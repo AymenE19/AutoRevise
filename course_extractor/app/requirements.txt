@@ -3,3 +3,6 @@ pymupdf
 python-dotenv
 python-docx
 python-pptx
+
+docling
+pathlib

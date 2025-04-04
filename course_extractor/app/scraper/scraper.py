@@ -27,7 +27,7 @@ from AutoRevise.course_extractor.app.storage.models import CourseDocument
 load_dotenv()  # take environment variables from .env
 
 # Scribd API
-SCRIBD_SEARCH_TERM = input("Write the desired search term (i.e. Cours de java) : ")
+SCRIBD_SEARCH_TERM = input("Write the desired search term (i.e. Cours de python) : ")
 SCRIBD_API_BASE_URL = "https://www.scribd.com/search/query"
 SCRIBD_MAX_PARSABLE_PAGES = int(os.getenv("SCRIBD_MAX_PARSABLE_PAGES"))
 SCRIBD_MAX_SAVED_RESULTS = int(os.getenv("SCRIBD_MAX_SAVED_RESULTS"))
@@ -108,55 +108,102 @@ def pdf_downloader(doc_data: dict, chrome_driver: webdriver.Chrome):
     file_name = doc_data["file_name"]
 
     # Get the pdf display page using https://ilide.info/
-    chrome_driver.get(
-        parameterized_url_generator(
+    try:
+        # Construire l'URL correctement en utilisant urllib.parse.quote pour encoder les caractères spéciaux dans le titre
+        from urllib.parse import quote
+        encoded_title = quote(title)
+
+        ilide_url = parameterized_url_generator(
             "https://ilide.info/docgeneratev2",
-            fileurl=f"https://scribd.vdownloaders.com/pdownload/{_id}/{title}",
-            title=title,
+            fileurl=f"https://scribd.vdownloaders.com/pdownload/{_id}/{encoded_title}",
+            title=encoded_title,
             utm_source="scrfree",
             utm_medium="queue",
             utm_campaign="dl"
         )
-    )
 
-    # Extract the pdf viewer page URL from the current page
-    pdf_viewer_page_url = ""
-    iframes = chrome_driver.find_elements(By.TAG_NAME, "iframe")
+        log_message(f"PDFs Downloading | Accessing ilide.info with URL: {ilide_url}")
+        chrome_driver.get(ilide_url)
 
-    for iframe in iframes:
-        src = iframe.get_attribute("src")
-        if src and src.startswith("https://ilide.info/viewer/web/viewer.html?file="):
-            pdf_viewer_page_url = src
-            break
+        # Attendre que la page se charge complètement
+        WebDriverWait(chrome_driver, 10).until(
+            EC.presence_of_element_located((By.TAG_NAME, "iframe"))
+        )
 
-    # Redirect to the pdf viewer page
-    log_message(f"PDFs Downloading | Redirecting to {pdf_viewer_page_url}")
-    chrome_driver.get(pdf_viewer_page_url)
+        # Extract the pdf viewer page URL from the current page
+        pdf_viewer_page_url = None
+        iframes = chrome_driver.find_elements(By.TAG_NAME, "iframe")
 
-    # Click on the download button
-    download_button = WebDriverWait(chrome_driver, 5).until(EC.element_to_be_clickable((By.ID, "download")))
-    download_button.click()
+        log_message(f"PDFs Downloading | Found {len(iframes)} iframes on the page")
 
-    # Extract the original download filename from the pdf viewer page URL
-    decoded_pdf_viewer_page_url = unquote(pdf_viewer_page_url)
-    download_filename = re.search(
-        r"https://ilide\.info/docdownloadv2-([^?]+)",
-        decoded_pdf_viewer_page_url
-    ).group(1)
+        for iframe in iframes:
+            src = iframe.get_attribute("src")
+            log_message(f"PDFs Downloading | Iframe source: {src}")
+            if src and src.startswith("https://ilide.info/viewer/web/viewer.html?file="):
+                pdf_viewer_page_url = src
+                break
 
-    if download_filename:  # Only rename the downloaded file if the original filename was extracted successfully
-        download_filename = f"ilide.info-{download_filename}.pdf"
-        log_message(f"PDFs Downloading | Extracted download filename : {download_filename}")
+        if not pdf_viewer_page_url:
+            log_message(f"PDFs Downloading | No PDF viewer URL found for document {_id}")
+            return False
 
-        # Wait for file download to complete
-        while download_filename not in os.listdir(DOWNLOAD_PATH):
-            log_message("PDFs Downloading | File not found yet, waiting...")
-            time.sleep(5)  # Check every 5 seconds
+        # Redirect to the pdf viewer page
+        log_message(f"PDFs Downloading | Redirecting to {pdf_viewer_page_url}")
+        chrome_driver.get(pdf_viewer_page_url)
 
-        # Rename the newly downloaded file
-        rename_file(os.path.join(DOWNLOAD_PATH, download_filename), os.path.join(DOWNLOAD_PATH, file_name))
-        log_message(f"PDFs Downloading | Renamed file '{download_filename}' to '{file_name}'")
+        # Wait for the page to load
+        WebDriverWait(chrome_driver, 10).until(
+            EC.presence_of_element_located((By.ID, "download"))
+        )
 
+        # Click on the download button
+        download_button = WebDriverWait(chrome_driver, 10).until(
+            EC.element_to_be_clickable((By.ID, "download"))
+        )
+        download_button.click()
+
+        # Extract the original download filename from the pdf viewer page URL
+        decoded_pdf_viewer_page_url = unquote(pdf_viewer_page_url)
+        match = re.search(
+            r"https://ilide\.info/docdownloadv2-([^?]+)",
+            decoded_pdf_viewer_page_url
+        )
+
+        if not match:
+            log_message(
+                f"PDFs Downloading | Could not extract filename pattern from URL: {decoded_pdf_viewer_page_url}")
+            return False
+
+        download_filename = match.group(1)
+        if download_filename:  # Only rename the downloaded file if the original filename was extracted successfully
+            download_filename = f"ilide.info-{download_filename}.pdf"
+            log_message(f"PDFs Downloading | Extracted download filename: {download_filename}")
+
+            # Wait for file download to complete (max 60 seconds)
+            download_path = os.path.join(DOWNLOAD_PATH, download_filename)
+            wait_time = 0
+            max_wait = 60  # seconds
+            while not os.path.exists(download_path) and wait_time < max_wait:
+                log_message(f"PDFs Downloading | File not found yet, waiting... ({wait_time}/{max_wait}s)")
+                time.sleep(5)  # Check every 5 seconds
+                wait_time += 5
+
+            if not os.path.exists(download_path):
+                log_message(f"PDFs Downloading | Download timed out for {download_filename}")
+                return False
+
+            # Rename the newly downloaded file
+            new_path = os.path.join(DOWNLOAD_PATH, file_name)
+            rename_file(download_path, new_path)
+            log_message(f"PDFs Downloading | Renamed file '{download_filename}' to '{file_name}'")
+            return True
+        else:
+            log_message(f"PDFs Downloading | Failed to extract download filename")
+            return False
+
+    except Exception as e:
+        log_message(f"PDFs Downloading | Error during download: {str(e)}")
+        return False
 
 def scrap_data_and_download_pdfs():
     # Fetching the list of Scribd file URLs ____________________________________________________________________________
