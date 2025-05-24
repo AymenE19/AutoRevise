@@ -1,0 +1,62 @@
+{
+    "Python": [
+        "Introduction à Python",
+        "Installation de Python Anaconda VS Code Jupyter Notebook",
+        "Variables et types de données en Python",
+        "Opérateurs arithmétiques, logiques et de comparaison en Python",
+        "Conditions et boucles en Python",
+        "Fonctions et manipulation des données en Python",
+        "Structures de données et algorithmes en Python",
+        "Programmation orientée objet (POO) en Python",
+        "Bases de données SQLite avec Python"
+    ],
+    "Java": [
+        "Introduction au langage Java",
+        "Programmation orientée objet (POO) en Java",
+        "Héritage, encapsulation et interfaces en Java",
+        "Collections et gestion des exceptions en Java",
+        "Bases de données avec JDBC en Java"
+    ],
+    "Bases de données": [
+        "Concepts fondamentaux et SQL",
+        "Modèle relationnel et normalisation",
+        "Requêtes SQL avancées : JOIN, GROUP BY, sous-requêtes",
+        "Transactions et sécurité des bases de données",
+        "Connexion aux bases de données via JDBC et PHP PDO"
+    ],
+    "Programmation Web": [
+        "Bases de HTML et CSS",
+        "Introduction à PHP : Syntaxe, variables, boucles, fonctions",
+        "Interaction avec les bases de données en PHP",
+        "Gestion des sessions et cookies en PHP",
+        "AJAX et interactivité web"
+    ],
+    "Programmation Mobile Android": [
+        "Introduction à Android Studio et architecture des applications",
+        "Interfaces utilisateur : XML, vues, boutons, champs de texte",
+        "Navigation et fragments en Android",
+        "Bases de données locales : SQLite et SharedPreferences",
+        "Fonctionnalités natives et déploiement : Localisation, caméra, APK"
+    ],
+    "Framework PHP Laravel": [
+        "Introduction à Laravel et structure du projet",
+        "Routage et gestion des contrôleurs en Laravel",
+        "Modèles et bases de données : Migrations et ORM Eloquent",
+        "Gestion des formulaires et validation en Laravel",
+        "Création d’une API RESTful avec Laravel"
+    ],
+    "Programmation JavaScript": [
+        "Bases de JavaScript moderne : Syntaxe ES6, manipulation du DOM",
+        "Framework front-end : React.js ou Vue.js",
+        "Développement backend avec Node.js et Express.js",
+        "Connexion à une base de données avec Mongoose",
+        "Développement d’une application complète en JavaScript"
+    ],
+    "Programmation Mobile avec JavaScript": [
+        "Introduction à React Native et Ionic",
+        "Interfaces utilisateur : Composants de base et navigation",
+        "Gestion des données et APIs avec Axios",
+        "Fonctionnalités natives : GPS, caméra, stockage",
+        "Déploiement d’applications mobiles : APK et IPA"
+    ]
+}

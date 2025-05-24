@@ -1,5 +1,10 @@
 DOWNLOAD_PATH/
+scraping/downloaded_files
 
+# TO DO: To be removed later
+scraping/.documentation
+extracting
+generating
 
 # Created by https://www.toptal.com/developers/gitignore/api/python,pycharm,pycharm+all,vs
 # Edit at https://www.toptal.com/developers/gitignore?templates=python,pycharm,pycharm+all,vs

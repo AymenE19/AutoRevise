@@ -5,16 +5,17 @@ import re
 def ensure_directory_exists(directory):
     """Creates a folder if it doesn't exist"""
 
-    if not os.path.exists(directory):
-        os.makedirs(directory)
+    os.makedirs(directory, exist_ok=True)
 
 
 def sanitize_filename(filename: str, replacement: str = "_") -> str:
     """Converts a string into a valid filename by removing or replacing invalid characters"""
 
-    invalid_chars = r'[<>:"/\\|?*\x00-\x1F]'  # Windows and general invalid chars
-    filename = re.sub(invalid_chars, replacement, filename)  # Remove social characters
-    filename = filename.strip().strip(".")  # Remove leading/trailing spaces and dots
+    invalid_chars_pattern = re.compile(
+        r'[<>:"/\\|?*\s\x00-\x1F\x7F\x80-\x9F\u2000-\u200A\u2028\u2029\u202A-\u202E\u2060\uFEFF]'
+    )
+    filename = invalid_chars_pattern.sub(replacement, filename)  # Remove special characters
+    filename = filename.strip().rstrip(".")  # Remove leading/trailing spaces and dots
 
     if not filename:  # If the filename is empty after sanitization, assign a default name
         filename = "default_filename"
