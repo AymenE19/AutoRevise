@@ -15,11 +15,10 @@ from utils.logger import setup_logger
 logger = setup_logger()
 
 
-def convert_one_pdf_to_markdown(pdf_file_path: str) -> str:
+def convert_one_pdf_to_markdown(pdf_converter: PdfConverter, pdf_file_path: str) -> str:
     """Convert a PDF file to a Markdown format and returns its converted content."""
 
-    converter = PdfConverter(artifact_dict=create_model_dict())
-    rendered = converter(pdf_file_path)
+    rendered = pdf_converter(pdf_file_path)
     text, _, images = text_from_rendered(rendered)
 
     return text
@@ -27,6 +26,8 @@ def convert_one_pdf_to_markdown(pdf_file_path: str) -> str:
 
 def convert_multi_pdfs_to_markdowns(pdfs_folder: str, output_folder: str) -> None:
     """Convert all PDF files in a folder to Markdown format and save them in an output folder."""
+
+    converter = PdfConverter(artifact_dict=create_model_dict())
 
     for file_name in os.listdir(pdfs_folder):
 
@@ -39,7 +40,7 @@ def convert_multi_pdfs_to_markdowns(pdfs_folder: str, output_folder: str) -> Non
             md_file_path = os.path.join(output_folder, file_name.replace(".pdf", ".md"))
 
             # Convert the PDF file to Markdown format
-            extracted_text = convert_one_pdf_to_markdown(pdf_file_path)
+            extracted_text = convert_one_pdf_to_markdown(converter, pdf_file_path)
 
             # Save the extracted text
             with open(md_file_path, "w", encoding="utf-8") as f:
