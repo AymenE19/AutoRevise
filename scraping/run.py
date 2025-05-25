@@ -32,12 +32,6 @@ SCRIBD_PREFERRED_FILE_LENGTH = getenv("SCRIBD_PREFERRED_FILE_LENGTH")
 SCRIBD_MIN_FILE_LENGTH = int(getenv("SCRIBD_MIN_FILE_LENGTH"))
 SCRIBD_MAX_FILE_LENGTH = int(getenv("SCRIBD_MAX_FILE_LENGTH"))
 
-# Mongodb SetUp
-MONGODB_URI = getenv("MONGODB_URI")
-MONGODB_DB_NAME = getenv("MONGODB_DB_NAME")
-MONGODB_COLLECTION_NAME = getenv("MONGODB_COLLECTION_NAME")
-# mongodb_client = AtlasClient(MONGODB_URI, MONGODB_DB_NAME)
-
 # Check the download folder
 ROOT_DOWNLOAD_PATH = getenv("ROOT_DOWNLOAD_PATH")
 ensure_directory_exists(ROOT_DOWNLOAD_PATH)
@@ -53,7 +47,7 @@ with open("topics.json", "r") as topics_file:
     topics = json.load(topics_file)
 
 
-def main():
+def run_scraping():
     for topic in topics:
         for subtopic in topics[topic]:
 
@@ -118,4 +112,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    run_scraping()
