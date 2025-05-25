@@ -2,7 +2,7 @@
 scraping/data/**/*.pdf
 scraping/.documentation
 extracting/data/
-generating
+generating/data/
 
 # Created by https://www.toptal.com/developers/gitignore/api/python,pycharm,pycharm+all,vs
 # Edit at https://www.toptal.com/developers/gitignore?templates=python,pycharm,pycharm+all,vs
