@@ -1,10 +1,7 @@
-DOWNLOAD_PATH/
-scraping/downloaded_files
-
 # TO DO: To be removed later
 scraping/data/**/*.pdf
 scraping/.documentation
-extracting
+extracting/data/
 generating
 
 # Created by https://www.toptal.com/developers/gitignore/api/python,pycharm,pycharm+all,vs
