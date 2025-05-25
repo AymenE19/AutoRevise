@@ -2,6 +2,8 @@ DOWNLOAD_PATH/
 scraping/downloaded_files
 
 # TO DO: To be removed later
+scraping/data/**/*.pdf
+scraping/.documentation
 extracting
 generating
 
