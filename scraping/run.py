@@ -1,10 +1,8 @@
 # --- Imports ---
 import json
 import logging
-from os import getenv
 from os.path import join
 
-from dotenv import load_dotenv
 from requests import get
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
@@ -12,29 +10,16 @@ from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
 
 from functionalities import process_scribd_api_response, download_file_from_scribd
+from scraping.settings import (
+    SCRIBD_MAX_PARSABLE_PAGES, SCRIBD_API_BASE_URL, SCRIBD_PREFERRED_FILE_LENGTH, SCRIBD_LANGS, SCRIBD_FILE_TYPES,
+    SCRAPING_ROOT_DOWNLOAD_PATH, SCRIBD_MAX_FILE_LENGTH, SCRIBD_MIN_FILE_LENGTH, SCRIBD_MAX_SAVED_RESULTS
+)
 from utils.files import sanitize_filename, ensure_directory_exists
 from utils.logger import setup_logger
 from utils.urls import build_url
 
-# --- Constants and Configuration ---
-load_dotenv("../.env")  # Load environment variables once at the beginning
-
 # Logging Configuration
 logger = setup_logger()
-
-# Scribd Setup
-SCRIBD_API_BASE_URL = getenv("SCRIBD_API_BASE_URL")
-SCRIBD_MAX_PARSABLE_PAGES = int(getenv("SCRIBD_MAX_PARSABLE_PAGES"))
-SCRIBD_MAX_SAVED_RESULTS = int(getenv("SCRIBD_MAX_SAVED_RESULTS"))
-SCRIBD_LANGS = getenv("SCRIBD_LANGS").split(",")
-SCRIBD_FILE_TYPES = getenv("SCRIBD_FILE_TYPES").split(",")
-SCRIBD_PREFERRED_FILE_LENGTH = getenv("SCRIBD_PREFERRED_FILE_LENGTH")
-SCRIBD_MIN_FILE_LENGTH = int(getenv("SCRIBD_MIN_FILE_LENGTH"))
-SCRIBD_MAX_FILE_LENGTH = int(getenv("SCRIBD_MAX_FILE_LENGTH"))
-
-# Check the download folder
-ROOT_DOWNLOAD_PATH = getenv("ROOT_DOWNLOAD_PATH")
-ensure_directory_exists(ROOT_DOWNLOAD_PATH)
 
 # Set up Selenium WebDriver
 chrome_options = Options()
@@ -55,7 +40,7 @@ def run_scraping():
             current_page = 1
             parsable_pages_count = 1  # Initialized to 1 but will get updated with the first API request
             docs_data = []
-            topic_download_path = join(ROOT_DOWNLOAD_PATH, sanitize_filename(subtopic))
+            topic_download_path = join(SCRAPING_ROOT_DOWNLOAD_PATH, sanitize_filename(subtopic))
             ensure_directory_exists(topic_download_path)
 
             logger.info(f"Downloading {subtopic} from {topic} pages into {topic_download_path}")
