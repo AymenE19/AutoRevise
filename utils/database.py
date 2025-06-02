@@ -98,6 +98,60 @@ class MongoDB:
 
         return success
 
+    def insert_map_mind(self, session_id: str, map_mind_data: list[dict]) -> bool:
+        """ Insert a list of dictionaries into the 'map_mind' field of a session document. """
+
+        result = self.topic.update_one(
+            {"_id": ObjectId(session_id)},
+            {"$set": {"map_mind": map_mind_data}}
+        )
+        success = result.modified_count > 0
+
+        # Logging
+        logger.info(f"Inserted map_mind for session {session_id}: Success = {success}")
+
+        return success
+
+    def update_map_mind(self, session_id: str, new_map_mind: list[dict]) -> bool:
+        """
+        Update the 'map_mind' field of a session document."""
+        result = self.topic.update_one(
+            {"_id": ObjectId(session_id)},
+            {"$set": {"map_mind": new_map_mind}}
+        )
+        success = result.modified_count > 0
+
+        # Logging
+        logger.info(f"Updated map_mind for session {session_id}: Success = {success}")
+
+        return success
+
+    def insert_markdown_content(self, session_id: str, markdowns: list[str]) -> bool:
+        """Insert a list of markdown strings into the 'markdown_content' field of a session."""
+        result = self.topic.update_one(
+            {"_id": ObjectId(session_id)},
+            {"$set": {"markdown_content": markdowns}}
+        )
+        success = result.modified_count > 0
+
+        # Logging
+        logger.info(f"Inserted markdown_content for session {session_id}: Success = {success}")
+
+        return success
+
+    def update_markdown_content(self, session_id: str, new_markdowns: list[str]) -> bool:
+        """Update the 'markdown_content' field of a session with new markdown data."""
+        result = self.topic.update_one(
+            {"_id": ObjectId(session_id)},
+            {"$set": {"markdown_content": new_markdowns}}
+        )
+        success = result.modified_count > 0
+
+        # Logging
+        logger.info(f"Updated markdown_content for session {session_id}: Success = {success}")
+
+        return success
+
     def close(self):
         """ Close the connection to the MongoDB server. """
         self.client.close()
