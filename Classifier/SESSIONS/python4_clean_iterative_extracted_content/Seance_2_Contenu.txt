@@ -1,0 +1,240 @@
+## Module 2: Fonctions, Manipulation de Données et Fichiers
+
+### 2.1 Définition et Utilisation des Fonctions
+Les fonctions sont des blocs de code réutilisables qui effectuent une tâche spécifique. Elles aident à organiser le code, le rendre plus lisible et éviter la répétition.
+
+**Syntaxe de base :**
+```python
+def nom_de_la_fonction(parametre1, parametre2, ...):
+    """Docstring: description de la fonction."""
+    # Corps de la fonction
+    instructions
+    return valeur_de_retour # Optionnel
+```
+
+-   `def` : Mot-clé pour définir une fonction.
+-   `nom_de_la_fonction` : Nom descriptif (suit les mêmes règles que les variables).
+-   `parametre1, parametre2` : Variables qui reçoivent les valeurs passées à la fonction (arguments). Optionnels.
+-   `Docstring` : Chaîne de caractères multiligne (optionnelle mais recommandée) pour documenter ce que fait la fonction.
+-   `return` : Mot-clé pour renvoyer une valeur depuis la fonction. Si omis, la fonction retourne `None`.
+
+**Exemple :**
+```python
+def saluer(nom):
+    """Cette fonction affiche un message de salutation."""
+    message = "Bonjour, " + nom + " !"
+    print(message)
+
+def additionner(a, b):
+    """Cette fonction retourne la somme de deux nombres."""
+    somme = a + b
+    return somme
+
+# Appel des fonctions
+saluer("Alice")  # Affiche: Bonjour, Alice !
+resultat = additionner(5, 3)
+print(f"Le résultat de l'addition est : {resultat}") # Affiche: Le résultat de l'addition est : 8
+```
+
+### 2.2 Passage de Paramètres et Valeurs de Retour
+Les fonctions peuvent accepter des données en entrée (paramètres) et produire des données en sortie (valeurs de retour).
+
+**Types de paramètres :**
+-   **Paramètres positionnels :** L'ordre des arguments lors de l'appel doit correspondre à l'ordre des paramètres dans la définition.
+-   **Paramètres nommés (mots-clés) :** On peut spécifier le nom du paramètre lors de l'appel, l'ordre n'a alors plus d'importance.
+-   **Paramètres par défaut :** On peut assigner une valeur par défaut à un paramètre dans la définition de la fonction. Si l'argument n'est pas fourni lors de l'appel, la valeur par défaut est utilisée.
+-   **Nombre variable d'arguments (`*args` et `**kwargs`) :**
+    -   `*args` : Permet de passer un nombre variable d'arguments positionnels, qui sont regroupés dans un tuple.
+    -   `**kwargs` : Permet de passer un nombre variable d'arguments nommés, qui sont regroupés dans un dictionnaire.
+
+**Exemple :**
+```python
+def infos_personne(nom, age, ville="Paris", *hobbies, **details):
+    """Affiche les informations d'une personne."""
+    print(f"Nom: {nom}")
+    print(f"Age: {age}")
+    print(f"Ville: {ville}")
+    if hobbies:
+        print("Hobbies:")
+        for hobby in hobbies:
+            print(f"- {hobby}")
+    if details:
+        print("Détails supplémentaires:")
+        for cle, valeur in details.items():
+            print(f"- {cle}: {valeur}")
+
+infos_personne("Bob", 30)
+# Nom: Bob
+# Age: 30
+# Ville: Paris
+
+infos_personne("Charlie", 25, ville="Lyon", "Lecture", "Sport", profession="Ingénieur", statut="Actif")
+# Nom: Charlie
+# Age: 25
+# Ville: Lyon
+# Hobbies:
+# - Lecture
+# - Sport
+# Détails supplémentaires:
+# - profession: Ingénieur
+# - statut: Actif
+```
+
+**Valeurs de retour multiples :**
+Une fonction peut retourner plusieurs valeurs, généralement sous forme de tuple.
+```python
+def operations(a, b):
+    somme = a + b
+    difference = a - b
+    return somme, difference
+
+s, d = operations(10, 4)
+print(f"Somme: {s}, Différence: {d}") # Somme: 14, Différence: 6
+```
+
+### 2.3 Manipulation des Chaînes de Caractères et Opérations sur les Listes
+
+#### Manipulation des Chaînes de Caractères
+Les chaînes de caractères (`str`) sont immuables en Python. Les opérations créent de nouvelles chaînes.
+
+**Méthodes courantes :**
+-   `len(chaine)` : Longueur de la chaîne.
+-   `chaine.lower()` / `chaine.upper()` : Convertit en minuscules / majuscules.
+-   `chaine.strip()` / `chaine.lstrip()` / `chaine.rstrip()` : Supprime les espaces (ou caractères spécifiés) au début et/ou à la fin.
+-   `chaine.startswith(prefixe)` / `chaine.endswith(suffixe)` : Vérifie si la chaîne commence/finit par un préfixe/suffixe.
+-   `chaine.find(sous_chaine)` / `chaine.index(sous_chaine)` : Trouve la première occurrence d'une sous-chaîne (retourne -1 si non trouvée pour `find`, lève une erreur pour `index`).
+-   `chaine.replace(ancienne, nouvelle)` : Remplace les occurrences d'une sous-chaîne.
+-   `chaine.split(separateur)` : Divise la chaîne en une liste de sous-chaînes.
+-   `separateur.join(liste_de_chaines)` : Joint les éléments d'une liste en une seule chaîne.
+-   **Formatage de chaînes :**
+    -   Opérateur `%` (ancien style)
+    -   Méthode `format()`
+    -   f-strings (chaînes formatées littérales, depuis Python 3.6) - le plus moderne et lisible.
+
+**Exemple avec f-strings :**
+```python
+nom = "Alice"
+age = 30
+message = f"Je m'appelle {nom} et j'ai {age} ans."
+print(message) # Je m'appelle Alice et j'ai 30 ans.
+
+phrase = "  Python est génial!  "
+print(f"Originale: '{phrase}'")
+print(f"Nettoyée: '{phrase.strip()}'")
+print(f"Majuscules: '{phrase.upper()}'")
+print(f"Mots: {phrase.strip().split(' ')}")
+
+mots = ["Python", "est", "amusant"]
+phrase_jointe = " ".join(mots)
+print(f"Phrase jointe: '{phrase_jointe}'")
+```
+
+**Slicing (découpage) :**
+Permet d'extraire des sous-chaînes. Syntaxe : `chaine[debut:fin:pas]`
+```python
+s = "Bonjour le monde"
+print(s[0:7])    # "Bonjour"
+print(s[8:])     # "le monde"
+print(s[:7])     # "Bonjour"
+print(s[::-1])   # "ednom el ruojnoB" (inversée)
+```
+
+#### Opérations de base sur les Listes
+Les listes sont des collections ordonnées et modifiables d'éléments.
+
+**Opérations courantes :**
+-   `len(liste)` : Nombre d'éléments.
+-   `liste.append(element)` : Ajoute un élément à la fin.
+-   `liste.insert(index, element)` : Insère un élément à une position donnée.
+-   `liste.extend(autre_liste)` : Ajoute tous les éléments d'une autre liste à la fin.
+-   `liste.remove(element)` : Supprime la première occurrence de l'élément.
+-   `liste.pop(index)` : Supprime et retourne l'élément à l'index donné (par défaut, le dernier).
+-   `del liste[index]` : Supprime l'élément à l'index donné.
+-   `element in liste` : Vérifie si un élément est dans la liste.
+-   `liste.index(element)` : Retourne l'index de la première occurrence de l'élément.
+-   `liste.count(element)` : Compte le nombre d'occurrences d'un élément.
+-   `liste.sort()` : Trie la liste sur place.
+-   `liste.reverse()` : Inverse l'ordre des éléments sur place.
+-   `nouvelle_liste = sorted(liste)` : Retourne une nouvelle liste triée.
+
+**Exemple :**
+```python
+nombres = [1, 2, 3, 4, 5]
+nombres.append(6)
+print(f"Après append: {nombres}") # [1, 2, 3, 4, 5, 6]
+
+nombres.insert(0, 0)
+print(f"Après insert: {nombres}") # [0, 1, 2, 3, 4, 5, 6]
+
+nombres.pop()
+print(f"Après pop: {nombres}") # [0, 1, 2, 3, 4, 5]
+
+if 3 in nombres:
+    print(f"L'index de 3 est: {nombres.index(3)}") # L'index de 3 est: 3
+
+# Slicing de listes (similaire aux chaînes)
+print(f"Slice de nombres: {nombres[1:4]}") # [1, 2, 3]
+```
+
+### 2.4 Lecture et Écriture dans des Fichiers
+Python permet d'interagir avec des fichiers sur le système.
+
+**Ouvrir un fichier :**
+La fonction `open()` est utilisée pour ouvrir un fichier. Elle retourne un objet fichier.
+`fichier = open("nom_du_fichier.txt", "mode")`
+
+**Modes d'ouverture courants :**
+-   `'r'` : Lecture (par défaut). Erreur si le fichier n'existe pas.
+-   `'w'` : Écriture. Crée le fichier s'il n'existe pas, écrase le contenu s'il existe.
+-   `'a'` : Ajout (append). Crée le fichier s'il n'existe pas, ajoute à la fin s'il existe.
+-   `'r+'` : Lecture et écriture.
+-   `'b'` : Mode binaire (ex: `'rb'`, `'wb'`). Pour les fichiers non textuels (images, etc.).
+-   `'t'` : Mode texte (par défaut).
+
+**Fermer un fichier :**
+Il est crucial de fermer un fichier après utilisation pour s'assurer que toutes les données sont écrites et les ressources libérées.
+`fichier.close()`
+
+**Utilisation de `with` (recommandé) :**
+Le gestionnaire de contexte `with` garantit que le fichier est automatiquement fermé, même en cas d'erreur.
+```python
+with open("exemple.txt", "w") as f:
+    f.write("Première ligne.\n")
+    f.write("Deuxième ligne avec des chiffres : 123.\n")
+
+# Lecture du fichier entier
+with open("exemple.txt", "r") as f:
+    contenu = f.read()
+    print("--- Contenu complet ---")
+    print(contenu)
+
+# Lecture ligne par ligne
+with open("exemple.txt", "r") as f:
+    print("--- Lecture ligne par ligne ---")
+    for ligne in f:
+        print(ligne.strip()) # .strip() pour enlever le \n de fin de ligne
+
+# Lecture de toutes les lignes dans une liste
+with open("exemple.txt", "r") as f:
+    lignes = f.readlines()
+    print("--- Lignes dans une liste ---")
+    print(lignes) # Chaque élément de la liste contient le \n
+```
+
+**Exemple d'écriture et lecture :**
+```python
+# Écriture
+lignes_a_ecrire = ["Ligne A\n", "Ligne B\n", "Ligne C\n"]
+with open("mon_fichier.txt", "w") as f:
+    f.writelines(lignes_a_ecrire) # Écrit une liste de chaînes
+
+# Ajout
+with open("mon_fichier.txt", "a") as f:
+    f.write("Ligne D ajoutée\n")
+
+# Lecture
+print("\n--- Contenu de mon_fichier.txt ---")
+with open("mon_fichier.txt", "r") as f:
+    for ligne in f:
+        print(ligne, end='') # end='' pour éviter le double saut de ligne
+```

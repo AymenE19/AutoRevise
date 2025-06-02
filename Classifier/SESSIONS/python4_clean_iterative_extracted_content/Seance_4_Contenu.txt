@@ -1,0 +1,386 @@
+### Partie 4: Programmation Orientée Objet (POO) en Python
+
+La Programmation Orientée Objet (POO) est un paradigme de programmation qui utilise des "objets" pour concevoir des applications et des programmes informatiques. Python est un langage orienté objet.
+
+#### 4.1 Concepts de base de la POO
+
+-   **Classes et Objets**:
+    -   Une **classe** est un plan (blueprint) pour créer des objets. Elle définit un ensemble d'attributs (données) et de méthodes (fonctions) que les objets créés à partir de cette classe auront.
+    -   Un **objet** est une instance d'une classe. C'est une entité concrète qui possède les attributs et les comportements définis par sa classe.
+-   **Attributs et Méthodes**:
+    -   Les **attributs** sont des variables qui stockent des données associées à un objet.
+    -   Les **méthodes** sont des fonctions qui effectuent des opérations sur les données de l'objet.
+
+#### 4.2 Définition d'une classe
+
+-   **Syntaxe de base**:
+    ```python
+    class NomDeLaClasse:
+        # Définition des attributs de classe (optionnel)
+        attribut_de_classe = "valeur"
+
+        # Constructeur
+        def __init__(self, parametre1, parametre2):
+            # Attributs d'instance
+            self.parametre1 = parametre1
+            self.parametre2 = parametre2
+
+        # Méthodes d'instance
+        def nom_de_la_methode(self, autre_parametre):
+            # corps de la méthode
+            # peut utiliser self.parametre1, etc.
+            pass
+    ```
+-   **Le constructeur `__init__`**:
+    -   C'est une méthode spéciale appelée automatiquement lorsqu'un objet de la classe est créé.
+    -   Le premier paramètre est toujours `self`, qui représente l'instance de l'objet en cours de création.
+    -   Il est utilisé pour initialiser les attributs de l'objet.
+-   **Méthodes d'instance**:
+    -   Ce sont des fonctions définies à l'intérieur d'une classe qui opèrent sur les instances de cette classe.
+    -   Leur premier paramètre est toujours `self`.
+
+-   **Exemple de classe `Voiture`**:
+    ```python
+    class Voiture:
+        # Attribut de classe
+        nombre_de_roues = 4
+
+        def __init__(self, marque, modele, couleur):
+            # Attributs d'instance
+            self.marque = marque
+            self.modele = modele
+            self.couleur = couleur
+            self.vitesse = 0
+
+        def accelerer(self, augmentation):
+            self.vitesse += augmentation
+            print(f"La {self.marque} {self.modele} accélère à {self.vitesse} km/h.")
+
+        def freiner(self, reduction):
+            self.vitesse -= reduction
+            if self.vitesse < 0:
+                self.vitesse = 0
+            print(f"La {self.marque} {self.modele} freine à {self.vitesse} km/h.")
+
+        def description(self):
+            return f"Voiture: {self.marque} {self.modele}, Couleur: {self.couleur}, Roues: {Voiture.nombre_de_roues}"
+
+    # Création d'objets (instances) de la classe Voiture
+    ma_voiture = Voiture("Renault", "Clio", "Rouge")
+    autre_voiture = Voiture("Peugeot", "208", "Bleu")
+
+    # Accès aux attributs et appel des méthodes
+    print(ma_voiture.marque)  # Renault
+    print(ma_voiture.description()) # Voiture: Renault Clio, Couleur: Rouge, Roues: 4
+
+    ma_voiture.accelerer(50)  # La Renault Clio accélère à 50 km/h.
+    ma_voiture.freiner(20)    # La Renault Clio freine à 30 km/h.
+    ```
+
+#### 4.3 Héritage
+
+-   **Concept et syntaxe**:
+    -   L'héritage permet à une classe (appelée classe fille ou sous-classe) d'hériter des attributs et méthodes d'une autre classe (appelée classe mère ou super-classe).
+    -   Cela favorise la réutilisation du code et la création d'une hiérarchie de classes.
+    -   Syntaxe : `class ClasseFille(ClasseMere):`
+-   **Exemple d'héritage**:
+    ```python
+    class Vehicule:
+        def __init__(self, marque):
+            self.marque = marque
+
+        def se_deplacer(self):
+            print("Le véhicule se déplace.")
+
+    class Voiture(Vehicule): # Voiture hérite de Vehicule
+        def __init__(self, marque, modele):
+            super().__init__(marque) # Appel du constructeur de la classe mère
+            self.modele = modele
+
+        def klaxonner(self):
+            print("Tut tut!")
+
+        # On peut redéfinir une méthode de la classe mère (polymorphisme)
+        def se_deplacer(self):
+            print(f"La voiture {self.marque} {self.modele} roule.")
+
+    ma_voiture_electrique = Voiture("Tesla", "Model S")
+    ma_voiture_electrique.se_deplacer() # La voiture Tesla Model S roule.
+    ma_voiture_electrique.klaxonner()   # Tut tut!
+    print(ma_voiture_electrique.marque) # Tesla
+    ```
+
+#### 4.4 Polymorphisme
+
+-   **Concept**:
+    -   Le polymorphisme (du grec "plusieurs formes") signifie qu'un objet peut prendre plusieurs formes.
+    -   En POO, cela se manifeste souvent par la capacité d'objets de différentes classes à répondre à la même méthode (appel de méthode) de manière spécifique à leur classe.
+    -   L'exemple typique est la redéfinition de méthodes (method overriding) dans les classes filles, comme vu avec `se_deplacer()` dans l'exemple d'héritage.
+-   **Exemple de polymorphisme**:
+    ```python
+    class Animal:
+        def __init__(self, nom):
+            self.nom = nom
+        def parler(self):
+            raise NotImplementedError("La sous-classe doit implémenter cette méthode")
+
+    class Chien(Animal):
+        def parler(self):
+            return "Woof!"
+
+    class Chat(Animal):
+        def parler(self):
+            return "Miaou!"
+
+    # Liste d'animaux
+    animaux = [Chien("Rex"), Chat("Minou")]
+
+    for animal in animaux:
+        # La méthode parler() est appelée sur des objets de types différents,
+        # mais chaque objet exécute sa propre version de parler().
+        print(f"{animal.nom} dit: {animal.parler()}")
+    # Rex dit: Woof!
+    # Minou dit: Miaou!
+    ```
+
+#### 4.5 Encapsulation (public, protégé, privé)
+
+-   **Principes**:
+    -   L'encapsulation consiste à restreindre l'accès direct à certains composants d'un objet et à regrouper les données (attributs) avec les méthodes qui opèrent sur ces données.
+    -   Python n'a pas de modificateurs d'accès stricts comme `public`, `private`, `protected` en Java ou C++.
+    -   Cependant, des conventions sont utilisées :
+        -   **Public**: Attributs et méthodes accessibles de partout (par défaut).
+        -   **Protégé**: Attributs et méthodes préfixés par un underscore simple (`_nom_attribut`). C'est une indication pour les développeurs qu'ils ne devraient pas être accédés directement de l'extérieur de la classe ou de ses sous-classes, mais ce n'est pas imposé par le langage.
+        -   **Privé**: Attributs et méthodes préfixés par deux underscores (`__nom_attribut`). Python effectue un "name mangling" (renommage) pour rendre plus difficile l'accès direct depuis l'extérieur (`_NomClasse__nom_attribut`).
+-   **Exemple**:
+    ```python
+    class CompteBancaire:
+        def __init__(self, solde_initial):
+            self._numero_compte = "12345XYZ" # Attribut protégé
+            self.__solde = solde_initial      # Attribut "privé"
+
+        def deposer(self, montant):
+            if montant > 0:
+                self.__solde += montant
+                print(f"Dépôt de {montant} effectué. Nouveau solde: {self.__solde}")
+            else:
+                print("Le montant du dépôt doit être positif.")
+
+        def retirer(self, montant):
+            if 0 < montant <= self.__solde:
+                self.__solde -= montant
+                print(f"Retrait de {montant} effectué. Nouveau solde: {self.__solde}")
+            else:
+                print("Montant invalide ou solde insuffisant.")
+
+        def get_solde(self): # Méthode d'accès (getter) pour le solde
+            return self.__solde
+
+        def _methode_protegee(self):
+            print("Ceci est une méthode protégée.")
+
+        def __methode_privee(self):
+            print("Ceci est une méthode privée.")
+
+    compte = CompteBancaire(1000)
+    compte.deposer(500)    # Dépôt de 500 effectué. Nouveau solde: 1500
+    print(compte.get_solde()) # 1500
+
+    # Accès à un attribut "protégé" (possible mais déconseillé)
+    print(compte._numero_compte) # 12345XYZ
+
+    # Tentative d'accès direct à un attribut "privé" (génère une erreur)
+    # print(compte.__solde) # AttributeError: 'CompteBancaire' object has no attribute '__solde'
+
+    # Accès via name mangling (possible mais fortement déconseillé)
+    print(compte._CompteBancaire__solde) # 1500
+    ```
+
+#### 4.6 Méthodes spéciales (Dunder methods)
+
+-   **Introduction**:
+    -   Les méthodes spéciales, souvent appelées "dunder methods" (double underscore), sont des méthodes prédéfinies en Python que vous pouvez surcharger dans vos classes pour intégrer des comportements spécifiques.
+    -   Elles sont identifiables par leurs noms qui commencent et se terminent par deux underscores (par exemple, `__init__`, `__str__`, `__len__`).
+-   **Exemples courants (`__str__`, `__len__`, etc.)**:
+    -   `__init__(self, ...)`: Constructeur, appelé lors de la création d'un objet.
+    -   `__str__(self)`: Retourne une représentation de l'objet sous forme de chaîne de caractères, conviviale pour l'utilisateur. Appelé par `str(objet)` et `print(objet)`.
+    -   `__repr__(self)`: Retourne une représentation "officielle" de l'objet sous forme de chaîne, utile pour le débogage. Si `__str__` n'est pas défini, `__repr__` est utilisé.
+    -   `__len__(self)`: Retourne la "longueur" de l'objet. Appelé par `len(objet)`.
+    -   `__add__(self, other)`: Permet de surcharger l'opérateur `+`.
+    -   `__eq__(self, other)`: Permet de surcharger l'opérateur `==`.
+
+    ```python
+    class Livre:
+        def __init__(self, titre, auteur, pages):
+            self.titre = titre
+            self.auteur = auteur
+            self.pages = pages
+
+        def __str__(self):
+            return f"'{self.titre}' par {self.auteur}"
+
+        def __repr__(self):
+            return f"Livre(titre='{self.titre}', auteur='{self.auteur}', pages={self.pages})"
+
+        def __len__(self):
+            return self.pages
+
+        def __eq__(self, autre_livre):
+            if isinstance(autre_livre, Livre):
+                return self.titre == autre_livre.titre and self.auteur == autre_livre.auteur
+            return False
+
+    mon_livre = Livre("Le Seigneur des Anneaux", "J.R.R. Tolkien", 1200)
+    autre_exemplaire = Livre("Le Seigneur des Anneaux", "J.R.R. Tolkien", 1200)
+    un_autre_livre = Livre("Harry Potter", "J.K. Rowling", 400)
+
+    print(str(mon_livre))  # Utilise __str__: 'Le Seigneur des Anneaux' par J.R.R. Tolkien
+    print(mon_livre)       # Utilise __str__ implicitement
+
+    print(repr(mon_livre)) # Utilise __repr__: Livre(titre='Le Seigneur des Anneaux', auteur='J.R.R. Tolkien', pages=1200)
+
+    print(len(mon_livre))  # Utilise __len__: 1200
+
+    print(mon_livre == autre_exemplaire) # Utilise __eq__: True
+    print(mon_livre == un_autre_livre)   # Utilise __eq__: False
+    ```
+
+---
+
+### Partie 5: Gestion des Erreurs et Exceptions
+
+La gestion des erreurs est cruciale pour écrire des programmes robustes. Python utilise un système d'exceptions pour gérer les erreurs qui se produisent pendant l'exécution d'un programme.
+
+#### 5.1 Introduction aux erreurs et exceptions
+
+-   **Erreurs de syntaxe (Syntax Errors)**: Erreurs détectées par l'interpréteur Python avant même le début de l'exécution, dues à un code mal formé.
+    ```python
+    # print "Bonjour" # En Python 3, ceci est une SyntaxError
+    ```
+-   **Exceptions (Runtime Errors)**: Erreurs qui se produisent pendant l'exécution du programme. Si elles ne sont pas gérées, elles provoquent l'arrêt du programme et affichent un message d'erreur (traceback).
+    Exemples : `ZeroDivisionError`, `TypeError`, `NameError`, `FileNotFoundError`, `IndexError`, `KeyError`.
+    ```python
+    # print(10 / 0) # Provoque une ZeroDivisionError
+    # liste = [1, 2]
+    # print(liste[5]) # Provoque une IndexError
+    ```
+
+#### 5.2 Le bloc `try-except`
+
+-   **Syntaxe de base**:
+    Permet d'essayer d'exécuter un bloc de code susceptible de lever une exception, et de définir comment réagir si une exception se produit.
+    ```python
+    try:
+        # Code susceptible de lever une exception
+        resultat = 10 / 0
+        print(resultat)
+    except ZeroDivisionError:
+        # Code à exécuter si une ZeroDivisionError se produit
+        print("Erreur : Division par zéro !")
+    except TypeError:
+        print("Erreur : Opération sur un type incompatible !")
+    except Exception as e: # Gère toutes les autres exceptions (plus générique)
+        print(f"Une erreur inattendue s'est produite : {e}")
+    ```
+-   **Gérer des exceptions spécifiques**:
+    Il est préférable de capturer des exceptions spécifiques plutôt qu'une `Exception` générique, pour un traitement plus précis des erreurs.
+    On peut lister plusieurs exceptions dans un même bloc `except`:
+    ```python
+    try:
+        valeur = int(input("Entrez un nombre : "))
+        resultat = 100 / valeur
+        print(f"100 / {valeur} = {resultat}")
+    except (ValueError, ZeroDivisionError) as e:
+        print(f"Entrée invalide ou division par zéro : {e}")
+    ```
+-   **Exemple**:
+    ```python
+    def lire_age_utilisateur():
+        try:
+            age_str = input("Quel est votre âge ? ")
+            age = int(age_str)
+            if age < 0:
+                print("L'âge ne peut pas être négatif.")
+                return None
+            print(f"Vous avez {age} ans.")
+            return age
+        except ValueError:
+            print("Erreur : Veuillez entrer un nombre entier valide pour l'âge.")
+            return None
+
+    age_utilisateur = lire_age_utilisateur()
+    if age_utilisateur is not None:
+        print(f"Traitement basé sur l'âge : {age_utilisateur}")
+    ```
+
+#### 5.3 Le bloc `else` dans `try-except`
+
+-   Le bloc `else` est optionnel et s'exécute si aucune exception n'est levée dans le bloc `try`.
+    ```python
+    try:
+        num = int(input("Entrez un nombre : "))
+    except ValueError:
+        print("Ce n'est pas un nombre valide !")
+    else:
+        # Ce bloc s'exécute seulement si le try a réussi (pas d'exception)
+        print(f"Vous avez entré le nombre {num}.")
+    ```
+
+#### 5.4 Le bloc `finally`
+
+-   Le bloc `finally` est optionnel et s'exécute toujours, qu'une exception ait été levée ou non, et même si un `return`, `break` ou `continue` est rencontré dans le `try` ou `except`.
+-   Il est souvent utilisé pour des opérations de nettoyage (fermer un fichier, libérer des ressources).
+    ```python
+    fichier = None
+    try:
+        fichier = open("mon_fichier.txt", "r")
+        contenu = fichier.read()
+        print(contenu)
+    except FileNotFoundError:
+        print("Erreur : Le fichier n'a pas été trouvé.")
+    except Exception as e:
+        print(f"Une autre erreur s'est produite : {e}")
+    finally:
+        # Ce bloc s'exécute toujours
+        if fichier:
+            fichier.close()
+            print("Fichier fermé.")
+        else:
+            print("Aucun fichier n'a été ouvert.")
+    ```
+
+#### 5.5 Déclencher des exceptions (`raise`)
+
+-   On peut explicitement lever (déclencher) une exception en utilisant le mot-clé `raise`.
+-   Cela peut être utile pour signaler des conditions d'erreur spécifiques dans votre propre code.
+-   **Exemple**:
+    ```python
+    def valider_age(age):
+        if not isinstance(age, int):
+            raise TypeError("L'âge doit être un entier.")
+        if age < 0:
+            raise ValueError("L'âge ne peut pas être négatif.")
+        if age > 120:
+            raise ValueError("L'âge est probablement trop élevé.")
+        print("Âge validé.")
+
+    try:
+        # valider_age("vingt") # Déclenchera TypeError
+        # valider_age(-5)      # Déclenchera ValueError
+        valider_age(150)     # Déclenchera ValueError
+        valider_age(30)      # Âge validé.
+    except TypeError as te:
+        print(f"Erreur de type : {te}")
+    except ValueError as ve:
+        print(f"Erreur de valeur : {ve}")
+
+    # Créer une exception personnalisée
+    class MonExceptionPersonnalisee(Exception):
+        """Ceci est mon exception personnalisée."""
+        pass
+
+    # try:
+    #     raise MonExceptionPersonnalisee("Quelque chose de spécifique s'est mal passé !")
+    # except MonExceptionPersonnalisee as e:
+    #     print(f"Exception personnalisée capturée : {e}")
+    ```

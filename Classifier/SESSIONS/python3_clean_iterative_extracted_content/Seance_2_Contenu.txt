@@ -1,0 +1,166 @@
+### 2.1 Définition et Appel de Fonctions
+
+Syntaxe `def` pour définir une fonction.
+Appel d'une fonction par son nom suivi de parenthèses.
+Importance des fonctions : réutilisabilité du code, modularité.
+
+```python
+# Définition de la fonction
+def saluer(nom):
+    message = f"Bonjour, {nom}!"
+    print(message)
+
+# Appel de la fonction
+saluer("Alice")
+saluer("Bob")
+```
+
+### 2.2 Paramètres et Valeurs de Retour
+
+Passage de paramètres (arguments) à une fonction.
+Paramètres positionnels et nommés (mots-clés).
+Valeurs par défaut pour les paramètres.
+Utilisation de l'instruction `return` pour renvoyer une valeur (ou plusieurs via un tuple).
+Fonctions sans `return` explicite renvoient `None`.
+
+```python
+def addition(a, b=5): # b a une valeur par défaut de 5
+    return a + b
+
+resultat1 = addition(10) # Utilise b=5, resultat1 = 15
+resultat2 = addition(10, 20) # Fournit b=20, resultat2 = 30
+resultat3 = addition(b=3, a=7) # Paramètres nommés, resultat3 = 10
+
+print(f"Résultat 1: {resultat1}")
+print(f"Résultat 2: {resultat2}")
+print(f"Résultat 3: {resultat3}")
+
+def infos_personne(nom, age):
+    return nom, age # Retourne un tuple
+
+nom_pers, age_pers = infos_personne("Charlie", 25)
+print(f"{nom_pers} a {age_pers} ans.")
+```
+
+### 3.1 Manipulation des Chaînes de Caractères (Approfondissement)
+
+Méthodes utiles : `strip()`, `lstrip()`, `rstrip()` pour supprimer les espaces.
+`startswith()`, `endswith()` pour vérifier les préfixes/suffixes.
+`find()`, `index()` pour rechercher des sous-chaînes (différence en cas de non-trouvaille).
+`count()` pour compter les occurrences.
+`isalpha()`, `isdigit()`, `isalnum()`, `isspace()` pour vérifier le type de caractères.
+`partition()`, `rpartition()`.
+
+```python
+texte = "   Bonjour Python!   "
+print(f"'{texte.strip()}'") # 'Bonjour Python!'
+print(texte.startswith("   Bon")) # True
+print(texte.lower().find("python")) # 10 (après conversion en minuscules)
+
+csv_data = "nom,age,ville"
+print(csv_data.split(',')) # ['nom', 'age', 'ville']
+```
+
+### 3.2 Listes : Opérations Avancées et Méthodes
+
+Méthodes : `extend()` vs `append()`.
+`index()` pour trouver l'indice d'un élément.
+`count()` pour compter les occurrences d'un élément.
+`sort()` (tri sur place) vs `sorted()` (renvoie une nouvelle liste triée).
+Paramètre `key` et `reverse` pour `sort()` et `sorted()`.
+Copie de listes : superficielle (`copy()` ou slicing `[:]`) vs profonde (`copy.deepcopy()`).
+
+```python
+ma_liste = [3, 1, 4, 1, 5, 9, 2, 6]
+ma_liste.sort(reverse=True)
+print(f"Liste triée décroissant: {ma_liste}")
+
+nouvelle_liste_triee = sorted([3, 1, 4, 1, 5, 9, 2, 6])
+print(f"Nouvelle liste triée croissant: {nouvelle_liste_triee}")
+
+liste_originale = [[1, 2], [3, 4]]
+liste_copie_superficielle = liste_originale.copy()
+liste_copie_superficielle[0][0] = 99
+print(f"Originale après modif copie superficielle: {liste_originale}") # Modifiée aussi!
+
+import copy
+liste_copie_profonde = copy.deepcopy(liste_originale)
+liste_copie_profonde[1][0] = 77
+print(f"Originale après modif copie profonde: {liste_originale}") # Non modifiée
+print(f"Copie profonde: {liste_copie_profonde}")
+```
+
+### 4.1 Lecture de Fichiers
+
+Ouvrir un fichier avec la fonction `open()`.
+Modes d'ouverture courants : `'r'` (lecture texte, par défaut), `'rb'` (lecture binaire).
+Spécifier l'encodage (ex: `encoding='utf-8'`) est crucial.
+Méthodes pour lire le contenu : `read()` (tout le fichier), `readline()` (une ligne), `readlines()` (toutes les lignes dans une liste).
+Importance de fermer le fichier avec `close()` ou, mieux, utiliser le gestionnaire de contexte `with open(...) as ...:` qui ferme automatiquement le fichier.
+
+```python
+# Création d'un fichier d'exemple pour la lecture
+with open("exemple_lecture.txt", "w", encoding="utf-8") as f_write:
+    f_write.write("Ligne 1 du fichier.\n")
+    f_write.write("Ligne 2 avec des caractères accentués : éàç.\n")
+    f_write.write("Ligne 3 finale.")
+
+# Méthode avec with (recommandée)
+try:
+    with open("exemple_lecture.txt", "r", encoding="utf-8") as f:
+        contenu_total = f.read()
+        print("Contenu total du fichier:\n", contenu_total)
+except FileNotFoundError:
+    print("Le fichier exemple_lecture.txt n'a pas été trouvé.")
+
+# Relire pour readline et readlines
+try:
+    with open("exemple_lecture.txt", "r", encoding="utf-8") as f:
+        print("\nLecture avec readline():")
+        ligne1 = f.readline()
+        print(f"Première ligne: {ligne1.strip()}")
+        ligne2 = f.readline()
+        print(f"Deuxième ligne: {ligne2.strip()}")
+except FileNotFoundError:
+    print("Le fichier exemple_lecture.txt n'a pas été trouvé.")
+
+try:
+    with open("exemple_lecture.txt", "r", encoding="utf-8") as f:
+        print("\nLecture avec readlines():")
+        toutes_les_lignes = f.readlines()
+        for ligne in toutes_les_lignes:
+            print(ligne.strip())
+except FileNotFoundError:
+    print("Le fichier exemple_lecture.txt n'a pas été trouvé.")
+```
+
+### 4.2 Écriture dans des Fichiers
+
+Modes d'ouverture : `'w'` (écriture, écrase le fichier s'il existe ou le crée), `'a'` (ajout, ajoute à la fin du fichier ou le crée), `'x'` (création exclusive, échoue si le fichier existe).
+Modes binaires correspondants : `'wb'`, `'ab'`, `'xb'`.
+Méthodes pour écrire : `write(string)` (écrit une chaîne), `writelines(list_of_strings)` (écrit une liste de chaînes).
+Ne pas oublier les caractères de nouvelle ligne (`\n`) si nécessaire.
+
+```python
+# Écriture dans un nouveau fichier (ou écrase un existant)
+with open("sortie_ecriture.txt", "w", encoding="utf-8") as f:
+    f.write("Ceci est la première ligne écrite en Python.\n")
+    f.write("Et voici la deuxième ligne avec des accents : éàè.\n")
+
+print("Le fichier sortie_ecriture.txt a été créé/modifié.")
+
+# Ajout à un fichier existant
+lignes_a_ajouter = [
+    "Troisième ligne ajoutée en mode append.\n",
+    "Quatrième ligne pour compléter.\n"
+]
+with open("sortie_ecriture.txt", "a", encoding="utf-8") as f:
+    f.writelines(lignes_a_ajouter)
+
+print("Des lignes ont été ajoutées à sortie_ecriture.txt.")
+
+# Vérification du contenu
+with open("sortie_ecriture.txt", "r", encoding="utf-8") as f_read:
+    print("\nContenu final de sortie_ecriture.txt:")
+    print(f_read.read())
+```

@@ -1,0 +1,184 @@
+### 2. Fonctions en Python
+
+Les fonctions sont des blocs de code réutilisables qui effectuent une tâche spécifique. Elles aident à organiser le code, le rendre plus lisible et éviter la répétition.
+
+**Définition et Appel de Fonctions**
+
+Une fonction est définie avec le mot-clé `def`, suivi du nom de la fonction, de parenthèses `()` et de deux-points `:`. Le code à l'intérieur de la fonction doit être indenté.
+
+```python
+def saluer():
+    print("Bonjour, Python!")
+
+# Appel de la fonction
+saluer()  # Output: Bonjour, Python!
+```
+
+**Paramètres et Arguments**
+
+Les fonctions peuvent accepter des entrées, appelées paramètres (lors de la définition) ou arguments (lors de l'appel).
+
+```python
+def saluer_personne(nom):  # 'nom' est un paramètre
+    print(f"Bonjour, {nom}!")
+
+saluer_personne("Alice")  # "Alice" est un argument. Output: Bonjour, Alice!
+saluer_personne("Bob")    # Output: Bonjour, Bob!
+```
+
+**Valeurs de Retour**
+
+Les fonctions peuvent retourner une valeur en utilisant le mot-clé `return`. Si `return` n'est pas utilisé ou est utilisé sans valeur, la fonction retourne `None`.
+
+```python
+def addition(a, b):
+    return a + b
+
+somme = addition(5, 3)
+print(somme)  # Output: 8
+
+def sans_retour():
+    x = 10
+    # Pas de return explicite
+
+valeur = sans_retour()
+print(valeur) # Output: None
+```
+
+**Portée des Variables (Scope)**
+
+Les variables définies à l'intérieur d'une fonction sont locales à cette fonction (portée locale). Les variables définies à l'extérieur de toute fonction sont globales (portée globale).
+
+```python
+variable_globale = "Je suis globale"
+
+def ma_fonction():
+    variable_locale = "Je suis locale"
+    print(variable_globale)  # Accès à la variable globale
+    print(variable_locale)
+
+ma_fonction()
+# print(variable_locale)  # Erreur: variable_locale n'est pas définie ici
+```
+
+### 3. Manipulation des Chaînes de Caractères et Listes
+
+**Opérations sur les Chaînes de Caractères**
+
+Les chaînes de caractères sont immuables en Python. Voici quelques opérations courantes :
+
+-   Concaténation : `+`
+-   Répétition : `*`
+-   Indexation : `chaine[index]`
+-   Slicing (tranchage) : `chaine[debut:fin:pas]`
+-   Longueur : `len(chaine)`
+-   Méthodes utiles : `.upper()`, `.lower()`, `.strip()`, `.split()`, `.find()`, `.replace()`
+
+```python
+s1 = "Bonjour"
+s2 = "Monde"
+salutation = s1 + " " + s2  # Concaténation
+print(salutation)  # Output: Bonjour Monde
+
+etoiles = "*" * 10  # Répétition
+print(etoiles)  # Output: **********
+
+print(salutation[0])      # Indexation. Output: B
+print(salutation[8:13])   # Slicing. Output: Monde
+print(len(salutation))    # Longueur. Output: 13
+
+print(salutation.upper()) # Output: BONJOUR MONDE
+parties = salutation.split(' ') # Séparer la chaîne en une liste
+print(parties) # Output: ['Bonjour', 'Monde']
+```
+
+**Opérations sur les Listes**
+
+Les listes sont des collections ordonnées et muables (modifiables).
+
+-   Création : `ma_liste = [1, 2, 3, "Python"]`
+-   Indexation et Slicing : Similaire aux chaînes.
+-   Ajout d'éléments : `.append(element)`, `.insert(index, element)`, `.extend(autre_liste)`
+-   Suppression d'éléments : `.remove(element)`, `.pop(index)`, `del ma_liste[index]`
+-   Longueur : `len(ma_liste)`
+-   Vérification d'appartenance : `element in ma_liste`
+
+```python
+nombres = [1, 2, 3, 4, 5]
+print(nombres[2])  # Output: 3
+
+nombres.append(6)
+print(nombres)  # Output: [1, 2, 3, 4, 5, 6]
+
+nombres.insert(0, 0) # Insère 0 à l'index 0
+print(nombres)  # Output: [0, 1, 2, 3, 4, 5, 6]
+
+nombres.pop(3) # Supprime l'élément à l'index 3 (qui est 3)
+print(nombres) # Output: [0, 1, 2, 4, 5, 6]
+
+nombres.remove(5) # Supprime la première occurrence de la valeur 5
+print(nombres) # Output: [0, 1, 2, 4, 6]
+
+print(len(nombres)) # Output: 5
+print(4 in nombres) # Output: True
+```
+
+### 4. Lecture et Écriture de Fichiers
+
+Python permet de manipuler des fichiers texte et binaires.
+
+**Lecture de Fichiers**
+
+La fonction `open()` est utilisée pour ouvrir un fichier. Il est recommandé d'utiliser le gestionnaire de contexte `with` qui s'assure que le fichier est correctement fermé.
+
+```python
+# Créons un fichier d'exemple pour la lecture
+with open("exemple.txt", "w") as f:
+    f.write("Ligne 1\n")
+    f.write("Ligne 2\n")
+    f.write("Ligne 3\n")
+
+# Lecture du fichier entier
+with open("exemple.txt", "r") as f: # 'r' pour mode lecture (read)
+    contenu = f.read()
+    print("Contenu entier:")
+    print(contenu)
+
+# Lecture ligne par ligne
+with open("exemple.txt", "r") as f:
+    print("\nLecture ligne par ligne:")
+    for ligne in f:
+        print(ligne.strip()) # .strip() pour enlever les sauts de ligne
+
+# Lecture de toutes les lignes dans une liste
+with open("exemple.txt", "r") as f:
+    lignes = f.readlines()
+    print("\nLignes dans une liste:")
+    print(lignes) # Chaque élément de la liste contient le \n
+```
+
+**Écriture dans les Fichiers**
+
+-   Mode `'w'` (write) : Ouvre un fichier pour l'écriture. S'il existe, son contenu est écrasé. S'il n'existe pas, il est créé.
+-   Mode `'a'` (append) : Ouvre un fichier pour l'écriture en ajoutant à la fin. S'il n'existe pas, il est créé.
+
+```python
+# Écriture en mode 'w' (écrase le contenu existant)
+with open("sortie.txt", "w") as f:
+    f.write("Ceci est la première ligne écrite.\n")
+    f.write("Ceci est la deuxième ligne.\n")
+
+# Lecture pour vérifier
+with open("sortie.txt", "r") as f:
+    print("\nContenu de sortie.txt après écriture 'w':")
+    print(f.read())
+
+# Écriture en mode 'a' (ajoute à la fin)
+with open("sortie.txt", "a") as f:
+    f.write("Ceci est une ligne ajoutée.\n")
+
+# Lecture pour vérifier
+with open("sortie.txt", "r") as f:
+    print("\nContenu de sortie.txt après écriture 'a':")
+    print(f.read())
+```

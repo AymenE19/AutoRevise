@@ -1,0 +1,95 @@
+# Module 3: Structures de Données Avancées
+
+## 3.1 Listes Avancées
+Les listes sont des collections ordonnées et modifiables.
+### Création et Modification
+```python
+ma_liste = [1, 2, 3, "Python", True]
+ma_liste.append("nouveau")
+ma_liste[0] = "un"
+print(ma_liste) # ['un', 2, 3, 'Python', True, 'nouveau']
+```
+### Parcours de listes
+```python
+for element in ma_liste:
+    print(element)
+```
+
+## 3.2 Dictionnaires
+Les dictionnaires sont des collections non ordonnées de paires clé-valeur.
+### Création et Modification
+```python
+mon_dict = {"nom": "Dupont", "age": 30}
+mon_dict["ville"] = "Paris"
+mon_dict["age"] = 31
+print(mon_dict) # {'nom': 'Dupont', 'age': 31, 'ville': 'Paris'}
+```
+### Parcours de dictionnaires
+```python
+# Parcourir les clés
+for cle in mon_dict.keys():
+    print(cle)
+
+# Parcourir les valeurs
+for valeur in mon_dict.values():
+    print(valeur)
+
+# Parcourir les paires clé-valeur
+for cle, valeur in mon_dict.items():
+    print(f"{cle}: {valeur}")
+```
+
+## 3.3 Algorithmes de Tri et Recherche
+### Tri à Bulles (Bubble Sort)
+Le tri à bulles est un algorithme simple qui parcourt plusieurs fois une liste, comparant les éléments adjacents et les échangeant s'ils sont dans le mauvais ordre.
+```python
+def tri_a_bulles(liste):
+    n = len(liste)
+    for i in range(n-1):
+        for j in range(0, n-i-1):
+            if liste[j] > liste[j+1]:
+                liste[j], liste[j+1] = liste[j+1], liste[j]
+    return liste
+
+exemple_liste_tri = [64, 34, 25, 12, 22, 11, 90]
+print(f"Liste triée (bulles): {tri_a_bulles(exemple_liste_tri)}")
+```
+### Recherche Linéaire
+La recherche linéaire vérifie séquentiellement chaque élément de la liste jusqu'à ce qu'une correspondance soit trouvée ou que toute la liste ait été parcourue.
+```python
+def recherche_lineaire(liste, element_recherche):
+    for i in range(len(liste)):
+        if liste[i] == element_recherche:
+            return i  # Retourne l'index de l'élément trouvé
+    return -1 # Retourne -1 si l'élément n'est pas trouvé
+
+print(f"Index de 22 (linéaire): {recherche_lineaire(exemple_liste_tri, 22)}")
+```
+### Recherche Dichotomique (Binary Search)
+*Prérequis: la liste doit être triée.*
+La recherche dichotomique divise à plusieurs reprises la portion de la liste qui pourrait contenir l'élément en deux, jusqu'à ce que vous ayez réduit les emplacements possibles à un seul.
+```python
+def recherche_dichotomique(liste_triee, element_recherche):
+    bas, haut = 0, len(liste_triee) - 1
+    while bas <= haut:
+        milieu = (bas + haut) // 2
+        if liste_triee[milieu] < element_recherche:
+            bas = milieu + 1
+        elif liste_triee[milieu] > element_recherche:
+            haut = milieu - 1
+        else:
+            return milieu # Élément trouvé
+    return -1 # Élément non trouvé
+
+liste_deja_triee = sorted(exemple_liste_tri) # Assurons-nous qu'elle est triée
+print(f"Index de 22 (dichotomique): {recherche_dichotomique(liste_deja_triee, 22)}")
+```
+
+## 3.4 Complexité Algorithmique (Introduction)
+La complexité algorithmique est une façon de mesurer la quantité de ressources (temps, espace mémoire) qu'un algorithme utilise en fonction de la taille de l'entrée (n).
+- **O(1)**: Complexité constante (temps d'exécution indépendant de la taille de l'entrée).
+- **O(n)**: Complexité linéaire (temps d'exécution proportionnel à la taille de l'entrée). Exemple: recherche linéaire.
+- **O(n^2)**: Complexité quadratique. Exemple: tri à bulles.
+- **O(log n)**: Complexité logarithmique. Exemple: recherche dichotomique.
+
+L'optimisation des boucles vise à réduire le nombre d'opérations inutiles ou à choisir des structures de données plus adaptées pour améliorer la performance. Par exemple, éviter les boucles imbriquées si une approche plus directe est possible.

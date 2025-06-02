@@ -1,0 +1,19 @@
+## Tuples et Ensembles
+Les tuples sont des séquences immuables. Les ensembles stockent des éléments uniques.
+# Modules et Packages
+## Importation de modules
+Utilisation de `import` et `from ... import`.
+## Création de packages
+Organiser son code en modules et packages.
+## Bibliothèques populaires
+Présentation rapide de NumPy, Pandas, Matplotlib.
+# Bonnes pratiques et Outils
+## Style de code (PEP 8)
+Recommandations pour écrire du code Python lisible.
+## Tests unitaires
+Introduction à `unittest` ou `pytest`.
+## Gestion de versions avec Git
+Concepts de base de Git et GitHub.
+# Projet Final
+## Développement d'une application complète
+Mise en pratique des concepts appris.

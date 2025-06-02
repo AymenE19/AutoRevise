@@ -1,0 +1,633 @@
+## Chapitre 7: Travailler avec les Listes
+Les listes sont l'une des structures de données les plus polyvalentes en Python. Elles sont ordonnées et modifiables.
+
+### Création et Accès aux Listes
+Une liste est créée avec des crochets `[]`.
+```python
+# Liste vide
+ma_liste_vide = []
+
+# Liste avec des éléments
+fruits = ["pomme", "banane", "cerise"]
+nombres = [1, 2, 3, 4, 5]
+mixte = [1, "bonjour", 3.14, True]
+
+print(fruits)
+print(nombres)
+print(mixte)
+```
+
+On accède aux éléments par leur index (commençant à 0).
+```python
+print(fruits[0])  # pomme
+print(fruits[1])  # banane
+
+# Indexation négative (depuis la fin)
+print(fruits[-1]) # cerise
+```
+
+Le "slicing" permet d'obtenir des sous-listes.
+```python
+print(nombres[1:4]) # [2, 3, 4] (éléments de l'index 1 à 3)
+print(nombres[:3])  # [1, 2, 3] (du début à l'index 2)
+print(nombres[2:])  # [3, 4, 5] (de l'index 2 à la fin)
+```
+
+### Modification des Listes
+Les listes sont mutables, on peut changer leurs éléments.
+```python
+fruits = ["pomme", "banane", "cerise"]
+fruits[1] = "myrtille"
+print(fruits) # ['pomme', 'myrtille', 'cerise']
+```
+
+Ajouter des éléments :
+- `append()`: ajoute un élément à la fin.
+- `insert()`: insère un élément à une position spécifique.
+- `extend()`: ajoute tous les éléments d'une autre liste (ou itérable) à la fin.
+```python
+fruits.append("orange")
+print(fruits) # ['pomme', 'myrtille', 'cerise', 'orange']
+
+fruits.insert(1, "fraise")
+print(fruits) # ['pomme', 'fraise', 'myrtille', 'cerise', 'orange']
+
+autres_fruits = ["mangue", "ananas"]
+fruits.extend(autres_fruits)
+print(fruits)
+```
+
+Supprimer des éléments :
+- `remove()`: supprime la première occurrence d'une valeur.
+- `pop()`: supprime un élément à un index donné (ou le dernier si pas d'index) et le retourne.
+- `del`: supprime un élément par son index ou une tranche.
+- `clear()`: vide la liste.
+```python
+fruits.remove("myrtille")
+print(fruits)
+
+element_supprime = fruits.pop(2) # Supprime 'cerise'
+print("Élément supprimé:", element_supprime)
+print(fruits)
+
+del fruits[0] # Supprime 'pomme'
+print(fruits)
+
+# del fruits # Supprimerait toute la variable fruits
+# fruits.clear() # Viderait la liste
+# print(fruits)
+```
+
+### Parcours des Listes
+On peut parcourir une liste avec une boucle `for`.
+```python
+for fruit in fruits:
+    print(fruit)
+
+# Parcourir avec index et valeur
+for index, valeur in enumerate(fruits):
+    print(f"Index {index}: {valeur}")
+```
+
+### Méthodes Utiles pour les Listes
+- `len()`: retourne le nombre d'éléments.
+- `count()`: retourne le nombre d'occurrences d'une valeur.
+- `index()`: retourne l'index de la première occurrence d'une valeur (génère une erreur si absente).
+- `sort()`: trie la liste sur place.
+- `reverse()`: inverse l'ordre des éléments sur place.
+- `copy()`: retourne une copie superficielle de la liste.
+```python
+nombres = [1, 5, 2, 8, 2, 5, 2]
+print("Longueur:", len(nombres))
+print("Nombre de 2:", nombres.count(2))
+print("Index de 8:", nombres.index(8))
+
+nombres_tries = nombres.copy()
+nombres_tries.sort() # Tri sur place
+print("Nombres triés:", nombres_tries)
+
+nombres_tries.reverse() # Inversion sur place
+print("Nombres inversés:", nombres_tries)
+
+# Attention à la copie
+liste_a = [1, 2, 3]
+liste_b = liste_a       # liste_b est une référence à liste_a
+liste_c = liste_a.copy() # liste_c est une nouvelle liste (copie superficielle)
+
+liste_a.append(4)
+print("Liste A:", liste_a) # [1, 2, 3, 4]
+print("Liste B:", liste_b) # [1, 2, 3, 4] (affectée par la modification de A)
+print("Liste C:", liste_c) # [1, 2, 3] (non affectée)
+```
+
+### Compréhensions de Liste (List Comprehensions)
+Une manière concise de créer des listes.
+```python
+# Carrés des nombres de 0 à 9
+carres = []
+for x in range(10):
+    carres.append(x**2)
+print(carres)
+
+# Avec compréhension de liste
+carres_comprehension = [x**2 for x in range(10)]
+print(carres_comprehension)
+
+# Avec condition
+nombres_pairs = [x for x in range(10) if x % 2 == 0]
+print(nombres_pairs)
+```
+
+## Chapitre 8: Dictionnaires en Python
+Les dictionnaires stockent des paires clé-valeur. Ils sont non ordonnés (avant Python 3.7, ordonnés depuis), modifiables et les clés doivent être uniques et immuables (ex: chaînes, nombres, tuples).
+
+### Création et Accès aux Dictionnaires
+Un dictionnaire est créé avec des accolades `{}`.
+```python
+# Dictionnaire vide
+mon_dict_vide = {}
+
+# Dictionnaire avec des éléments
+personne = {
+    "nom": "Dupont",
+    "prenom": "Jean",
+    "age": 30,
+    "ville": "Paris"
+}
+print(personne)
+```
+
+On accède aux valeurs par leur clé.
+```python
+print(personne["nom"])  # Dupont
+print(personne["age"])  # 30
+
+# Utiliser get() pour éviter une erreur si la clé n'existe pas
+print(personne.get("profession")) # None
+print(personne.get("profession", "Non spécifié")) # Non spécifié (valeur par défaut)
+
+# print(personne["profession"]) # KeyError si la clé n'existe pas
+```
+
+### Modification des Dictionnaires
+Les dictionnaires sont mutables.
+```python
+# Modifier une valeur existante
+personne["age"] = 31
+print(personne)
+
+# Ajouter une nouvelle paire clé-valeur
+personne["profession"] = "Ingénieur"
+personne["langues"] = ["français", "anglais"]
+print(personne)
+```
+
+Supprimer des éléments :
+- `pop()`: supprime une clé et retourne sa valeur.
+- `popitem()`: supprime et retourne la dernière paire clé-valeur insérée (avant Python 3.7, une paire aléatoire).
+- `del`: supprime une clé.
+- `clear()`: vide le dictionnaire.
+```python
+profession = personne.pop("profession")
+print("Profession supprimée:", profession)
+print(personne)
+
+dernier_item = personne.popitem() # Supprime 'langues' et sa valeur
+print("Dernier item supprimé:", dernier_item)
+print(personne)
+
+del personne["ville"]
+print(personne)
+
+# personne.clear()
+# print(personne)
+```
+
+### Parcours des Dictionnaires
+On peut parcourir les clés, les valeurs, ou les paires clé-valeur.
+```python
+personne = {"nom": "Dupont", "prenom": "Alice", "age": 25}
+
+# Parcourir les clés (par défaut)
+print("Clés:")
+for cle in personne:
+    print(cle) # ou personne.keys()
+
+# Parcourir les valeurs
+print("\nValeurs:")
+for valeur in personne.values():
+    print(valeur)
+
+# Parcourir les paires clé-valeur
+print("\nPaires clé-valeur:")
+for cle, valeur in personne.items():
+    print(f"{cle}: {valeur}")
+```
+
+### Méthodes Utiles pour les Dictionnaires
+- `len()`: nombre de paires clé-valeur.
+- `keys()`: retourne une vue des clés.
+- `values()`: retourne une vue des valeurs.
+- `items()`: retourne une vue des paires (clé, valeur).
+- `update()`: met à jour le dictionnaire avec des paires d'un autre dictionnaire ou d'un itérable de paires.
+- `copy()`: retourne une copie superficielle.
+```python
+print("Nombre d'éléments:", len(personne))
+
+cles = personne.keys()
+print("Vue des clés:", cles) # Objet de type dict_keys
+
+valeurs = personne.values()
+print("Vue des valeurs:", valeurs) # Objet de type dict_values
+
+items = personne.items()
+print("Vue des items:", items) # Objet de type dict_items
+
+# Update
+infos_supplementaires = {"ville": "Lyon", "email": "alice@example.com"}
+personne.update(infos_supplementaires)
+print("Personne mise à jour:", personne)
+
+# Copie
+personne_copie = personne.copy()
+personne_copie["age"] = 28
+print("Original:", personne)
+print("Copie modifiée:", personne_copie)
+```
+Les compréhensions de dictionnaire existent aussi, similaires aux compréhensions de liste.
+```python
+carres_dict = {x: x**2 for x in range(5)}
+print(carres_dict) # {0: 0, 1: 1, 2: 4, 3: 9, 4: 16}
+```
+
+## Chapitre 9: Ensembles (Sets) et Tuples
+
+### Ensembles (Sets)
+Un ensemble est une collection non ordonnée d'éléments uniques et immuables. Utile pour les opérations mathématiques sur les ensembles.
+Créés avec `{}` ou `set()`. Pour un ensemble vide, utiliser `set()` car `{}` crée un dictionnaire vide.
+```python
+# Création
+nombres_set = {1, 2, 3, 4, 4, 5} # Les doublons sont ignorés
+print(nombres_set) # {1, 2, 3, 4, 5}
+
+fruits_set = set(["pomme", "banane", "cerise"])
+print(fruits_set)
+
+set_vide = set()
+print(set_vide)
+```
+
+Opérations sur les ensembles :
+- `add()`: ajoute un élément.
+- `remove()`: supprime un élément (erreur si absent).
+- `discard()`: supprime un élément (pas d'erreur si absent).
+- `pop()`: supprime et retourne un élément arbitraire.
+- `clear()`: vide l'ensemble.
+```python
+nombres_set.add(6)
+print(nombres_set)
+
+nombres_set.remove(1)
+# nombres_set.remove(10) # KeyError
+
+nombres_set.discard(2)
+nombres_set.discard(10) # Pas d'erreur
+print(nombres_set)
+```
+
+Opérations mathématiques : union, intersection, différence.
+```python
+set_a = {1, 2, 3, 4}
+set_b = {3, 4, 5, 6}
+
+# Union (| ou union())
+union_set = set_a | set_b
+print("Union:", union_set) # {1, 2, 3, 4, 5, 6}
+
+# Intersection (& ou intersection())
+intersection_set = set_a & set_b
+print("Intersection:", intersection_set) # {3, 4}
+
+# Différence (- ou difference())
+difference_set_ab = set_a - set_b # Éléments dans A mais pas dans B
+print("Différence A-B:", difference_set_ab) # {1, 2}
+difference_set_ba = set_b - set_a
+print("Différence B-A:", difference_set_ba) # {5, 6}
+
+# Différence symétrique (^ ou symmetric_difference())
+# Éléments dans A ou B, mais pas dans les deux
+sym_diff_set = set_a ^ set_b
+print("Différence symétrique:", sym_diff_set) # {1, 2, 5, 6}
+```
+Les ensembles ne supportent pas l'indexation ou le slicing. On peut les parcourir.
+```python
+for element in nombres_set:
+    print(element)
+```
+
+### Tuples
+Un tuple est une collection ordonnée et immuable (non modifiable après création).
+Créés avec des parenthèses `()`.
+```python
+# Création
+mon_tuple_vide = ()
+nombres_tuple = (1, 2, 3, 4, 5)
+mixte_tuple = (1, "salut", 3.14)
+print(nombres_tuple)
+
+# Tuple avec un seul élément (attention à la virgule)
+tuple_un_element = (10,) # La virgule est cruciale
+print(tuple_un_element)
+pas_un_tuple = (10) # Ceci est juste un entier entre parenthèses
+print(type(pas_un_tuple))
+```
+
+Accès aux éléments comme les listes (indexation, slicing).
+```python
+print(nombres_tuple[0])    # 1
+print(nombres_tuple[1:3])  # (2, 3)
+```
+Les tuples sont immuables.
+```python
+# nombres_tuple[0] = 10 # TypeError: 'tuple' object does not support item assignment
+```
+Utilité des tuples :
+- Clés de dictionnaire (car immuables).
+- Retourner plusieurs valeurs d'une fonction.
+- Quand on veut s'assurer que les données ne sont pas modifiées.
+```python
+coordonnees = (10.0, 20.5) # Représente un point (x, y)
+# Unpacking de tuple
+x, y = coordonnees
+print(f"x = {x}, y = {y}")
+```
+Méthodes limitées car immuables : `count()`, `index()`.
+```python
+mon_tuple = (1, 2, 2, 3, 4, 2)
+print("Nombre de 2:", mon_tuple.count(2))
+print("Index de 3:", mon_tuple.index(3))
+```
+On peut parcourir les tuples comme les listes.
+```python
+for item in mon_tuple:
+    print(item)
+```
+
+## Chapitre 16: Introduction aux Algorithmes de Tri
+Le tri est une opération fondamentale en informatique. Python offre des méthodes intégrées pour trier, mais comprendre les algorithmes de tri est crucial.
+
+### Tri à Bulles (Bubble Sort)
+Le tri à bulles est un algorithme simple qui parcourt répétitivement la liste, compare les éléments adjacents et les échange s'ils sont dans le mauvais ordre.
+```python
+def bubble_sort(arr):
+    n = len(arr)
+    for i in range(n):
+        swapped = False
+        for j in range(0, n-i-1):
+            if arr[j] > arr[j+1]:
+                arr[j], arr[j+1] = arr[j+1], arr[j]
+                swapped = True
+        if not swapped: # Optimisation: si aucun échange lors d'un passage, la liste est triée
+            break
+    return arr
+
+my_list = [64, 34, 25, 12, 22, 11, 90]
+print("Liste triée (Tri à Bulles):", bubble_sort(my_list))
+```
+Complexité: O(n^2) dans le pire des cas et en moyenne, O(n) dans le meilleur cas (déjà trié avec optimisation).
+
+### Tri par Sélection (Selection Sort)
+Le tri par sélection divise la liste en une sous-liste triée et une sous-liste non triée. Il sélectionne répétitivement le plus petit (ou plus grand) élément de la sous-liste non triée et le déplace vers la sous-liste triée.
+```python
+def selection_sort(arr):
+    n = len(arr)
+    for i in range(n):
+        min_idx = i
+        for j in range(i+1, n):
+            if arr[j] < arr[min_idx]:
+                min_idx = j
+        # Échange de l'élément minimum trouvé avec le premier élément non trié
+        arr[i], arr[min_idx] = arr[min_idx], arr[i]
+    return arr
+
+my_list_sel = [64, 25, 12, 22, 11]
+print("Liste triée (Tri par Sélection):", selection_sort(my_list_sel))
+```
+Complexité: O(n^2) dans tous les cas (pire, meilleur, moyen).
+
+### Tri par Insertion (Insertion Sort)
+Le tri par insertion construit la liste triée finale un élément à la fois. Il est moins performant sur de grandes listes que des algorithmes plus avancés comme le tri rapide, le tri fusion ou le heapsort.
+```python
+def insertion_sort(arr):
+    for i in range(1, len(arr)):
+        key = arr[i] # Élément à insérer
+        j = i-1      # Dernier élément de la sous-liste triée
+        # Déplacer les éléments de la sous-liste triée qui sont plus grands que key
+        # vers une position à droite pour faire de la place pour key
+        while j >=0 and key < arr[j] :
+                arr[j+1] = arr[j]
+                j -= 1
+        arr[j+1] = key # Insérer key à sa place
+    return arr
+
+my_list_ins = [12, 11, 13, 5, 6]
+print("Liste triée (Tri par Insertion):", insertion_sort(my_list_ins))
+```
+Complexité: O(n^2) dans le pire des cas et en moyenne, O(n) dans le meilleur cas (déjà trié). Efficace pour les petites listes ou les listes presque triées.
+
+### Tri Rapide (Quick Sort) - Concept
+Le tri rapide est un algorithme de tri efficace basé sur la stratégie "diviser pour régner". Il choisit un élément comme pivot et partitionne les autres éléments en deux sous-tableaux, selon qu'ils sont inférieurs ou supérieurs au pivot. Les sous-tableaux sont ensuite triés récursivement.
+(Une implémentation complète de Quick Sort peut être complexe et est souvent abordée dans des cours d'algorithmique plus avancés. Ici, nous présentons le concept.)
+```python
+# Concept du Quick Sort (implémentation simplifiée pour illustration de la récursion)
+def quick_sort_concept(arr):
+    if len(arr) <= 1:
+        return arr
+    else:
+        pivot = arr[len(arr) // 2] # Choix simple du pivot (peut être amélioré)
+        left = [x for x in arr if x < pivot]
+        middle = [x for x in arr if x == pivot] # Pour gérer les doublons du pivot
+        right = [x for x in arr if x > pivot]
+        return quick_sort_concept(left) + middle + quick_sort_concept(right)
+
+my_list_qs = [3,6,8,10,1,2,1,5,9,4,7]
+print("Liste triée (Quick Sort concept):", quick_sort_concept(my_list_qs))
+```
+Complexité: O(n log n) en moyenne et dans le meilleur cas. O(n^2) dans le pire des cas (par exemple, si la liste est déjà triée et le pivot mal choisi).
+
+Python utilise un algorithme de tri hybride appelé Timsort (dérivé du tri fusion et du tri par insertion) pour sa méthode `sort()` et la fonction `sorted()`, qui est très efficace (O(n log n)).
+
+## Chapitre 17: Introduction aux Algorithmes de Recherche
+Rechercher un élément dans une collection de données est une tâche courante.
+
+### Recherche Linéaire (Linear Search)
+La recherche linéaire (ou séquentielle) est la méthode la plus simple. Elle consiste à parcourir chaque élément de la liste jusqu'à ce que l'élément recherché soit trouvé ou que la fin de la liste soit atteinte.
+```python
+def linear_search(arr, target):
+    for i in range(len(arr)):
+        if arr[i] == target:
+            return i  # Retourne l'index de l'élément trouvé
+    return -1 # Retourne -1 si l'élément n'est pas trouvé
+
+my_list = [10, 20, 80, 30, 60, 50, 110, 100, 130, 170]
+target_value = 110
+result_index = linear_search(my_list, target_value)
+
+if result_index != -1:
+    print(f"L'élément {target_value} a été trouvé à l'index {result_index}.")
+else:
+    print(f"L'élément {target_value} n'a pas été trouvé dans la liste.")
+
+target_value_absent = 95
+result_index_absent = linear_search(my_list, target_value_absent)
+if result_index_absent != -1:
+    print(f"L'élément {target_value_absent} a été trouvé à l'index {result_index_absent}.")
+else:
+    print(f"L'élément {target_value_absent} n'a pas été trouvé dans la liste.")
+```
+Complexité: O(n) car dans le pire des cas, il faut parcourir toute la liste. Fonctionne sur les listes triées ou non triées.
+
+### Recherche Dichotomique (Binary Search)
+La recherche dichotomique est un algorithme beaucoup plus efficace, mais elle **nécessite que la liste soit triée**.
+Elle fonctionne en comparant l'élément cible à l'élément médian de la collection. Si l'élément médian est la cible, la recherche est terminée. Sinon, si la cible est plus petite que l'élément médian, la recherche continue sur la moitié inférieure de la collection. Si la cible est plus grande, la recherche continue sur la moitié supérieure. Ce processus est répété, divisant la taille de la portion de recherche par deux à chaque étape.
+```python
+def binary_search(arr_sorted, target):
+    low = 0
+    high = len(arr_sorted) - 1
+    
+    while low <= high:
+        mid = (low + high) // 2 # Index du milieu
+        guess = arr_sorted[mid] # Valeur au milieu
+        
+        if guess == target:
+            return mid # Cible trouvée
+        elif guess > target:
+            high = mid - 1 # La cible est dans la moitié inférieure
+        else: # guess < target
+            low = mid + 1  # La cible est dans la moitié supérieure
+            
+    return -1 # Cible non trouvée
+
+# La liste DOIT être triée pour la recherche dichotomique
+my_sorted_list = [10, 20, 30, 50, 60, 80, 100, 110, 130, 170]
+target_bs = 130
+result_bs_index = binary_search(my_sorted_list, target_bs)
+
+if result_bs_index != -1:
+    print(f"L'élément {target_bs} a été trouvé à l'index {result_bs_index} (recherche dichotomique).")
+else:
+    print(f"L'élément {target_bs} n'a pas été trouvé (recherche dichotomique).")
+
+target_bs_absent = 95
+result_bs_absent_index = binary_search(my_sorted_list, target_bs_absent)
+if result_bs_absent_index != -1:
+    print(f"L'élément {target_bs_absent} a été trouvé à l'index {result_bs_absent_index} (recherche dichotomique).")
+else:
+    print(f"L'élément {target_bs_absent} n'a pas été trouvé (recherche dichotomique).")
+
+```
+Complexité: O(log n) car la taille de l'espace de recherche est divisée par deux à chaque étape. C'est significativement plus rapide que O(n) pour les grandes listes.
+
+## Chapitre 18: Complexité Algorithmique
+La complexité algorithmique est une mesure de la quantité de ressources (temps ou espace mémoire) nécessaires à un algorithme pour s'exécuter en fonction de la taille de l'entrée.
+
+### Introduction à la Complexité
+- **Complexité Temporelle (Time Complexity)**: Mesure le temps d'exécution d'un algorithme en fonction de la taille de l'entrée (n). On s'intéresse souvent au comportement asymptotique (comment le temps croît quand n devient très grand).
+- **Complexité Spatiale (Space Complexity)**: Mesure l'espace mémoire utilisé par un algorithme en fonction de la taille de l'entrée.
+
+On analyse souvent trois cas :
+1.  **Meilleur Cas (Best Case)**: Le scénario où l'algorithme prend le moins de temps.
+2.  **Pire Cas (Worst Case)**: Le scénario où l'algorithme prend le plus de temps. C'est souvent le plus important car il garantit une performance maximale.
+3.  **Cas Moyen (Average Case)**: La performance attendue en moyenne sur toutes les entrées possibles.
+
+### Notation Big O (Grand O)
+La notation Big O est utilisée pour décrire la limite supérieure de la complexité temporelle ou spatiale dans le pire des cas. Elle donne une idée de la croissance du temps d'exécution ou de l'espace mémoire lorsque la taille de l'entrée augmente.
+Elle ignore les constantes et les termes de bas ordre, car on s'intéresse au taux de croissance pour de grandes valeurs de n.
+
+Exemples courants de complexités Big O (du plus rapide au plus lent) :
+- **O(1) - Constant**: Le temps d'exécution est constant, quelle que soit la taille de l'entrée.
+  Ex: Accéder à un élément d'une liste par son index `ma_liste[i]`.
+- **O(log n) - Logarithmique**: Le temps d'exécution croît logarithmiquement avec la taille de l'entrée. Très efficace.
+  Ex: Recherche dichotomique.
+- **O(n) - Linéaire**: Le temps d'exécution croît linéairement avec la taille de l'entrée.
+  Ex: Parcourir tous les éléments d'une liste (recherche linéaire), trouver le max/min.
+- **O(n log n) - Linéithmique**: Temps d'exécution commun pour les algorithmes de tri efficaces.
+  Ex: Tri fusion (Merge Sort), Tri rapide (Quick Sort en moyenne), Timsort.
+- **O(n^2) - Quadratique**: Le temps d'exécution croît de manière quadratique. Devient lent pour de grandes entrées.
+  Ex: Tri à bulles, tri par sélection, tri par insertion (dans le pire cas). Boucles imbriquées parcourant n éléments chacune.
+- **O(n^3) - Cubique**: Temps d'exécution encore plus lent.
+  Ex: Certaines opérations matricielles avec trois boucles imbriquées.
+- **O(2^n) - Exponentiel**: Le temps d'exécution double (ou plus) avec chaque ajout à la taille de l'entrée. Très lent, impraticable pour des n même modérés.
+  Ex: Certains problèmes de force brute, suite de Fibonacci récursive naïve.
+- **O(n!) - Factoriel**: Le temps d'exécution croît de manière factorielle. Extrêmement lent.
+  Ex: Problème du voyageur de commerce par force brute.
+
+### Exemples de Complexités Courantes
+
+```python
+# O(1) - Constant
+def get_first_element(data_list):
+    if data_list:
+        return data_list[0] # Accès direct
+    return None
+
+# O(n) - Linéaire
+def sum_list_elements(data_list):
+    total = 0
+    for element in data_list: # Boucle unique sur n éléments
+        total += element
+    return total
+
+# O(n^2) - Quadratique
+def find_duplicates_simple(data_list):
+    duplicates = []
+    n = len(data_list)
+    for i in range(n):       # Boucle externe (n itérations)
+        for j in range(i + 1, n): # Boucle interne (environ n/2 itérations en moyenne)
+            if data_list[i] == data_list[j] and data_list[i] not in duplicates:
+                duplicates.append(data_list[i])
+    return duplicates
+# Chaque élément est comparé à presque tous les autres éléments.
+
+# O(log n) - Logarithmique (exemple conceptuel, la recherche dichotomique vue avant)
+# Si on divise le problème par deux à chaque étape.
+
+# O(n log n) - Tri rapide (concept vu avant)
+```
+
+### Optimisation des Boucles
+L'optimisation des boucles est cruciale car c'est souvent là que les algorithmes passent le plus de temps.
+Quelques stratégies :
+1.  **Réduire le travail inutile dans les boucles**:
+    - Sortir les calculs invariants de la boucle.
+    ```python
+    # Moins optimisé
+    # for i in range(n):
+    #     result = i * (constant_value * 2) # (constant_value * 2) calculé n fois
+
+    # Optimisé
+    # precalculated = constant_value * 2
+    # for i in range(n):
+    #     result = i * precalculated
+    ```
+2.  **Utiliser des structures de données appropriées**:
+    - Rechercher dans un `set` ou les clés d'un `dict` est en moyenne O(1), alors que dans une `list` c'est O(n).
+    ```python
+    my_list = list(range(100000))
+    my_set = set(my_list)
+
+    # Recherche dans une liste: O(n)
+    # if 99999 in my_list: print("Trouvé dans liste")
+
+    # Recherche dans un ensemble: O(1) en moyenne
+    # if 99999 in my_set: print("Trouvé dans set")
+    ```
+3.  **Éviter les boucles imbriquées profondes si possible**: Chaque niveau d'imbrication multiplie la complexité (par exemple, O(n^2), O(n^3)). Parfois, on peut les remplacer par des approches plus intelligentes.
+4.  **Utiliser `break` et `continue` pour sauter des itérations inutiles**:
+    - Si une condition est remplie et que le reste de la boucle n'est plus nécessaire, utiliser `break`.
+    - Si l'itération actuelle peut être sautée, utiliser `continue`.
+    (Exemple: optimisation du tri à bulles avec `swapped` flag et `break`).
+5.  **Compréhensions de liste/dictionnaire/ensemble**: Souvent plus rapides et plus lisibles que les boucles explicites pour créer des collections, car elles sont implémentées en C et optimisées.
+6.  **Vectorisation (avec NumPy)**: Pour les opérations numériques sur de grands tableaux, les bibliothèques comme NumPy permettent des opérations vectorisées qui sont beaucoup plus rapides que les boucles Python natives. (Hors du cadre de ce chapitre introductif).
+
+Comprendre la complexité Big O aide à choisir le bon algorithme pour un problème donné, surtout lorsque l'on travaille avec de grandes quantités de données.

@@ -1,0 +1,59 @@
+### 1.1 Qu'est-ce que Python ?
+Python est un langage de programmation interprété, de haut niveau et généraliste. Il est réputé pour sa syntaxe claire et lisible, ce qui en fait un excellent choix pour les débutants.
+
+### 1.2 Installation de l'Environnement
+Pour commencer, vous aurez besoin d'installer Python et quelques outils. Nous recommandons la distribution Anaconda, qui inclut Python, Jupyter Notebook, et d'autres bibliothèques utiles. VS Code est un excellent éditeur de texte pour écrire du code Python.
+
+#### Installation d'Anaconda
+Suivez les instructions sur le site officiel d'Anaconda.
+
+### 1.3 Variables et Types de Données
+En Python, les variables sont créées lorsque vous leur assignez une valeur. Python est dynamiquement typé.
+
+#### Types de base:
+- **Entiers (int)**: `age = 30`
+- **Flottants (float)**: `prix = 19.99`
+- **Chaînes de caractères (str)**: `nom = "Alice"`
+- **Booléens (bool)**: `est_majeur = True`
+
+### 1.4 Opérateurs
+Python supporte divers opérateurs.
+
+#### Opérateurs Arithmétiques
+- Addition (`+`), Soustraction (`-`), Multiplication (`*`), Division (`/`)
+
+#### Opérateurs de Comparaison
+- Égal (`==`), Différent (`!=`), Supérieur (`>`), Inférieur (`<`)
+
+#### Opérateurs Logiques
+- `and`, `or`, `not`
+
+### 1.5 Structures de Contrôle
+
+#### Conditions (if-elif-else)
+```python
+x = 10
+if x > 5:
+    print("x est supérieur à 5")
+elif x == 5:
+    print("x est égal à 5")
+else:
+    print("x est inférieur à 5")
+```
+
+#### Boucles `for`
+La boucle `for` est utilisée pour itérer sur une séquence (liste, tuple, dictionnaire, ensemble, ou chaîne).
+```python
+fruits = ["pomme", "banane", "cerise"]
+for fruit in fruits:
+    print(fruit)
+```
+
+#### Boucles `while`
+La boucle `while` s'exécute tant qu'une condition est vraie.
+```python
+i = 1
+while i < 6:
+    print(i)
+    i += 1
+```

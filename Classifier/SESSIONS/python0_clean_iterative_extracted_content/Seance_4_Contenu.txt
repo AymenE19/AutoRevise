@@ -1,0 +1,48 @@
+# Module 4: Programmation Orientée Objet (POO)
+## 4.1 Concepts de la POO
+La Programmation Orientée Objet (POO) est un paradigme de programmation qui utilise des "objets" – des instances de classes – pour concevoir des applications et des programmes informatiques.
+## 4.2 Classes et Objets
+Une classe est un plan à partir duquel des objets sont créés. Un objet est une instance d'une classe.
+```python
+class MaClasse:
+    attribut_de_classe = "valeur"
+
+    def __init__(self, parametre1):
+        print("Constructeur appelé")
+        self.attribut_instance = parametre1
+
+    def methode(self):
+        print("Méthode appelée")
+
+# Création d'un objet
+mon_objet = MaClasse("test")
+mon_objet.methode()
+```
+## 4.3 Constructeur `__init__`
+Le constructeur `__init__` est une méthode spéciale appelée lors de la création d'un objet. Il initialise les attributs de l'objet.
+## 4.4 Héritage
+L'héritage permet à une classe (classe fille) d'hériter des attributs et méthodes d'une autre classe (classe mère).
+```python
+class ClasseMere:
+    def methode_mere(self):
+        print("Méthode de la classe mère")
+
+class ClasseFille(ClasseMere):
+    def methode_fille(self):
+        print("Méthode de la classe fille")
+
+objet_fille = ClasseFille()
+objet_fille.methode_mere() # Héritée
+```
+## 4.5 Polymorphisme
+Le polymorphisme permet d'utiliser une interface unique pour des objets de types différents.
+## 4.6 Gestion des Exceptions
+La gestion des exceptions permet de traiter les erreurs qui peuvent survenir pendant l'exécution d'un programme.
+```python
+try:
+    resultat = 10 / 0
+except ZeroDivisionError:
+    print("Erreur : Division par zéro !")
+finally:
+    print("Bloc finally exécuté.")
+```

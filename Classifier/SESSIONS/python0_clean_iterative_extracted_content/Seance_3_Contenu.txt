@@ -1,0 +1,220 @@
+## Module 3: Structures de Données et Algorithmes Fondamentaux
+Objectifs: Maîtriser les listes et dictionnaires, comprendre les algorithmes de tri et de recherche de base, et s'initier à la complexité algorithmique.
+
+### 3.1 Listes et Dictionnaires
+#### Création, Modification et Parcours des Listes
+Les listes sont des collections ordonnées et mutables d'éléments. Elles peuvent contenir des éléments de types différents.
+
+**Création d'une liste :**
+```python
+ma_liste = [1, "Python", 3.14, True]
+liste_vide = []
+```
+
+**Accès aux éléments :**
+Les éléments d'une liste sont accessibles par leur index (commençant à 0).
+```python
+print(ma_liste[0])  # Affiche 1
+print(ma_liste[1])  # Affiche "Python"
+```
+
+**Modification d'une liste :**
+```python
+ma_liste[2] = "modifié"
+print(ma_liste)  # Affiche [1, "Python", "modifié", True]
+```
+
+**Ajout d'éléments :**
+- `append()`: ajoute un élément à la fin de la liste.
+- `insert()`: insère un élément à une position spécifique.
+```python
+ma_liste.append("nouveau")
+ma_liste.insert(1, "inséré")
+print(ma_liste)
+```
+
+**Suppression d'éléments :**
+- `remove()`: supprime la première occurrence d'une valeur.
+- `pop()`: supprime un élément à un index donné (ou le dernier si aucun index n'est spécifié) et le retourne.
+- `del`: supprime un élément par son index ou une tranche.
+```python
+ma_liste.remove("Python") # Assumant que "Python" est toujours là après l'insertion
+# Pour être sûr, utilisons une liste fraîche pour cet exemple ou vérifions la présence
+# Exemple avec une liste contrôlée:
+test_list_suppr = [1, "cible", 3]
+test_list_suppr.remove("cible") # Supprime "cible"
+print(test_list_suppr) # [1, 3]
+
+element_supprime = ma_liste.pop(0) # Supprime et retourne le premier élément
+del ma_liste[0] # Supprime le nouveau premier élément
+print(ma_liste)
+```
+
+**Parcours d'une liste :**
+```python
+# Utilisons une liste fraîche pour la clarté du parcours
+parcours_liste = ["a", "b", "c"]
+for element in parcours_liste:
+    print(element)
+
+for i in range(len(parcours_liste)):
+    print(f"Index {i}: {parcours_liste[i]}")
+```
+
+#### Création, Modification et Parcours des Dictionnaires
+Les dictionnaires sont des collections non ordonnées (avant Python 3.7, ordonnées depuis) de paires clé-valeur. Les clés doivent être uniques et immuables.
+
+**Création d'un dictionnaire :**
+```python
+mon_dictionnaire = {"nom": "Dupont", "prenom": "Jean", "age": 30}
+dict_vide = {}
+```
+
+**Accès aux valeurs :**
+Les valeurs sont accessibles via leurs clés.
+```python
+print(mon_dictionnaire["nom"])  # Affiche "Dupont"
+print(mon_dictionnaire.get("ville", "Non spécifié")) # Utiliser get() pour éviter une erreur si la clé n'existe pas
+```
+
+**Modification d'un dictionnaire :**
+```python
+mon_dictionnaire["age"] = 31
+mon_dictionnaire["ville"] = "Paris" # Ajoute une nouvelle paire clé-valeur
+print(mon_dictionnaire)
+```
+
+**Suppression d'éléments :**
+- `pop()`: supprime une clé et retourne sa valeur.
+- `del`: supprime une paire clé-valeur.
+```python
+age_supprime = mon_dictionnaire.pop("age")
+del mon_dictionnaire["prenom"]
+print(mon_dictionnaire)
+```
+
+**Parcours d'un dictionnaire :**
+```python
+# Parcourir les clés
+for cle in mon_dictionnaire.keys():
+    print(cle)
+
+# Parcourir les valeurs
+for valeur in mon_dictionnaire.values():
+    print(valeur)
+
+# Parcourir les paires clé-valeur
+for cle, valeur in mon_dictionnaire.items():
+    print(f"{cle}: {valeur}")
+```
+
+### 3.2 Algorithmes de Tri et de Recherche
+#### Tri à Bulles (Bubble Sort)
+Le tri à bulles est un algorithme de tri simple qui parcourt plusieurs fois la liste, comparant les éléments adjacents et les échangeant s'ils sont dans le mauvais ordre.
+```python
+def tri_a_bulles(liste):
+    n = len(liste)
+    for i in range(n):
+        # Le dernier i éléments sont déjà en place
+        for j in range(0, n-i-1):
+            # Parcourir la liste de 0 à n-i-1
+            # Échanger si l'élément trouvé est plus grand
+            # que le suivant
+            if liste[j] > liste[j+1]:
+                liste[j], liste[j+1] = liste[j+1], liste[j]
+    return liste
+
+exemple_liste_tri = [64, 34, 25, 12, 22, 11, 90]
+print("Liste originale:", exemple_liste_tri)
+print("Liste triée (bulles):", tri_a_bulles(exemple_liste_tri.copy())) # .copy() pour ne pas modifier l'originale
+```
+
+#### Tri Rapide (Quick Sort) - Concept
+Le tri rapide est un algorithme de tri efficace basé sur la stratégie "diviser pour régner". Il choisit un élément comme pivot et partitionne les autres éléments en deux sous-tableaux, selon qu'ils sont inférieurs ou supérieurs au pivot. Les sous-tableaux sont ensuite triés récursivement.
+(Note: Une implémentation complète peut être complexe pour une introduction, nous nous concentrons sur le concept).
+
+#### Recherche Linéaire (Linear Search)
+La recherche linéaire vérifie séquentiellement chaque élément de la liste jusqu'à ce qu'une correspondance soit trouvée ou que toute la liste ait été parcourue.
+```python
+def recherche_lineaire(liste, element_recherche):
+    for i in range(len(liste)):
+        if liste[i] == element_recherche:
+            return i  # Retourne l'index de l'élément trouvé
+    return -1 # Retourne -1 si l'élément n'est pas trouvé
+
+print("Index de 22 (linéaire) dans", exemple_liste_tri, ":", recherche_lineaire(exemple_liste_tri, 22))
+```
+
+#### Recherche Dichotomique (Binary Search)
+La recherche dichotomique est un algorithme efficace pour trouver un élément dans une **liste triée**. Elle compare l'élément cible à l'élément médian de la liste. Si l'élément médian n'est pas égal à la cible, la moitié de la liste dans laquelle la cible ne peut pas se trouver est éliminée, et la recherche continue sur la moitié restante.
+```python
+def recherche_dichotomique(liste_triee, element_recherche):
+    bas, haut = 0, len(liste_triee) - 1
+    while bas <= haut:
+        milieu = (bas + haut) // 2
+        if liste_triee[milieu] < element_recherche:
+            bas = milieu + 1
+        elif liste_triee[milieu] > element_recherche:
+            haut = milieu - 1
+        else:
+            return milieu # Élément trouvé
+    return -1 # Élément non trouvé
+
+liste_pour_dicho = sorted(exemple_liste_tri.copy()) # La recherche dichotomique nécessite une liste triée
+print("Liste triée pour dicho:", liste_pour_dicho)
+print("Index de 22 (dichotomique) dans", liste_pour_dicho, ":", recherche_dichotomique(liste_pour_dicho, 22))
+```
+
+### 3.3 Complexité Algorithmique et Optimisation
+#### Introduction à la Complexité Algorithmique (Notation Big O)
+La complexité algorithmique est une façon de décrire l'efficacité d'un algorithme en termes de temps d'exécution (complexité temporelle) ou d'espace mémoire utilisé (complexité spatiale) en fonction de la taille de l'entrée. La notation Big O est couramment utilisée pour cela.
+- **O(1)** : Temps constant (ex: accès à un élément de liste par index, ajout/suppression à la fin d'une liste Python).
+- **O(log n)** : Temps logarithmique (ex: recherche dichotomique).
+- **O(n)** : Temps linéaire (ex: parcours d'une liste, recherche linéaire, ajout/suppression au début d'une liste Python).
+- **O(n log n)** : Temps quasi-linéaire (ex: tris efficaces comme le tri rapide, tri fusion, `list.sort()` en Python).
+- **O(n^2)** : Temps quadratique (ex: tri à bulles, boucles imbriquées sur la même collection de taille n).
+- **O(2^n)** : Temps exponentiel (ex: certains problèmes de force brute, suite de Fibonacci récursive naïve).
+
+Comprendre la complexité aide à choisir l'algorithme le plus adapté à un problème donné, surtout avec de grandes quantités de données.
+
+#### Optimisation des Boucles
+L'optimisation des boucles vise à réduire le temps d'exécution des programmes en rendant les boucles plus efficaces.
+Quelques conseils :
+1.  **Réduire le travail inutile dans les boucles** : Évitez de recalculer des valeurs qui ne changent pas à chaque itération. Sortez les calculs constants de la boucle.
+    ```python
+    ma_grande_liste = list(range(1000))
+    # Moins optimisé
+    # for i in range(len(ma_grande_liste)):
+    #     taille = len(ma_grande_liste) # Recalculé à chaque fois (même si Python peut optimiser len() pour les listes)
+    #     # Fait quelque chose avec ma_grande_liste[i] et taille
+
+    # Optimisé
+    taille = len(ma_grande_liste)
+    for i in range(taille): # Utilise la taille pré-calculée
+        # Fait quelque chose avec ma_grande_liste[i] et taille
+        pass # Placeholder pour une opération
+    ```
+2.  **Utiliser des compréhensions de liste/dictionnaire/set** : Elles sont souvent plus concises et peuvent être plus rapides que les boucles `for` explicites pour créer des collections.
+    ```python
+    # Compréhension de liste
+    carres = [x*x for x in range(10)] 
+    print(carres)
+
+    # Équivalent avec une boucle for explicite :
+    # carres_boucle = []
+    # for x in range(10):
+    #    carres_boucle.append(x*x)
+    ```
+3.  **Choisir la bonne structure de données** : Par exemple, vérifier l'appartenance (`in`) est beaucoup plus rapide pour les `set` et les clés de `dict` (en moyenne O(1)) que pour les `list` (O(n)).
+    ```python
+    liste_nombres = list(range(100000))
+    set_nombres = set(range(100000))
+
+    # Recherche dans une liste (O(n))
+    # %timeit (99999 in liste_nombres) # (Exemple pour Jupyter/IPython)
+
+    # Recherche dans un set (O(1) en moyenne)
+    # %timeit (99999 in set_nombres)   # (Exemple pour Jupyter/IPython)
+    # La recherche dans le set sera significativement plus rapide pour de grandes collections.
+    ```
+4.  **Éviter les boucles imbriquées profondes si possible** : Elles peuvent rapidement conduire à une complexité élevée (O(n^2), O(n^3), etc.). Recherchez des alternatives algorithmiques si la performance devient un problème.

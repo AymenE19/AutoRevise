@@ -1,0 +1,8 @@
+- **Introduction aux bases de données avec SQLite**
+  - Connexion à une base de données SQLite
+  - Création de tables, insertion, sélection, mise à jour, suppression de données (CRUD)
+  - Utilisation de `sqlite3`
+- **Interaction avec des APIs Web (Requêtes HTTP)**
+  - Principes des APIs REST
+  - Utilisation de la bibliothèque `requests` pour GET, POST
+  - Manipulation de données JSON

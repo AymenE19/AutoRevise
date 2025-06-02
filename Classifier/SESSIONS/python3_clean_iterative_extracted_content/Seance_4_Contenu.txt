@@ -1,0 +1,117 @@
+**Partie 4: Programmation Orientée Objet (POO) en Python**
+*   **4.1 Introduction à la POO**
+    *   Concepts clés : classes, objets, encapsulation, héritage, polymorphisme.
+    *   Exemple :
+        ```python
+        # Ceci est un commentaire expliquant le concept de POO
+        print("La POO est un paradigme de programmation.")
+        ```
+*   **4.2 Définition des Classes et Création d'Objets**
+    *   Syntaxe de base pour définir une classe.
+    *   Création d'instances (objets) d'une classe.
+    *   Attributs d'instance et attributs de classe.
+    *   Exemple :
+        ```python
+        class MaClasse:
+            attribut_de_classe = "Je suis un attribut de classe"
+
+            def __init__(self, nom):
+                self.nom = nom  # Attribut d'instance
+
+            def afficher_nom(self):
+                print(f"Nom: {self.nom}")
+
+        # Création d'un objet
+        mon_objet = MaClasse("Test")
+        mon_objet.afficher_nom()
+        print(MaClasse.attribut_de_classe)
+        ```
+*   **4.3 Constructeurs et Méthodes Spéciales**
+    *   Le constructeur `__init__`.
+    *   Autres méthodes spéciales (ex: `__str__`, `__repr__`).
+    *   Exemple :
+        ```python
+        class Livre:
+            def __init__(self, titre, auteur):
+                self.titre = titre
+                self.auteur = auteur
+
+            def __str__(self):
+                return f"{self.titre} par {self.auteur}"
+
+        mon_livre = Livre("Le Seigneur des Anneaux", "J.R.R. Tolkien")
+        print(mon_livre) # Utilise __str__
+        ```
+*   **4.5 Héritage**
+    *   Définition de classes dérivées (sous-classes).
+    *   Surcharge de méthodes (method overriding).
+    *   La fonction `super()`.
+    *   Exemple :
+        ```python
+        class Animal:
+            def __init__(self, nom):
+                self.nom = nom
+
+            def manger(self):
+                print(f"{self.nom} mange.")
+
+        class Chien(Animal): # Chien hérite de Animal
+            def aboyer(self):
+                print(f"{self.nom} aboie.")
+
+            def manger(self): # Surcharge de méthode
+                super().manger()
+                print(f"{self.nom} mange de la nourriture pour chien.")
+
+        mon_chien = Chien("Rex")
+        mon_chien.manger()
+        mon_chien.aboyer()
+        ```
+*   **4.6 Polymorphisme**
+    *   Concept de polymorphisme et exemples.
+    *   Duck typing.
+    *   Exemple :
+        ```python
+        class Chat:
+            def parler(self):
+                return "Miaou!"
+
+        class Canard:
+            def parler(self):
+                return "Coin coin!"
+
+        def faire_parler(animal):
+            print(animal.parler())
+
+        minou = Chat()
+        donald = Canard()
+
+        faire_parler(minou)  # Affiche Miaou!
+        faire_parler(donald) # Affiche Coin coin!
+        ```
+*   **4.7 Gestion des Exceptions**
+    *   Introduction aux exceptions.
+    *   Blocs `try`, `except`, `else`, `finally`.
+    *   Lever des exceptions (`raise`).
+    *   Création d'exceptions personnalisées.
+    *   Exemple :
+        ```python
+        try:
+            resultat = 10 / 0
+        except ZeroDivisionError:
+            print("Erreur : Division par zéro !")
+        else:
+            print(f"Résultat : {resultat}")
+        finally:
+            print("Exécution du bloc finally.")
+
+        def verifier_age(age):
+            if age < 0:
+                raise ValueError("L'âge ne peut pas être négatif.")
+            print(f"Âge : {age}")
+
+        try:
+            verifier_age(-5)
+        except ValueError as e:
+            print(f"Exception capturée : {e}")
+        ```

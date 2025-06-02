@@ -1,0 +1,108 @@
+### 1. Introduction à Python
+Python est un langage de programmation de haut niveau, interprété, et facile à apprendre. Il est largement utilisé dans divers domaines tels que le développement web, l'analyse de données, l'intelligence artificielle, et plus encore. Sa syntaxe claire et lisible le rend idéal pour les débutants.
+
+### 2. Installation de l'Environnement
+Pour commencer à programmer en Python, vous devez configurer votre environnement de développement.
+*   **Anaconda**: Une distribution populaire qui inclut Python, Jupyter Notebook, Spyder, et de nombreux packages utiles pour la science des données. Recommandé pour une installation facile et complète.
+    *   Téléchargez Anaconda depuis [anaconda.com](https://www.anaconda.com/products/distribution).
+    *   Suivez les instructions d'installation pour votre système d'exploitation.
+*   **VS Code (Visual Studio Code)**: Un éditeur de code source léger mais puissant avec un excellent support pour Python.
+    *   Téléchargez VS Code depuis [code.visualstudio.com](https://code.visualstudio.com/).
+    *   Installez l'extension Python de Microsoft pour VS Code.
+*   **Jupyter Notebook**: Une application web open-source qui vous permet de créer et de partager des documents contenant du code en direct, des équations, des visualisations et du texte narratif. Il est inclus dans Anaconda.
+
+### 3. Variables et Types de Données
+Les variables sont utilisées pour stocker des informations qui peuvent être référencées et manipulées dans un programme. Python est un langage à typage dynamique, ce qui signifie que vous n'avez pas besoin de déclarer le type d'une variable.
+
+*   **Entiers (int)**: Nombres entiers, positifs ou négatifs, sans décimales.
+    `age = 30`
+*   **Flottants (float)**: Nombres avec un point décimal.
+    `prix = 19.99`
+*   **Chaînes de caractères (str)**: Séquences de caractères, entourées de guillemets simples ou doubles.
+    `nom = "Alice"`
+    `message = 'Bonjour le monde!'`
+*   **Booléens (bool)**: Représentent l'une des deux valeurs : `True` ou `False`.
+    `est_majeur = True`
+
+```python
+# Exemples de variables et types de données
+x = 10          # int
+y = 2.5         # float
+name = "Python" # str
+is_active = True # bool
+
+print(type(x))
+print(type(y))
+print(type(name))
+print(type(is_active))
+```
+
+### 4. Opérateurs
+Les opérateurs sont des symboles spéciaux qui effectuent des opérations sur des variables et des valeurs.
+
+*   **Opérateurs Arithmétiques**:
+    *   `+` (Addition), `-` (Soustraction), `*` (Multiplication), `/` (Division)
+    *   `%` (Modulo - reste de la division), `**` (Exponentiation), `//` (Division entière)
+    ```python
+    a = 10
+    b = 3
+    print(a + b)  # 13
+    print(a / b)  # 3.33...
+    print(a // b) # 3
+    print(a % b)  # 1
+    print(a ** b) # 1000
+    ```
+
+*   **Opérateurs de Comparaison**:
+    *   `==` (Égal à), `!=` (Différent de), `>` (Supérieur à), `<` (Inférieur à)
+    *   `>=` (Supérieur ou égal à), `<=` (Inférieur ou égal à)
+    ```python
+    x = 5
+    y = 10
+    print(x == y) # False
+    print(x < y)  # True
+    ```
+
+*   **Opérateurs Logiques**:
+    *   `and` (ET logique), `or` (OU logique), `not` (NON logique)
+    ```python
+    p = True
+    q = False
+    print(p and q) # False
+    print(p or q)  # True
+    print(not p)   # False
+    ```
+
+### 5. Structures de Contrôle
+Les structures de contrôle permettent de diriger le flux d'exécution d'un programme.
+
+*   **Conditions (if-elif-else)**: Exécutent des blocs de code en fonction de conditions.
+    ```python
+    age = 20
+    if age < 18:
+        print("Mineur")
+    elif age >= 18 and age < 65:
+        print("Adulte")
+    else:
+        print("Senior")
+    ```
+
+*   **Boucles (for, while)**: Répètent un bloc de code plusieurs fois.
+    *   **Boucle `for`**: Itère sur une séquence (liste, chaîne, range, etc.).
+        ```python
+        # Itérer sur une liste
+        fruits = ["pomme", "banane", "cerise"]
+        for fruit in fruits:
+            print(fruit)
+
+        # Itérer avec range()
+        for i in range(5):  # de 0 à 4
+            print(i)
+        ```
+    *   **Boucle `while`**: S'exécute tant qu'une condition est vraie.
+        ```python
+        compteur = 0
+        while compteur < 5:
+            print(compteur)
+            compteur += 1  # Important d'incrémenter pour éviter une boucle infinie
+        ```

@@ -1,0 +1,74 @@
+## 3.2 Tuples
+- Qu'est-ce qu'un tuple ? Séquence immuable et ordonnée.
+- Création de tuples, tuple packing et unpacking.
+- Utilisation des tuples : quand les préférer aux listes.
+- Méthodes des tuples (limitées car immuables) : `count()`, `index()`.
+
+## 3.4 Ensembles (Sets)
+- Qu'est-ce qu'un ensemble ? Collection non ordonnée d'éléments uniques.
+- Création d'ensembles.
+- Opérations sur les ensembles : union, intersection, différence, différence symétrique.
+- Méthodes courantes : `add()`, `remove()`, `discard()`, `pop()`.
+
+## 5.1 Modules en Python
+- Qu'est-ce qu'un module ? Fichier `.py` contenant des définitions et instructions Python.
+- Importation de modules : `import module_name`, `from module_name import ...`, `import module_name as alias`.
+- Le chemin de recherche des modules (`sys.path`).
+- Création de ses propres modules.
+- Modules courants de la bibliothèque standard :
+    - `math` : fonctions mathématiques.
+    - `random` : génération de nombres aléatoires.
+    - `datetime` : manipulation des dates et heures.
+    - `json` : manipulation du format JSON.
+    - `os` : interaction avec le système d'exploitation.
+
+## 5.2 Packages en Python
+- Qu'est-ce qu'un package ? Collection de modules organisés dans une hiérarchie de répertoires.
+- Fichier `__init__.py`.
+- Importation depuis les packages.
+- Création de ses propres packages.
+
+## 5.3 Introduction à la Gestion des Dépendances et Environnements Virtuels
+- Problème des dépendances.
+- `pip` : gestionnaire de paquets Python.
+- Environnements virtuels (`venv`, `conda env`) : pourquoi et comment les utiliser.
+
+# Sujets Complémentaires et Bonnes Pratiques
+
+## SC.1 Style de Code et Conventions (PEP 8)
+- Importance de la lisibilité du code.
+- Présentation de PEP 8 : guide de style officiel pour Python.
+- Outils de linting et formatage (ex: Flake8, Black, Pylint).
+
+## SC.2 Tests Unitaires
+- Pourquoi tester son code ?
+- Introduction aux tests unitaires.
+- Module `unittest` (bibliothèque standard).
+- (Optionnel) Module `pytest` (alternative populaire).
+- Écrire des assertions simples.
+
+## SC.3 Contrôle de Version avec Git et GitHub
+- Importance du contrôle de version.
+- Concepts de base de Git : repository, commit, branch, merge, push, pull.
+- Introduction à GitHub (ou GitLab/Bitbucket) : hébergement de dépôts distants, collaboration.
+- Workflow de base.
+
+## SC.4 Débogage
+- Techniques de débogage :
+    - `print()` statements (simple mais efficace).
+    - Utilisation d'un débogueur (ex: `pdb`, débogueur de VS Code).
+    - Points d'arrêt, exécution pas à pas.
+- Lecture et compréhension des messages d'erreur (tracebacks).
+
+## SC.5 Introduction à des Bibliothèques Tierces Populaires (Aperçu)
+- NumPy : calcul numérique, tableaux N-dimensionnels.
+- Pandas : manipulation et analyse de données (DataFrames).
+- Matplotlib / Seaborn : visualisation de données.
+- Scikit-learn : machine learning.
+- Django / Flask : développement web.
+(Ceci est un aperçu, chaque bibliothèque mériterait un cours dédié)
+
+## SC.6 Projet de Fin de Cours (Suggestion)
+- Proposition d'un projet intégrateur pour appliquer les connaissances.
+- Exemples de projets : petit jeu, analyseur de données simple, application console, etc.
+- Importance de la planification et de la décomposition du projet.

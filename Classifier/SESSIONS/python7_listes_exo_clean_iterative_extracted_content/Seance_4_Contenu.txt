@@ -1,0 +1,122 @@
+## Module 2: Programmation Orientée Objet (POO) en Python
+
+### Principes de la POO
+Encapsulation, Abstraction, Héritage, Polymorphisme.
+
+### Classes et Objets
+Définition d'une classe, création d'objets (instances).
+Attributs d'instance et attributs de classe.
+```python
+class Chien:
+    # Attribut de classe
+    espece = "Canis familiaris"
+
+    def __init__(self, nom, age):
+        # Attributs d'instance
+        self.nom = nom
+        self.age = age
+
+    def aboyer(self):
+        return f"{self.nom} dit: Ouaf !"
+
+mon_chien = Chien("Rex", 3)
+print(mon_chien.aboyer())
+print(f"{mon_chien.nom} est un {Chien.espece}")
+```
+
+### Constructeur et Méthodes Spéciales
+Le constructeur `__init__`.
+Autres méthodes spéciales (dunder methods) comme `__str__`, `__repr__`, `__len__`.
+```python
+class Livre:
+    def __init__(self, titre, auteur):
+        self.titre = titre
+        self.auteur = auteur
+
+    def __str__(self):
+        return f"'{self.titre}' par {self.auteur}"
+
+    def __repr__(self):
+        return f"Livre(titre='{self.titre}', auteur='{self.auteur}')"
+
+livre_python = Livre("Apprendre Python", "John Doe")
+print(str(livre_python)) # Utilise __str__
+print(repr(livre_python)) # Utilise __repr__
+```
+
+### Héritage
+Création de classes dérivées (sous-classes).
+Surcharge de méthodes (method overriding).
+La fonction `super()`.
+```python
+class Animal:
+    def __init__(self, nom):
+        self.nom = nom
+
+    def manger(self):
+        return f"{self.nom} mange."
+
+class Chat(Animal): # Chat hérite de Animal
+    def __init__(self, nom, couleur_pelage):
+        super().__init__(nom) # Appel au constructeur de la classe parente
+        self.couleur_pelage = couleur_pelage
+
+    def miauler(self):
+        return "Miaou!"
+
+    # Surcharge de la méthode manger
+    def manger(self):
+        return f"{self.nom} (un chat) mange délicatement."
+
+mon_chat = Chat("Garfield", "roux")
+print(mon_chat.manger())
+print(mon_chat.miauler())
+```
+
+### Polymorphisme
+Concept de polymorphisme en POO.
+Exemples avec des méthodes ayant le même nom dans différentes classes.
+"Duck typing".
+```python
+class Oiseau:
+    def voler(self):
+        print("L'oiseau vole")
+
+class Avion:
+    def voler(self):
+        print("L'avion décolle et vole")
+
+def faire_voler(entite_volante):
+    entite_volante.voler()
+
+moineau = Oiseau()
+boeing = Avion()
+
+faire_voler(moineau) # L'oiseau vole
+faire_voler(boeing)  # L'avion décolle et vole
+```
+
+### Gestion des Exceptions
+Blocs `try`, `except`, `else`, `finally`.
+Lever des exceptions (`raise`).
+Création d'exceptions personnalisées.
+```python
+try:
+    resultat = 10 / 0
+except ZeroDivisionError as e:
+    print(f"Erreur : Division par zéro ! ({e})")
+else:
+    print("Division réussie.")
+finally:
+    print("Fin du bloc try-except.")
+
+def verifier_age(age):
+    if age < 0:
+        raise ValueError("L'âge ne peut pas être négatif.")
+    print(f"Âge vérifié : {age}")
+
+try:
+    verifier_age(-5)
+except ValueError as e:
+    print(e)
+```

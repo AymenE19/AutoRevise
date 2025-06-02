@@ -1,0 +1,45 @@
+# Modules et Packages
+## Utilisation des modules
+Python dispose d'une vaste bibliothèque standard. L'instruction `import` permet d'utiliser des modules comme `math` ou `datetime`.
+```python
+import math
+print(math.sqrt(16))
+```
+## Création de packages
+Organiser son code en packages.
+
+# Environnements Virtuels
+## Pourquoi utiliser des environnements virtuels ?
+Pour isoler les dépendances des projets.
+## Création avec venv
+```bash
+python -m venv mon_env
+source mon_env/bin/activate
+```
+
+# Tests Unitaires
+## Introduction aux tests
+L'importance de tester son code.
+## Le module unittest
+```python
+import unittest
+
+class TestMonModule(unittest.TestCase):
+    def test_addition(self):
+        self.assertEqual(1 + 1, 2)
+
+if __name__ == '__main__':
+    unittest.main()
+```
+
+# Bonnes Pratiques de Codage
+## PEP 8
+Guide de style pour le code Python.
+## Commentaires et Documentation
+Commenter son code et utiliser les docstrings.
+
+# Projet Final
+## Description du Projet
+Les étudiants devront réaliser un projet complet.
+## Présentation des Projets
+Démonstration des projets finaux.

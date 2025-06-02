@@ -1,0 +1,79 @@
+# Séance 3: Structures de Données Avancées et Algorithmes
+
+## 3.1 Listes : création, modification et parcours avancés
+Les listes sont des structures de données polyvalentes en Python.
+### Création
+`ma_liste = [1, "deux", 3.0, True]`
+### Modification
+`ma_liste[1] = 2`
+`ma_liste.append("nouveau")`
+`ma_liste.insert(0, "début")`
+`ma_liste.pop()`
+`del ma_liste[0]`
+### Parcours
+`for item in ma_liste: print(item)`
+Compréhensions de listes :
+`carres = [x**2 for x in range(10)]`
+
+## 3.2 Dictionnaires : création, modification et parcours
+Les dictionnaires stockent des paires clé-valeur.
+### Création
+`mon_dico = {"nom": "Alice", "age": 25, "ville": "Paris"}`
+`autre_dico = dict(pays="France", code=33)`
+### Modification
+`mon_dico["age"] = 26`
+`mon_dico["profession"] = "Ingénieur"`
+`del mon_dico["ville"]`
+`mon_dico.pop("nom")`
+### Parcours
+`for cle in mon_dico.keys(): print(cle)`
+`for valeur in mon_dico.values(): print(valeur)`
+`for cle, valeur in mon_dico.items(): print(f"{cle}: {valeur}")`
+
+## 3.3 Algorithmes de Tri
+### Tri à Bulles
+Le tri à bulles compare les éléments adjacents et les échange s'ils sont dans le mauvais ordre.
+```python
+def tri_a_bulles(arr):
+    n = len(arr)
+    for i in range(n-1):
+        for j in range(0, n-i-1):
+            if arr[j] > arr[j+1]:
+                arr[j], arr[j+1] = arr[j+1], arr[j]
+    return arr
+
+exemple_liste = [64, 34, 25, 12, 22, 11, 90]
+print(tri_a_bulles(exemple_liste))
+```
+### Tri Rapide (Quick Sort) - Concept
+Le tri rapide est un algorithme de tri efficace basé sur la stratégie "diviser pour régner". Il choisit un élément comme pivot et partitionne le tableau autour du pivot.
+*(Note: L'implémentation complète du Tri Rapide peut être complexe pour une introduction, nous nous concentrons sur le concept et le tri à bulles pour l'implémentation.)*
+
+## 3.4 Algorithmes de Recherche
+### Recherche Linéaire
+La recherche linéaire vérifie chaque élément de la liste séquentiellement jusqu'à ce que l'élément cible soit trouvé ou que la liste soit épuisée.
+```python
+def recherche_lineaire(liste, element_recherche):
+    for i in range(len(liste)):
+        if liste[i] == element_recherche:
+            return i  # Retourne l'index de l'élément trouvé
+    return -1 # Retourne -1 si l'élément n'est pas trouvé
+
+print(recherche_lineaire(exemple_liste, 22))
+```
+### Recherche Dichotomique (Binaire) - Concept
+La recherche dichotomique est un algorithme efficace pour trouver un élément dans une **liste triée**. Elle compare l'élément cible avec l'élément médian de la liste. Si l'élément cible correspond, la recherche est terminée. Sinon, la recherche continue dans la moitié inférieure ou supérieure de la liste.
+*(Note: L'implémentation complète de la Recherche Dichotomique sera abordée dans des modules plus avancés si nécessaire, nous nous concentrons sur le concept ici.)*
+
+## 3.5 Complexité Algorithmique (Introduction)
+La complexité algorithmique mesure la quantité de ressources (temps, espace) nécessaires à un algorithme pour s'exécuter en fonction de la taille de l'entrée.
+- **Notation Big O**: Utilisée pour décrire la performance ou la complexité d'un algorithme.
+  - O(1) : Temps constant
+  - O(n) : Temps linéaire (ex: recherche linéaire, parcours de boucle simple)
+  - O(n^2) : Temps quadratique (ex: tri à bulles, boucles imbriquées)
+  - O(log n) : Temps logarithmique (ex: recherche dichotomique)
+### Optimisation des Boucles (Principes)
+- Éviter les calculs redondants à l'intérieur des boucles.
+- Utiliser des structures de données appropriées.
+- Comprendre l'impact des opérations sur la complexité.
+Par exemple, vérifier l'appartenance à une liste (`element in ma_liste`) est O(n), alors que pour un `set`, c'est en moyenne O(1).

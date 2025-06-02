@@ -1,0 +1,18 @@
+### Objectifs du Module
+### Prérequis Techniques
+### Tuples et Ensembles (Sets)
+### Compréhensions de Listes, Dictionnaires, Ensembles
+### Modules et Packages
+#### Importation de modules (import, from ... import)
+#### Création de modules simples
+#### Exploration de la bibliothèque standard (ex: math, random, datetime)
+### Introduction à NumPy
+#### Arrays NumPy, Opérations vectorielles
+### Introduction à Pandas
+#### Series et DataFrames, Lecture de CSV
+### Introduction à Matplotlib/Seaborn pour la Visualisation
+### Introduction à Flask (Framework Web Léger)
+#### Création d'une application web simple
+### Bonnes pratiques de codage et PEP 8
+### Utilisation de Git pour le contrôle de version (Introduction)
+### Ressources Complémentaires et Prochaines Étapes

@@ -1,0 +1,181 @@
+## 2.3 Listes
+Les listes sont des collections ordonnées et modifiables d'éléments. Elles sont l'une des structures de données les plus polyvalentes en Python.
+
+### Création et accès aux éléments
+```python
+ma_liste = [1, "deux", 3.0, True]
+premier_element = ma_liste[0]  # Accès par index
+print(f"Ma liste: {ma_liste}")
+print(f"Premier élément: {premier_element}")
+```
+
+### Modification des listes (ajout, suppression, modification d'éléments)
+Les listes sont mutables, ce qui signifie que leur contenu peut être modifié après leur création.
+```python
+ma_liste[1] = "TWO" # Modification
+ma_liste.append("nouveau") # Ajout à la fin
+ma_liste.insert(1, "un_et_demi") # Insertion à un index spécifique
+element_supprime = ma_liste.pop(2) # Suppression par index
+ma_liste.remove(True) # Suppression par valeur
+print(f"Liste modifiée: {ma_liste}")
+```
+
+### Parcours de listes (boucles `for`)
+On parcourt généralement une liste avec une boucle `for`.
+```python
+for element in ma_liste:
+    print(element)
+```
+
+### Méthodes utiles (`append()`, `insert()`, `remove()`, `pop()`, `sort()`, `len()`)
+Python offre de nombreuses méthodes intégrées pour travailler avec les listes.
+- `len(ma_liste)`: retourne la taille de la liste.
+- `ma_liste.sort()`: trie la liste sur place (si les éléments sont comparables).
+
+## 2.4 Dictionnaires
+Les dictionnaires sont des collections non ordonnées (avant Python 3.7, ordonnées depuis) de paires clé-valeur. Chaque clé doit être unique et immuable.
+
+### Création et accès aux valeurs par clé
+```python
+mon_dictionnaire = {"nom": "Dupont", "prenom": "Jean", "age": 30}
+nom_personne = mon_dictionnaire["nom"] # Accès par clé
+print(f"Dictionnaire: {mon_dictionnaire}")
+print(f"Nom: {nom_personne}")
+```
+Si une clé n'existe pas, une `KeyError` est levée. Utilisez `get()` pour éviter cela.
+`age = mon_dictionnaire.get("age", "Clé non trouvée")`
+
+### Modification des dictionnaires (ajout, suppression, modification de paires clé-valeur)
+```python
+mon_dictionnaire["age"] = 31 # Modification
+mon_dictionnaire["ville"] = "Paris" # Ajout
+del mon_dictionnaire["prenom"] # Suppression
+print(f"Dictionnaire modifié: {mon_dictionnaire}")
+```
+
+### Parcours de dictionnaires (`keys()`, `values()`, `items()`)
+```python
+# Parcourir les clés
+for cle in mon_dictionnaire.keys():
+    print(cle)
+
+# Parcourir les valeurs
+for valeur in mon_dictionnaire.values():
+    print(valeur)
+
+# Parcourir les paires clé-valeur
+for cle, valeur in mon_dictionnaire.items():
+    print(f"{cle}: {valeur}")
+```
+
+## 3.2 Algorithmes de Tri
+Le tri est une opération fondamentale en informatique.
+
+### Tri à bulles (Bubble Sort)
+Le tri à bulles est un algorithme simple qui parcourt plusieurs fois une liste, comparant les éléments adjacents et les échangeant s'ils sont dans le mauvais ordre.
+```python
+def tri_a_bulles(liste):
+    n = len(liste)
+    for i in range(n-1):
+        for j in range(0, n-i-1):
+            if liste[j] > liste[j+1]:
+                liste[j], liste[j+1] = liste[j+1], liste[j]
+    return liste
+
+exemple_liste = [64, 34, 25, 12, 22, 11, 90]
+print(f"Liste triée (bulles): {tri_a_bulles(exemple_liste)}")
+```
+Sa complexité est O(n^2) dans le pire des cas.
+
+### Tri rapide (Quick Sort)
+Le tri rapide est un algorithme de tri efficace basé sur la stratégie "diviser pour régner". Il choisit un élément comme pivot et partitionne les autres éléments en deux sous-listes, selon qu'ils sont inférieurs ou supérieurs au pivot.
+```python
+def tri_rapide(liste):
+    if len(liste) <= 1:
+        return liste
+    else:
+        pivot = liste[len(liste) // 2]
+        gauche = [x for x in liste if x < pivot]
+        milieu = [x for x in liste if x == pivot]
+        droite = [x for x in liste if x > pivot]
+        return tri_rapide(gauche) + milieu + tri_rapide(droite)
+
+exemple_liste_rapide = [10, 7, 8, 9, 1, 5]
+print(f"Liste triée (rapide): {tri_rapide(exemple_liste_rapide)}")
+```
+Sa complexité moyenne est O(n log n).
+
+## 3.3 Algorithmes de Recherche
+Rechercher un élément dans une collection est une autre tâche courante.
+
+### Recherche linéaire (Linear Search)
+La recherche linéaire vérifie séquentiellement chaque élément de la liste jusqu'à ce qu'une correspondance soit trouvée ou que toute la liste ait été parcourue.
+```python
+def recherche_lineaire(liste, element_recherche):
+    for i in range(len(liste)):
+        if liste[i] == element_recherche:
+            return i # Retourne l'index de l'élément trouvé
+    return -1 # Élément non trouvé
+
+resultat_recherche = recherche_lineaire(exemple_liste, 22)
+print(f"Index de 22 (linéaire): {resultat_recherche}")
+```
+Complexité O(n).
+
+### Recherche dichotomique (Binary Search)
+La recherche dichotomique est un algorithme efficace pour trouver un élément dans une liste **triée**. Elle compare l'élément cible à l'élément médian de la liste. Si ce n'est pas l'élément recherché, la moitié dans laquelle l'élément ne peut pas se trouver est éliminée, et la recherche continue sur la moitié restante.
+```python
+def recherche_dichotomique(liste_triee, element_recherche):
+    debut, fin = 0, len(liste_triee) - 1
+    while debut <= fin:
+        milieu = (debut + fin) // 2
+        if liste_triee[milieu] < element_recherche:
+            debut = milieu + 1
+        elif liste_triee[milieu] > element_recherche:
+            fin = milieu - 1
+        else:
+            return milieu # Élément trouvé
+    return -1 # Élément non trouvé
+
+liste_pour_dicho = sorted([64, 34, 25, 12, 22, 11, 90])
+resultat_dicho = recherche_dichotomique(liste_pour_dicho, 22)
+print(f"Index de 22 (dichotomique): {resultat_dicho}")
+```
+Complexité O(log n).
+
+## 3.4 Notion de Complexité Algorithmique
+La complexité algorithmique mesure la quantité de ressources (temps, espace mémoire) nécessaires à un algorithme pour s'exécuter en fonction de la taille de l'entrée.
+
+### Notation Big O (O(1), O(log n), O(n), O(n log n), O(n^2))
+La notation Big O est utilisée pour classifier les algorithmes selon leur taux de croissance.
+- O(1) : Temps constant (ex: accès à un élément de liste par index)
+- O(log n) : Temps logarithmique (ex: recherche dichotomique)
+- O(n) : Temps linéaire (ex: parcours d'une liste, recherche linéaire)
+- O(n log n) : Temps quasi-linéaire (ex: tri rapide, tri fusion)
+- O(n^2) : Temps quadratique (ex: tri à bulles, boucles imbriquées sur la même collection)
+
+### Analyse de la complexité des boucles et des fonctions récursives
+L'analyse de la complexité implique d'identifier les opérations dominantes et de compter combien de fois elles sont exécutées.
+- Boucle simple : O(n) si elle itère n fois.
+- Boucles imbriquées : O(n*m) ou O(n^2) si les deux boucles dépendent de la même taille n.
+- Fonctions récursives : Souvent analysées avec des relations de récurrence (ex: Master Theorem pour diviser pour régner).
+
+## 3.5 Optimisation des Boucles et du Code
+L'optimisation vise à réduire le temps d'exécution ou l'utilisation de la mémoire.
+
+### Techniques pour rendre le code plus efficace
+- Choisir les bonnes structures de données (ex: `set` pour des recherches rapides d'appartenance).
+- Éviter les calculs redondants dans les boucles.
+- Utiliser des compréhensions de liste/dictionnaire pour la concision et parfois l'efficacité.
+- Profiler le code pour identifier les goulots d'étranglement.
+- Pour les boucles, minimiser le travail effectué à chaque itération.
+  ```python
+  # Moins optimal
+  # for i in range(len(ma_grande_liste)):
+  #    valeur = ma_grande_liste[i]
+  #    # ... faire quelque chose avec valeur
+
+  # Plus optimal (souvent)
+  # for valeur in ma_grande_liste:
+  #    # ... faire quelque chose avec valeur
+  ```

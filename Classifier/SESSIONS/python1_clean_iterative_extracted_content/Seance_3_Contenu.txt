@@ -1,0 +1,23 @@
+### Jour 3: Collections et Manipulation de Données
+- **Listes** : création, indexation, slicing, méthodes (`append`, `insert`, `remove`, `pop`, `sort`, `reverse`), boucles sur les listes, compréhensions de listes.
+  Exemple de création de liste : `ma_liste = [1, "deux", 3.0]`
+  Parcours :
+  ```python
+  for element in ma_liste:
+      print(element)
+  ```
+- **Dictionnaires** (`dict`) : création, accès aux éléments par clé, modification, ajout, suppression (`del`, `pop`), méthodes (`keys`, `values`, `items`), boucles sur les dictionnaires.
+  Exemple de dictionnaire : `mon_dico = {"nom": "Dupont", "prenom": "Jean"}`
+  Modification : `mon_dico["age"] = 30`
+
+### Jour 5: Algorithmes de Base et Complexité
+- **Notion de complexité algorithmique** (Big O notation) : O(1), O(n), O(n log n), O(n^2).
+- Exemples d'analyse de complexité sur des boucles simples et imbriquées.
+- **Optimisation des boucles** : réduire les opérations inutiles, sortir tôt des boucles.
+- **Algorithmes de tri** :
+    - **Tri à bulles** (Bubble Sort) : principe et implémentation.
+    - **Tri par sélection** (Selection Sort) : principe et implémentation.
+    - (Optionnel) **Tri rapide** (Quick Sort) : présentation du principe.
+- **Algorithmes de recherche** :
+    - **Recherche linéaire** (Linear Search) : sur listes non triées.
+    - **Recherche dichotomique** (Binary Search) : sur listes triées.

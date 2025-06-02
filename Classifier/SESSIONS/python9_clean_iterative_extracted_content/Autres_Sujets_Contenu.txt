@@ -1,0 +1,11 @@
+## Tuples et Ensembles (Sets)
+## Introduction aux Modules
+## Module `math`
+## Module `datetime`
+## Module `json`
+## Introduction à `pip` et aux environnements virtuels (`venv`)
+## Style de Code et PEP 8
+## Débogage et Tests Unitaires (introduction à `unittest`)
+## Utilisation de Git pour le Contrôle de Version (bases)
+## Mini-Projet Guidé : Application de Console Simple
+## Perspectives : Où aller ensuite ? (Web avec Flask/Django, Data Science avec Pandas/NumPy, etc.)

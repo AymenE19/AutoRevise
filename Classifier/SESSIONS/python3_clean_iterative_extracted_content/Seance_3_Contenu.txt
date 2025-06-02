@@ -1,0 +1,104 @@
+## Structures de Données Détaillées
+### Listes : Création, Modification, Parcours
+Les listes sont des collections ordonnées et mutables d'éléments.
+```python
+# Création
+fruits = ["pomme", "banane", "cerise"]
+nombres = list(range(5))
+
+# Modification
+fruits.append("orange")  # Ajoute à la fin
+fruits[1] = "myrtille"   # Modifie un élément
+fruits.insert(1, "fraise") # Insère à un index
+del fruits[0]            # Supprime un élément par index
+fruits.remove("cerise")  # Supprime par valeur
+
+# Parcours
+for fruit in fruits:
+    print(fruit)
+
+for i in range(len(fruits)):
+    print(f"Index {i}: {fruits[i]}")
+```
+Des méthodes utiles : `.sort()`, `.reverse()`, `.pop()`, `.index()`, `.count()`.
+
+### Dictionnaires : Création, Modification, Parcours
+Les dictionnaires stockent des paires clé-valeur. Ils sont non ordonnés (avant Python 3.7, maintenant ordonnés par insertion) et mutables.
+```python
+# Création
+personne = {"nom": "Dupont", "age": 40, "ville": "Paris"}
+coords = dict(x=10, y=20)
+
+# Modification
+personne["age"] = 41
+personne["profession"] = "Ingénieur" # Ajoute une nouvelle clé-valeur
+del personne["ville"]
+
+# Parcours
+for cle in personne:
+    print(f"{cle}: {personne[cle]}")
+
+for cle, valeur in personne.items():
+    print(f"La clé {cle} a pour valeur {valeur}")
+
+for valeur in personne.values():
+    print(valeur)
+```
+Des méthodes utiles : `.keys()`, `.values()`, `.items()`, `.get()`, `.pop()`.
+
+## Algorithmes de Tri et Recherche
+### Tri à Bulles (Bubble Sort)
+C'est un algorithme de tri simple qui compare et échange les éléments adjacents de manière répétée.
+```python
+def tri_a_bulles(liste):
+    n = len(liste)
+    for i in range(n-1):
+        for j in range(0, n-i-1):
+            if liste[j] > liste[j+1]:
+                liste[j], liste[j+1] = liste[j+1], liste[j]
+    return liste
+
+ma_liste_non_triee = [64, 34, 25, 12, 22, 11, 90]
+print(f"Tri à bulles: {tri_a_bulles(ma_liste_non_triee)}")
+```
+Sa complexité est O(n^2) dans le pire des cas.
+
+### Recherche Linéaire (Linear Search)
+Elle consiste à parcourir séquentiellement une liste pour trouver un élément.
+```python
+def recherche_lineaire(liste, element_recherche):
+    for i in range(len(liste)):
+        if liste[i] == element_recherche:
+            return i  # Retourne l'index de l'élément trouvé
+    return -1 # Élément non trouvé
+
+idx = recherche_lineaire(ma_liste_non_triee, 22) # Note: la liste n'est pas triée ici pour l'exemple
+print(f"Recherche linéaire de 22: Index {idx}")
+```
+Sa complexité est O(n).
+
+## Complexité Algorithmique (Introduction)
+La complexité algorithmique est une mesure de la quantité de ressources (temps ou espace) qu'un algorithme consomme en fonction de la taille de l'entrée.
+- **Notation Big O**: Décrit le comportement asymptotique (limite supérieure).
+  - O(1) : Temps constant
+  - O(log n) : Temps logarithmique
+  - O(n) : Temps linéaire
+  - O(n log n) : Temps quasi-linéaire
+  - O(n^2) : Temps quadratique
+
+### Optimisation des Boucles (Bases)
+- Éviter les calculs répétitifs à l'intérieur des boucles.
+- Choisir la bonne structure de données pour l'opération.
+- Sortir des boucles dès que possible (ex: `break`).
+```python
+# Exemple simple d'optimisation
+# Non optimisé
+resultats = []
+for x in range(1000):
+    calcul_complexe = x * x + 2*x + 1 # Calculé à chaque itération
+    if calcul_complexe % 5 == 0:
+        resultats.append(calcul_complexe)
+
+# Potentiellement mieux si le calcul est coûteux et peut être sorti ou simplifié
+# (Ceci est un exemple trivial, l'optimisation dépend du contexte)
+```

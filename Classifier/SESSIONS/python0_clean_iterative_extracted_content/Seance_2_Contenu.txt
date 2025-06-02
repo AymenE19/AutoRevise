@@ -1,0 +1,90 @@
+2.1 Définition et Appel de Fonctions
+Syntaxe `def` pour définir une fonction.
+Appel de fonction.
+Exemple:
+```python
+def saluer(nom):
+    print(f"Bonjour, {nom}!")
+
+saluer("Monde")
+```
+2.2 Paramètres et Valeurs de Retour
+Passage de paramètres (positionnels, nommés).
+Valeurs par défaut pour les paramètres.
+Instruction `return` pour renvoyer une valeur.
+Exemple:
+```python
+def addition(a, b=5):
+    return a + b
+
+resultat = addition(3) # resultat = 8
+resultat2 = addition(10, 20) # resultat2 = 30
+print(f"Résultat 1: {resultat}, Résultat 2: {resultat2}")
+```
+2.4 Fonctions Lambda (Anonymes)
+Fonctions courtes et anonymes définies avec `lambda`.
+Syntaxe: `lambda arguments: expression`
+Exemple:
+```python
+carre = lambda x: x * x
+print(carre(5)) # Affiche 25
+```
+3.1 Chaînes de Caractères (Strings)
+Opérations courantes : concaténation, répétition, indexation, slicing.
+Méthodes utiles : `len()`, `upper()`, `lower()`, `strip()`, `split()`, `join()`, `find()`, `replace()`.
+Formatage des chaînes : f-strings (fortement recommandées), méthode `format()`.
+Exemple:
+```python
+s1 = "bonjour"
+s2 = "monde"
+phrase = s1 + " " + s2 + "!"
+print(phrase.upper()) # BONJOUR MONDE!
+
+nom = "Alice"
+age = 30
+message = f"Je m'appelle {nom} et j'ai {age} ans."
+print(message)
+```
+3.2 Listes (Lists)
+Séquences mutables ordonnées.
+Création, accès aux éléments (indexation, slicing), modification.
+Méthodes : `append()`, `insert()`, `pop()`, `remove()`, `sort()`, `reverse()`, `len()`, `count()`, `index()`.
+Boucles sur les listes.
+Compréhensions de listes pour créer des listes de manière concise.
+Exemple:
+```python
+fruits = ["pomme", "banane", "cerise"]
+fruits.append("orange")
+print(fruits[1]) # banane
+
+nombres_pairs = [x for x in range(10) if x % 2 == 0]
+print(nombres_pairs) # [0, 2, 4, 6, 8]
+```
+4.1 Lecture de Fichiers
+Ouvrir un fichier en mode lecture (`'r'`).
+Méthodes `read()`, `readline()`, `readlines()`.
+Utilisation du bloc `with open(...) as ...:` pour garantir la fermeture du fichier.
+Exemple:
+```python
+try:
+    with open("mon_fichier.txt", "r", encoding="utf-8") as f:
+        contenu = f.read()
+        print(contenu)
+except FileNotFoundError:
+    print("Le fichier n'a pas été trouvé.")
+```
+4.2 Écriture dans des Fichiers
+Ouvrir un fichier en mode écriture (`'w'`) ou ajout (`'a'`).
+Le mode `'w'` écrase le fichier s'il existe, le crée sinon.
+Le mode `'a'` ajoute à la fin du fichier, le crée s'il n'existe pas.
+Méthodes `write()`, `writelines()`.
+Exemple:
+```python
+with open("sortie.txt", "w", encoding="utf-8") as f:
+    f.write("Première ligne.\n")
+    f.write("Deuxième ligne.\n")
+
+lignes = ["Autre ligne 1\n", "Autre ligne 2\n"]
+with open("sortie.txt", "a", encoding="utf-8") as f:
+    f.writelines(lignes)
+```

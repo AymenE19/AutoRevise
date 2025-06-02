@@ -1,0 +1,76 @@
+## Introduction aux bases de données avec SQLite
+SQLite est un moteur de base de données SQL relationnel contenu dans une bibliothèque C. Il est léger, rapide, autonome, et ne nécessite pas de serveur séparé.
+### Connexion et création de table
+```python
+import sqlite3
+
+# Connexion (crée le fichier .db s'il n'existe pas)
+conn = sqlite3.connect('ma_base.db')
+cursor = conn.cursor()
+
+# Création d'une table
+cursor.execute('''
+CREATE TABLE IF NOT EXISTS etudiants (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nom TEXT NOT NULL,
+    age INTEGER
+)
+''')
+conn.commit()
+print("Table etudiants créée ou déjà existante.")
+```
+### Opérations CRUD (Create, Read, Update, Delete)
+```python
+# Insertion (Create)
+cursor.execute("INSERT INTO etudiants (nom, age) VALUES (?, ?)", ('Alice', 20))
+cursor.execute("INSERT INTO etudiants (nom, age) VALUES (?, ?)", ('Bob', 22))
+conn.commit()
+
+# Lecture (Read)
+cursor.execute("SELECT * FROM etudiants")
+for row in cursor.fetchall():
+    print(row)
+
+# Mise à jour (Update)
+cursor.execute("UPDATE etudiants SET age = ? WHERE nom = ?", (21, 'Alice'))
+conn.commit()
+
+# Suppression (Delete)
+cursor.execute("DELETE FROM etudiants WHERE nom = ?", ('Bob',))
+conn.commit()
+
+# Fermeture de la connexion
+conn.close()
+```
+
+## Interaction avec des APIs et requêtes HTTP
+Une API (Application Programming Interface) permet à différents logiciels de communiquer entre eux. Les APIs web sont souvent utilisées pour échanger des données au format JSON ou XML via HTTP.
+### Utilisation de la bibliothèque `requests`
+La bibliothèque `requests` simplifie l'envoi de requêtes HTTP en Python.
+```python
+import requests
+import json
+
+# Requête GET
+url_get = 'https://jsonplaceholder.typicode.com/todos/1'
+response_get = requests.get(url_get)
+
+if response_get.status_code == 200:
+    data = response_get.json()
+    print(f"Titre de la tâche (GET): {data['title']}")
+else:
+    print(f"Erreur GET: {response_get.status_code}")
+
+# Requête POST
+url_post = 'https://jsonplaceholder.typicode.com/posts'
+payload = {'title': 'Mon Titre', 'body': 'Mon contenu', 'userId': 1}
+headers = {'Content-type': 'application/json; charset=UTF-8'}
+
+response_post = requests.post(url_post, data=json.dumps(payload), headers=headers)
+
+if response_post.status_code == 201: # 201 Created
+    data_post = response_post.json()
+    print(f"ID du post créé (POST): {data_post['id']}")
+else:
+    print(f"Erreur POST: {response_post.status_code}")
+```

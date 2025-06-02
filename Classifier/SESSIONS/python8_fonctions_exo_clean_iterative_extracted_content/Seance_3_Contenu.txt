@@ -1,0 +1,57 @@
+## 2.3 Listes : Création et Opérations
+Les listes sont des collections ordonnées et modifiables.
+```python
+ma_liste = [1, "deux", 3.0, True]
+ma_liste.append(5)      # Ajout
+print(ma_liste[1])      # Accès
+ma_liste[0] = "un"      # Modification
+for element in ma_liste: # Parcours
+    print(element)
+```
+Opérations : `append()`, `insert()`, `remove()`, `pop()`, `len()`, slicing.
+
+## 2.4 Dictionnaires : Création et Opérations
+Les dictionnaires sont des collections non ordonnées de paires clé-valeur.
+```python
+mon_dict = {"nom": "Dupont", "prenom": "Jean", "age": 40}
+print(mon_dict["nom"])  # Accès
+mon_dict["age"] = 41    # Modification
+mon_dict["ville"] = "Paris" # Ajout
+for cle, valeur in mon_dict.items(): # Parcours
+    print(f"{cle}: {valeur}")
+```
+Opérations : `keys()`, `values()`, `items()`, `get()`, `pop()`.
+
+## 3.1 Tri : Algorithmes de Base
+### 3.1.1 Tri à Bulles (Bubble Sort)
+Le tri à bulles est un algorithme simple qui parcourt plusieurs fois une liste, en comparant les éléments adjacents et en les échangeant s'ils sont dans le mauvais ordre.
+```python
+def tri_a_bulles(liste):
+    n = len(liste)
+    for i in range(n-1):
+        for j in range(0, n-i-1):
+            if liste[j] > liste[j+1]:
+                liste[j], liste[j+1] = liste[j+1], liste[j]
+    return liste
+
+exemple_liste = [64, 34, 25, 12, 22, 11, 90]
+print(tri_a_bulles(exemple_liste))
+```
+
+## 3.2 Recherche : Algorithmes de Base
+### 3.2.1 Recherche Linéaire (Linear Search)
+La recherche linéaire vérifie séquentiellement chaque élément de la liste jusqu'à ce qu'une correspondance soit trouvée ou que toute la liste ait été parcourue.
+```python
+def recherche_lineaire(liste, element_recherche):
+    for i in range(len(liste)):
+        if liste[i] == element_recherche:
+            return i  # Retourne l'index de l'élément trouvé
+    return -1 # Retourne -1 si l'élément n'est pas trouvé
+
+print(recherche_lineaire(exemple_liste, 22))
+```
+
+## 3.3 Introduction à la Complexité Algorithmique
+La complexité algorithmique est une mesure de la quantité de ressources (temps, espace) nécessaires à un algorithme pour s'exécuter en fonction de la taille de l'entrée.
+Notation Big O (O).
+Optimisation des boucles : éviter les calculs redondants, choisir les bonnes structures de données.

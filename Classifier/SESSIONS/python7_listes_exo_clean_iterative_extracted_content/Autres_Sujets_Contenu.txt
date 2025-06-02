@@ -1,0 +1,70 @@
+### 2.3 Portée des Variables (Scope)
+Explication de la portée locale, globale, et non locale (pour les fonctions imbriquées).
+Mot-clés `global` et `nonlocal`.
+
+### 2.6 Tuples
+Définition : séquences immuables.
+Création, accès, opérations courantes (ne peuvent pas être modifiés après création).
+Utilisation des tuples (e.g., clés de dictionnaire, retour multiple de fonctions).
+
+### 2.8 Ensembles (Sets)
+Définition : collections non ordonnées d'éléments uniques.
+Création, ajout/suppression d'éléments.
+Opérations sur les ensembles (union, intersection, différence).
+
+### 3.1 Compréhensions de Listes, Dictionnaires et Ensembles
+Syntaxe concise pour créer des listes, dictionnaires et ensembles.
+Exemples pratiques et avantages (lisibilité, performance).
+
+#### Gestionnaire de contexte (`with`)
+Utilisation de `with open(...) as f:` pour garantir la fermeture automatique des fichiers.
+Avantages : code plus propre et plus sûr.
+
+### 3.3 Modules et Packages
+#### Importation de modules (e.g., `math`, `random`, `datetime`)
+Comment importer et utiliser des fonctionnalités de la bibliothèque standard.
+Différentes formes d'importation (`import module`, `from module import name`, `import module as alias`).
+#### Création de vos propres modules
+Comment structurer votre code en fichiers réutilisables.
+Le fichier `__init__.py` pour les packages.
+
+#### Méthodes d'instance, de classe (`@classmethod`), et statiques (`@staticmethod`)
+Distinction entre ces types de méthodes et leurs cas d'usage.
+Utilisation des décorateurs `@classmethod` et `@staticmethod`.
+
+### 4.5 Encapsulation (public, protected, private)
+Concept de masquage de l'information.
+Conventions de nommage pour les attributs "protégés" (préfixe `_`) et "privés" (préfixe `__`).
+Propriétés (`@property`) pour contrôler l'accès aux attributs.
+
+### 5.1 Expressions Régulières (module `re`)
+Introduction aux expressions régulières pour la recherche et la manipulation de motifs dans les chaînes de caractères.
+Fonctions courantes : `search()`, `match()`, `findall()`, `sub()`.
+
+### 5.2 Manipulation de Dates et Heures (module `datetime`)
+Objets `date`, `time`, `datetime`, `timedelta`.
+Formatage et parsing des dates et heures (`strftime`, `strptime`).
+
+### 5.3 Introduction aux Tests Unitaires (module `unittest` ou `pytest`)
+Importance des tests pour la qualité du code.
+Écriture de cas de tests simples.
+Exécution des tests et interprétation des résultats.
+
+### 5.4 Environnements Virtuels (`venv`, `conda env`)
+Pourquoi utiliser des environnements virtuels ?
+Création et gestion d'environnements avec `venv` et `conda`.
+Fichier `requirements.txt` pour gérer les dépendances.
+
+### 5.5 Introduction au Contrôle de Version avec Git et GitHub
+Principes de base du contrôle de version.
+Commandes Git essentielles (`clone`, `add`, `commit`, `push`, `pull`, `branch`, `merge`).
+Collaboration avec GitHub (fork, pull request).
+
+### 5.8 Bonnes pratiques de codage (PEP 8)
+Guide de style pour le code Python.
+Importance de la lisibilité et de la cohérence.
+Outils de linting (e.g., Pylint, Flake8).
+
+### 5.9 Débogage et Outils de Débogage
+Techniques de débogage (print-debugging, utilisation d'un débogueur).
+Introduction au débogueur Python (`pdb` ou débogueurs d'IDE).

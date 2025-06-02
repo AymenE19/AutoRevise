@@ -1,0 +1,96 @@
+# Semaine 3: Structures de Données Avancées et Algorithmes
+
+## Listes : Création, Modification et Parcours
+Les listes sont des structures de données fondamentales en Python.
+```python
+# Création
+ma_liste = [1, 2, 3, "Python", True]
+print(ma_liste)
+
+# Modification
+ma_liste[0] = 100
+ma_liste.append("Nouveau")
+print(ma_liste)
+
+# Parcours
+for element in ma_liste:
+    print(element)
+```
+
+## Dictionnaires : Création, Modification et Parcours
+Les dictionnaires stockent des paires clé-valeur.
+```python
+# Création
+mon_dict = {"nom": "Dupont", "prenom": "Jean", "age": 30}
+print(mon_dict)
+
+# Modification
+mon_dict["age"] = 31
+mon_dict["ville"] = "Paris"
+print(mon_dict)
+
+# Parcours
+for cle, valeur in mon_dict.items():
+    print(f"{cle}: {valeur}")
+```
+
+## Algorithmes de Tri
+### Tri à Bulles (Bubble Sort)
+Le tri à bulles compare les éléments adjacents et les échange s'ils sont dans le mauvais ordre.
+```python
+def tri_a_bulles(liste):
+    n = len(liste)
+    for i in range(n-1):
+        for j in range(0, n-i-1):
+            if liste[j] > liste[j+1]:
+                liste[j], liste[j+1] = liste[j+1], liste[j]
+    return liste
+
+exemple_liste = [64, 34, 25, 12, 22, 11, 90]
+print(f"Liste triée (bulles): {tri_a_bulles(exemple_liste)}")
+```
+### Tri Rapide (Quick Sort) - Concept
+Le tri rapide est un algorithme de tri efficace basé sur la stratégie "diviser pour régner". (Implémentation détaillée hors de portée pour ce module introductif, mais le concept est important).
+
+## Algorithmes de Recherche
+### Recherche Linéaire
+Parcourt séquentiellement la liste jusqu'à trouver l'élément.
+```python
+def recherche_lineaire(liste, element_recherche):
+    for i in range(len(liste)):
+        if liste[i] == element_recherche:
+            return i  # Retourne l'index
+    return -1 # Non trouvé
+
+idx = recherche_lineaire(exemple_liste, 22) # exemple_liste est déjà triée par tri_a_bulles
+print(f"Index de 22 (linéaire): {idx}")
+```
+### Recherche Dichotomique (Binary Search)
+Nécessite une liste triée. Divise la liste en deux à chaque étape.
+```python
+def recherche_dichotomique(liste_triee, element_recherche):
+    debut, fin = 0, len(liste_triee) - 1
+    while debut <= fin:
+        milieu = (debut + fin) // 2
+        if liste_triee[milieu] < element_recherche:
+            debut = milieu + 1
+        elif liste_triee[milieu] > element_recherche:
+            fin = milieu - 1
+        else:
+            return milieu # Retourne l'index
+    return -1 # Non trouvé
+
+# Assurons-nous que la liste est triée pour la recherche dichotomique
+liste_pour_dicho = sorted([64, 34, 25, 12, 22, 11, 90])
+idx_dicho = recherche_dichotomique(liste_pour_dicho, 22)
+print(f"Index de 22 (dichotomique): {idx_dicho}")
+```
+
+## Complexité Algorithmique (Introduction)
+La complexité algorithmique mesure les ressources (temps, espace) nécessaires à un algorithme.
+- Notation Big O (O(n), O(n^2), O(log n)).
+- Importance de choisir le bon algorithme.
+
+## Optimisation des Boucles (Bases)
+- Éviter les calculs redondants dans les boucles.
+- Utiliser des compréhensions de liste lorsque c'est approprié.

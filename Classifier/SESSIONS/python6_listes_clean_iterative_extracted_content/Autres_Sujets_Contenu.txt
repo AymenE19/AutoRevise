@@ -1,0 +1,49 @@
+## Portée des Variables (Scope)
+Variables locales et globales.
+## Modules et Packages
+Comment importer et utiliser des modules de la bibliothèque standard (ex: `math`, `random`).
+Création de vos propres modules.
+
+## Tuples
+Structures de données immuables. Quand les utiliser.
+## Ensembles (Sets)
+Opérations sur les ensembles (union, intersection). Unicité des éléments.
+
+## Encapsulation
+Cacher les détails d'implémentation (attributs privés).
+
+# Module 5: Python pour la Data Science - Introduction
+## Introduction à NumPy
+Arrays NumPy, opérations vectorielles.
+```python
+import numpy as np
+arr = np.array([1, 2, 3])
+print(arr * 2)
+```
+## Introduction à Pandas
+Series et DataFrames. Lecture de CSV.
+```python
+import pandas as pd
+data = {'col1': [1, 2], 'col2': [3, 4]}
+df = pd.DataFrame(data)
+print(df)
+```
+## Visualisation avec Matplotlib
+Création de graphiques simples (lignes, barres).
+
+# Module 7: Bonnes Pratiques et Outils
+## Tests Unitaires avec `unittest`
+Écrire des tests pour assurer la qualité du code.
+## Contrôle de Version avec Git et GitHub
+Introduction aux concepts de base de Git (commit, push, pull, branch).
+Utilisation de GitHub pour la collaboration.
+## Environnements Virtuels
+Pourquoi et comment utiliser `venv` ou `conda env`.
+## PEP 8 et Style de Code
+Guide de style pour le code Python.
+
+# Module 8: Projet Final
+## Description du Projet
+Développer une application console complète.
+## Étapes de Réalisation
+Planification, développement, tests, documentation.

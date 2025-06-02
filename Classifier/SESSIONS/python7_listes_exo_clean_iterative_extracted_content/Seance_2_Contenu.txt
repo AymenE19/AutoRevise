@@ -1,0 +1,154 @@
+## Module 2: Fonctions, Chaînes, Listes et Fichiers
+Ce module est crucial pour comprendre comment structurer le code et manipuler les données de base.
+
+### Les Fonctions en Python
+Les fonctions sont des blocs de code réutilisables qui effectuent une tâche spécifique.
+Elles aident à organiser le code, le rendre plus lisible et éviter la répétition.
+
+**Définition d'une fonction :**
+On utilise le mot-clé `def`, suivi du nom de la fonction, de parenthèses `()` pouvant contenir des paramètres, et de deux-points `:`.
+Le corps de la fonction est indenté.
+```python
+def saluer():
+    print("Bonjour !")
+```
+
+**Appel d'une fonction :**
+Pour exécuter une fonction, on l'appelle par son nom suivi de parenthèses.
+```python
+saluer()  # Output: Bonjour !
+```
+
+**Paramètres et Arguments :**
+Les fonctions peuvent accepter des données en entrée, appelées paramètres (lors de la définition) ou arguments (lors de l'appel).
+```python
+def saluer_personne(nom):  # nom est un paramètre
+    print(f"Bonjour, {nom}!")
+
+saluer_personne("Alice")  # "Alice" est un argument
+saluer_personne("Bob")
+```
+
+**Valeurs de Retour :**
+Une fonction peut retourner une valeur à l'aide du mot-clé `return`. Si `return` n'est pas utilisé ou est utilisé sans valeur, la fonction retourne `None`.
+```python
+def addition(a, b):
+    resultat = a + b
+    return resultat
+
+somme = addition(5, 3)
+print(somme)  # Output: 8
+
+def sans_retour():
+    x = 10
+    # pas de return explicite
+
+val = sans_retour()
+print(val) # Output: None
+```
+Une fonction se termine dès qu'une instruction `return` est exécutée.
+
+### Manipulation des Chaînes de Caractères (Strings)
+Les chaînes de caractères sont des séquences de caractères immuables (on ne peut pas les modifier directement après création, mais on peut créer de nouvelles chaînes à partir d'anciennes).
+
+**Méthodes courantes :**
+- `upper()`: Convertit la chaîne en majuscules.
+- `lower()`: Convertit la chaîne en minuscules.
+- `strip()`: Supprime les espaces au début et à la fin.
+- `split(separateur)`: Divise la chaîne en une liste de sous-chaînes.
+- `join(liste)`: Joint les éléments d'une liste en une seule chaîne avec la chaîne courante comme séparateur.
+- `replace(ancien, nouveau)`: Remplace les occurrences d'une sous-chaîne.
+- `find(sous_chaine)`: Retourne l'index de la première occurrence (-1 si non trouvée).
+- `len(chaine)`: Retourne la longueur de la chaîne.
+
+```python
+texte = "  Bonjour le Monde!  "
+print(texte.upper())  # Output:   BONJOUR LE MONDE!
+print(texte.lower())  # Output:   bonjour le monde!
+print(texte.strip())  # Output: Bonjour le Monde!
+print(texte.strip().split(' '))  # Output: ['Bonjour', 'le', 'Monde!']
+
+mots = ["Python", "est", "génial"]
+phrase = " ".join(mots)
+print(phrase)  # Output: Python est génial
+
+print(texte.replace("Monde", "Python")) # Output:   Bonjour le Python!
+print(texte.find("jour")) # Output: 5 (index de 'j' dans "  Bonjour...")
+print(len(texte)) # Output: 22
+```
+
+### Opérations de Base sur les Listes
+Les listes sont des collections ordonnées et modifiables d'éléments. Voici quelques opérations de base pour la manipulation de données.
+(La création détaillée, le parcours avancé et autres aspects des listes comme structure de données sont vus en Séance 3).
+
+**Quelques opérations utiles pour la manipulation :**
+- `append(element)`: Ajoute un élément à la fin de la liste.
+- `insert(index, element)`: Insère un élément à une position donnée.
+- `pop(index)`: Supprime et retourne l'élément à l'index donné (par défaut, le dernier).
+- `remove(element)`: Supprime la première occurrence de l'élément.
+- Accès par index : `ma_liste[i]`
+- Slicing : `ma_liste[start:end]`
+
+```python
+nombres = [1, 2, 3, 4]
+nombres.append(5)
+print(nombres)  # Output: [1, 2, 3, 4, 5]
+
+nombres.insert(1, 1.5) # Insère 1.5 à l'index 1
+print(nombres) # Output: [1, 1.5, 2, 3, 4, 5]
+
+element_retire = nombres.pop() # Retire le dernier élément (5)
+print(element_retire) # Output: 5
+print(nombres) # Output: [1, 1.5, 2, 3, 4]
+
+nombres.remove(2) # Retire la première occurrence de 2
+print(nombres) # Output: [1, 1.5, 3, 4]
+
+print(nombres[0]) # Output: 1
+print(nombres[1:3]) # Output: [1.5, 3]
+```
+
+### Lecture et Écriture dans des Fichiers
+Python permet de manipuler des fichiers pour lire des données ou y écrire des résultats.
+
+**Lecture d'un fichier :**
+La manière la plus courante et la plus sûre est d'utiliser `with open(...)`.
+```python
+# Supposons un fichier "exemple.txt" avec le contenu:
+# Ligne 1
+# Ligne 2
+
+try:
+    with open("exemple.txt", "r", encoding="utf-8") as f: # "r" pour read (lecture)
+        contenu_total = f.read()  # Lit tout le fichier en une seule chaîne
+        print("Contenu total:\n", contenu_total)
+
+    with open("exemple.txt", "r", encoding="utf-8") as f:
+        lignes = f.readlines()  # Lit toutes les lignes et les retourne comme une liste de chaînes
+        print("Lignes:", lignes)
+        for ligne in lignes:
+            print("Ligne lue:", ligne.strip()) # strip() pour enlever les \n
+
+except FileNotFoundError:
+    print("Le fichier exemple.txt n'a pas été trouvé.")
+```
+
+**Écriture dans un fichier :**
+- Mode `"w"` (write) : Écrase le fichier s'il existe, le crée sinon.
+- Mode `"a"` (append) : Ajoute à la fin du fichier, le crée s'il n'existe pas.
+
+```python
+# Écriture en mode "w" (écrase le contenu précédent)
+with open("sortie.txt", "w", encoding="utf-8") as f:
+    f.write("Ceci est la première ligne.\n")
+    f.write("Ceci est la deuxième ligne.\n")
+
+# Ajout en mode "a"
+with open("sortie.txt", "a", encoding="utf-8") as f:
+    f.write("Ceci est une ligne ajoutée.\n")
+
+# Vérification (en lisant le fichier qu'on vient d'écrire)
+with open("sortie.txt", "r", encoding="utf-8") as f:
+    print("\nContenu de sortie.txt:\n", f.read())
+```
+L'utilisation de `encoding="utf-8"` est une bonne pratique pour gérer les caractères spéciaux et accents.

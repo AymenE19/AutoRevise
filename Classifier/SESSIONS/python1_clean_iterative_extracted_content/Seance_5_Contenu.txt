@@ -1,0 +1,87 @@
+# Module 5: Introduction aux bases de données avec SQLite
+## 5.1 Qu'est-ce que SQLite?
+SQLite est un système de gestion de base de données relationnelle (SGBDR) contenu dans une bibliothèque C. Il est léger, basé sur des fichiers, et ne nécessite pas de serveur séparé.
+## 5.2 Connexion à une base de données et création de tables
+```python
+import sqlite3
+
+# Connexion à la base de données (crée le fichier s'il n'existe pas)
+conn = sqlite3.connect('ma_base.db')
+cursor = conn.cursor()
+
+# Création d'une table
+cursor.execute('''
+CREATE TABLE IF NOT EXISTS utilisateurs (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nom TEXT NOT NULL,
+    email TEXT UNIQUE NOT NULL
+)
+''')
+conn.commit() # Sauvegarde les changements
+```
+## 5.3 Opérations CRUD (Create, Read, Update, Delete)
+### Insertion de données (Create)
+```python
+cursor.execute("INSERT INTO utilisateurs (nom, email) VALUES (?, ?)", ("Alice Wonderland", "alice@example.com"))
+cursor.execute("INSERT INTO utilisateurs (nom, email) VALUES (?, ?)", ("Bob The Builder", "bob@example.com"))
+conn.commit()
+```
+### Lecture de données (Read)
+```python
+cursor.execute("SELECT * FROM utilisateurs")
+utilisateurs = cursor.fetchall() # Récupère toutes les lignes
+for utilisateur in utilisateurs:
+    print(utilisateur)
+
+cursor.execute("SELECT * FROM utilisateurs WHERE nom=?", ("Alice Wonderland",))
+alice = cursor.fetchone() # Récupère une seule ligne
+print(f"Utilisateur trouvé : {alice}")
+```
+### Mise à jour de données (Update)
+```python
+cursor.execute("UPDATE utilisateurs SET email = ? WHERE nom = ?", ("alice.new@example.com", "Alice Wonderland"))
+conn.commit()
+```
+### Suppression de données (Delete)
+```python
+cursor.execute("DELETE FROM utilisateurs WHERE nom = ?", ("Bob The Builder",))
+conn.commit()
+```
+## 5.4 Fermeture de la connexion
+```python
+conn.close()
+```
+
+# Module 6: Interaction avec des APIs et requêtes HTTP
+## 6.1 Introduction aux APIs Web
+Une API (Application Programming Interface) permet à différents logiciels de communiquer entre eux. Les APIs Web utilisent HTTP pour échanger des données, souvent au format JSON.
+## 6.2 Utilisation de la bibliothèque `requests`
+La bibliothèque `requests` simplifie l'envoi de requêtes HTTP en Python.
+Installation : `pip install requests`
+### Envoyer une requête GET
+```python
+import requests
+
+response = requests.get('https://jsonplaceholder.typicode.com/todos/1')
+
+if response.status_code == 200:
+    data = response.json() # Convertit la réponse JSON en dictionnaire Python
+    print("Données récupérées :")
+    print(data)
+else:
+    print(f"Erreur : {response.status_code}")
+```
+### Envoyer une requête POST (Exemple)
+```python
+payload = {'title': 'foo', 'body': 'bar', 'userId': 1}
+response_post = requests.post('https://jsonplaceholder.typicode.com/posts', json=payload)
+
+if response_post.status_code == 201: # 201 Created
+    print("Données postées avec succès :")
+    print(response_post.json())
+else:
+    print(f"Erreur POST : {response_post.status_code}")
+```
+## 6.3 Travailler avec les données JSON
+JSON (JavaScript Object Notation) est un format léger d'échange de données.
+La méthode `.json()` de l'objet réponse de `requests` parse le JSON en structures de données Python (dictionnaires et listes).

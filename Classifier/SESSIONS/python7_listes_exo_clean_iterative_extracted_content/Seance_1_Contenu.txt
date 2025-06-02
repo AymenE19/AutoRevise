@@ -1,0 +1,163 @@
+# Introduction à Python
+Python est un langage de programmation interprété, de haut niveau et polyvalent. Il est réputé pour sa syntaxe claire et lisible, ce qui en fait un excellent choix pour les débutants.
+
+## Pourquoi Python ?
+- Simplicité et lisibilité
+- Vaste communauté et nombreuses bibliothèques
+- Polyvalence (développement web, science des données, IA, scripting, etc.)
+
+## Installation de l'environnement
+Nous recommandons d'utiliser Anaconda pour gérer les paquets et les environnements Python. Anaconda inclut Python, Jupyter Notebook, Spyder, et d'autres outils utiles.
+
+### Anaconda
+1. Téléchargez Anaconda depuis [https://www.anaconda.com/products/distribution](https://www.anaconda.com/products/distribution).
+2. Suivez les instructions d'installation pour votre système d'exploitation.
+
+### VS Code
+VS Code est un éditeur de code source populaire avec un excellent support pour Python.
+1. Téléchargez VS Code depuis [https://code.visualstudio.com/](https://code.visualstudio.com/).
+2. Installez l'extension Python de Microsoft.
+
+### Jupyter Notebook
+Jupyter Notebook est une application web open-source qui vous permet de créer et de partager des documents contenant du code live, des équations, des visualisations et du texte narratif.
+Il est inclus avec Anaconda. Vous pouvez le lancer depuis Anaconda Navigator ou en tapant `jupyter notebook` dans votre terminal/console après avoir activé un environnement Anaconda.
+
+# Variables et Types de Données
+En Python, une variable est créée au moment où vous lui affectez une valeur.
+
+## Types de données de base
+- **Entiers (int)** : Nombres entiers, positifs ou négatifs, sans décimales (ex: `5`, `-10`).
+  ```python
+  age = 30
+  quantite = -2
+  ```
+- **Flottants (float)** : Nombres avec une partie décimale (ex: `3.14`, `-0.001`).
+  ```python
+  prix = 19.99
+  temperature = -5.5
+  ```
+- **Chaînes de caractères (str)** : Séquences de caractères, délimitées par des guillemets simples (`'`) ou doubles (`"`) (ex: `"Bonjour"`, `'Python'`).
+  ```python
+  nom = "Alice"
+  message = 'Bienvenue !'
+  ```
+- **Booléens (bool)** : Représentent l'une des deux valeurs : `True` ou `False`.
+  ```python
+  est_majeur = True
+  a_reussi = False
+  ```
+
+## Nommage des variables
+- Doit commencer par une lettre ou un underscore (`_`).
+- Ne peut pas commencer par un chiffre.
+- Peut contenir des lettres, des chiffres et des underscores (A-z, 0-9, et `_`).
+- Sensible à la casse (`age`, `Age` et `AGE` sont trois variables différentes).
+
+## Affichage avec `print()` et vérification du type avec `type()`
+```python
+x = 10
+y = "Python"
+z = True
+print(x)
+print(type(x))
+print(y)
+print(type(y))
+print(z)
+print(type(z))
+```
+
+# Opérateurs
+## Opérateurs Arithmétiques
+- Addition : `+`
+- Soustraction : `-`
+- Multiplication : `*`
+- Division : `/` (renvoie toujours un float)
+- Division entière : `//` (renvoie un entier, tronque la partie décimale)
+- Modulo : `%` (reste de la division)
+- Exponentiation : `**`
+  ```python
+  a = 10
+  b = 3
+  print(f"a + b = {a + b}")
+  print(f"a - b = {a - b}")
+  print(f"a * b = {a * b}")
+  print(f"a / b = {a / b}")
+  print(f"a // b = {a // b}")
+  print(f"a % b = {a % b}")
+  print(f"a ** b = {a ** b}")
+  ```
+
+## Opérateurs de Comparaison
+- Égal à : `==`
+- Différent de : `!=`
+- Supérieur à : `>`
+- Inférieur à : `<`
+- Supérieur ou égal à : `>=`
+- Inférieur ou égal à : `<=`
+  ```python
+  x = 5
+  y = 10
+  print(f"x == y: {x == y}") # False
+  print(f"x != y: {x != y}") # True
+  print(f"x < y: {x < y}")   # True
+  ```
+
+## Opérateurs Logiques
+- `and` : Vrai si les deux opérandes sont vraies.
+- `or` : Vrai si au moins une des opérandes est vraie.
+- `not` : Inverse l'état logique de l'opérande.
+  ```python
+  p = True
+  q = False
+  print(f"p and q: {p and q}") # False
+  print(f"p or q: {p or q}")   # True
+  print(f"not p: {not p}")     # False
+  ```
+
+# Structures de Contrôle
+## Conditions (if, elif, else)
+Permettent d'exécuter des blocs de code en fonction de certaines conditions.
+```python
+age = 18
+if age < 13:
+    print("Enfant")
+elif age < 18:
+    print("Adolescent")
+else:
+    print("Adulte")
+```
+
+## Boucles
+### Boucle `for`
+Utilisée pour itérer sur une séquence (comme une liste, un tuple, un dictionnaire, un ensemble ou une chaîne de caractères) ou d'autres objets itérables.
+```python
+# Itérer sur une liste
+fruits = ["pomme", "banane", "cerise"]
+for fruit in fruits:
+    print(fruit)
+
+# Itérer avec range()
+for i in range(5):  # de 0 à 4
+    print(i)
+```
+
+### Boucle `while`
+Exécute un bloc de code tant qu'une condition est vraie.
+```python
+compteur = 0
+while compteur < 5:
+    print(compteur)
+    compteur += 1 # Important pour éviter une boucle infinie
+```
+
+### Instructions `break` et `continue`
+- `break` : Termine la boucle courante.
+- `continue` : Passe à l'itération suivante de la boucle.
+```python
+for i in range(10):
+    if i == 5:
+        break  # Sort de la boucle quand i est 5
+    if i % 2 == 0:
+        continue # Passe à l'itération suivante si i est pair
+    print(i) # Affiche 1, 3
+```

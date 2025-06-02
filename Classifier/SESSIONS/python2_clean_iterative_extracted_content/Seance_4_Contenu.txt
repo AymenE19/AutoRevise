@@ -1,0 +1,71 @@
+# Programmation Orientée Objet (POO)
+La POO est un paradigme de programmation.
+
+## Classes et Objets
+Une classe est un plan pour créer des objets.
+Un objet est une instance d'une classe.
+```python
+class Chien:
+    def __init__(self, nom):
+        self.nom = nom
+
+    def aboyer(self):
+        return "Woof!"
+
+mon_chien = Chien("Rex")
+print(mon_chien.aboyer())
+```
+
+## Constructeur `__init__`
+Le constructeur `__init__` est appelé lors de la création d'un objet.
+Il initialise les attributs de l'objet.
+
+## Méthodes Spéciales
+Les méthodes spéciales commencent et se terminent par `__` (double underscore).
+Exemples : `__str__`, `__repr__`.
+
+## Héritage
+L'héritage permet à une classe (enfant) d'hériter des attributs et méthodes d'une autre classe (parent).
+```python
+class Animal:
+    def __init__(self, nom):
+        self.nom = nom
+
+    def manger(self):
+        return f"{self.nom} mange."
+
+class Chat(Animal): # Chat hérite de Animal
+    def miauler(self):
+        return "Miaou!"
+
+mon_chat = Chat("Felix")
+print(mon_chat.manger())
+print(mon_chat.miauler())
+```
+
+## Polymorphisme
+Le polymorphisme signifie "plusieurs formes".
+Il permet d'utiliser une interface commune pour différents types d'objets.
+```python
+def faire_parler(animal):
+    if hasattr(animal, 'aboyer'):
+        print(animal.aboyer())
+    elif hasattr(animal, 'miauler'):
+        print(animal.miauler())
+
+faire_parler(mon_chien)
+faire_parler(mon_chat)
+```
+
+# Gestion des Exceptions
+La gestion des exceptions permet de gérer les erreurs qui se produisent pendant l'exécution d'un programme.
+
+## Blocs `try-except`
+Le bloc `try` contient le code susceptible de lever une exception.
+Le bloc `except` attrape et gère l'exception.
+```python
+try:
+    resultat = 10 / 0
+except ZeroDivisionError:
+    print("Erreur : Division par zéro !")
+```

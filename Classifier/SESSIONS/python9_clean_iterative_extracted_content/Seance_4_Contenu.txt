@@ -1,0 +1,105 @@
+# Introduction à la Programmation Orientée Objet (POO)
+La Programmation Orientée Objet (POO) est un paradigme de programmation qui utilise des "objets" – des instances de classes – pour concevoir des applications et des programmes informatiques.
+
+## Classes et Objets
+Une classe est un plan ou un modèle à partir duquel des objets sont créés. Un objet est une instance d'une classe.
+
+### Définition d'une classe
+En Python, une classe est définie à l'aide du mot-clé `class`.
+```python
+class Chien:
+    # Attribut de classe
+    espece = "Canis familiaris"
+
+    # Constructeur
+    def __init__(self, nom, age):
+        # Attributs d'instance
+        self.nom = nom
+        self.age = age
+
+    def aboyer(self):
+        return f"{self.nom} dit: Ouaf!"
+```
+
+### Création d'objets (Instances)
+```python
+mon_chien = Chien("Rex", 3)
+print(mon_chien.nom)  # Affiche Rex
+print(mon_chien.aboyer()) # Affiche Rex dit: Ouaf!
+```
+
+## Le Constructeur `__init__`
+La méthode `__init__` est un constructeur. Elle est appelée automatiquement lorsqu'un nouvel objet de la classe est créé. Elle est utilisée pour initialiser les attributs de l'objet.
+
+## Méthodes spéciales (Dunder methods)
+Python possède plusieurs méthodes spéciales, reconnaissables par leurs doubles underscores (par exemple, `__str__`, `__len__`).
+Par exemple, `__str__` permet de définir une représentation en chaîne de caractères de l'objet.
+```python
+class Voiture:
+    def __init__(self, marque, modele):
+        self.marque = marque
+        self.modele = modele
+
+    def __str__(self):
+        return f"Voiture {self.marque} {self.modele}"
+
+ma_voiture = Voiture("Renault", "Clio")
+print(ma_voiture) # Affiche: Voiture Renault Clio
+```
+
+## Héritage
+L'héritage permet à une classe (appelée classe fille ou sous-classe) d'hériter des attributs et méthodes d'une autre classe (appelée classe parente ou super-classe).
+```python
+class Animal:
+    def __init__(self, nom):
+        self.nom = nom
+
+    def manger(self):
+        return f"{self.nom} mange."
+
+class Chat(Animal): # Chat hérite de Animal
+    def miauler(self):
+        return "Miaou!"
+
+mon_chat = Chat("Garfield")
+print(mon_chat.manger()) # Affiche: Garfield mange.
+print(mon_chat.miauler()) # Affiche: Miaou!
+```
+
+## Polymorphisme
+Le polymorphisme signifie "plusieurs formes". En POO, il permet d'utiliser une interface unique pour des objets de types différents.
+```python
+class Oiseau:
+    def voler(self):
+        print("L'oiseau vole")
+
+class Avion:
+    def voler(self):
+        print("L'avion vole")
+
+def faire_voler(entite_volante):
+    entite_volante.voler()
+
+oiseau = Oiseau()
+avion = Avion()
+
+faire_voler(oiseau) # Affiche: L'oiseau vole
+faire_voler(avion)  # Affiche: L'avion vole
+```
+
+# Gestion des Exceptions
+La gestion des exceptions permet de traiter les erreurs qui peuvent survenir pendant l'exécution d'un programme.
+
+## Blocs `try` et `except`
+Le bloc `try` contient le code qui pourrait lever une exception. Le bloc `except` attrape et gère l'exception.
+```python
+try:
+    resultat = 10 / 0
+except ZeroDivisionError:
+    print("Erreur : Division par zéro !")
+else:
+    print(f"Le résultat est {resultat}")
+finally:
+    print("Exécution du bloc finally.")
+```
+On peut spécifier le type d'exception à attraper. Si aucune n'est spécifiée, `except` attrape toutes les exceptions.

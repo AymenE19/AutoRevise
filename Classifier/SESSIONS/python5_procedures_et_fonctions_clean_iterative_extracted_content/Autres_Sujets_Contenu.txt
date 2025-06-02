@@ -1,0 +1,81 @@
+### Introduction aux Modules et Packages
+Python dispose d'une vaste bibliothèque standard. L'instruction `import` permet d'utiliser des modules.
+Exemple avec le module `math`:
+```python
+import math
+print(math.sqrt(16))
+```
+Organisation du code en packages.
+
+### Tuples et Ensembles (Sets)
+Les tuples sont des séquences immuables.
+```python
+mon_tuple = (1, 2, 3)
+```
+Les ensembles sont des collections non ordonnées d'éléments uniques.
+```python
+mon_set = {1, 2, 2, 3} # devient {1, 2, 3}
+```
+
+## Semaine 5: Python pour la Data Science
+
+### Introduction à NumPy
+NumPy est une bibliothèque fondamentale pour le calcul scientifique en Python.
+Elle fournit un support pour les tableaux et matrices multidimensionnels.
+```python
+import numpy as np
+arr = np.array([1, 2, 3])
+print(arr * 2)
+```
+
+### Introduction à Pandas
+Pandas offre des structures de données et des outils d'analyse de données de haut niveau.
+Les DataFrames sont au cœur de Pandas.
+```python
+import pandas as pd
+data = {'col1': [1, 2], 'col2': [3, 4]}
+df = pd.DataFrame(data)
+print(df.head())
+```
+
+## Semaine 6: Projets et Bonnes Pratiques
+
+### Gestion des Environnements Virtuels
+Utilisation de `venv` pour isoler les dépendances de projets.
+```bash
+python -m venv mon_env
+source mon_env/bin/activate # sur Linux/macOS
+mon_env\Scripts\activate # sur Windows
+```
+
+### Tests Unitaires avec `unittest`
+Écrire des tests pour assurer la qualité du code.
+```python
+import unittest
+
+class TestMonModule(unittest.TestCase):
+    def test_addition(self):
+        self.assertEqual(1 + 1, 2)
+
+if __name__ == '__main__':
+    unittest.main()
+```
+
+### Introduction au Contrôle de Version avec Git
+Concepts de base de Git: `commit`, `branch`, `merge`, `push`, `pull`.
+Importance du suivi des modifications.
+
+### Bonnes Pratiques de Codage (PEP 8)
+Guide de style pour le code Python. Lisibilité et maintenabilité.
+
+## Module Complémentaire: Expressions Régulières
+### Introduction aux Expressions Régulières (Regex)
+Le module `re` en Python.
+Recherche de motifs dans les chaînes de caractères.
+```python
+import re
+texte = "L'email est user@example.com"
+match = re.search(r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b', texte)
+if match:
+    print("Email trouvé:", match.group(0))
+```

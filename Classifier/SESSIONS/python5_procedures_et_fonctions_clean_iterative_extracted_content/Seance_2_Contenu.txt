@@ -1,0 +1,80 @@
+## Chapitre 2: Fonctions en Python
+### 2.1 Définition et Appel de Fonctions
+En Python, une fonction est définie à l'aide du mot-clé `def`, suivi du nom de la fonction et de parenthèses `()`.
+Les fonctions peuvent prendre des paramètres (arguments) et retourner des valeurs à l'aide du mot-clé `return`.
+```python
+def saluer(nom):
+    message = f"Bonjour, {nom}!"
+    return message
+
+print(saluer("Alice"))
+```
+### 2.2 Passage de Paramètres
+Les paramètres sont les valeurs que vous passez à une fonction lorsqu'elle est appelée.
+Python supporte plusieurs types de passage de paramètres : positionnels, par mot-clé, par défaut, et variables (*args, **kwargs).
+```python
+def infos_personne(nom, age=30): # age a une valeur par défaut
+    print(f"{nom} a {age} ans.")
+
+infos_personne("Bob")
+infos_personne(nom="Carol", age=25)
+```
+
+## Chapitre 4: Manipulation de Chaînes et Listes
+### 4.1 Manipulation des Chaînes de Caractères
+Les chaînes de caractères en Python sont immuables et offrent de nombreuses méthodes pour leur manipulation.
+- Concaténation: `chaine1 + chaine2`
+- Répétition: `chaine * 3`
+- Slicing: `chaine[start:end:step]`
+- Méthodes utiles: `upper()`, `lower()`, `strip()`, `split()`, `join()`, `find()`, `replace()`.
+```python
+s = "Bonjour le monde!"
+print(s.upper()) # BONJOUR LE MONDE!
+print(s.split(' ')) # ['Bonjour', 'le', 'monde!']
+```
+### 4.2 Opérations sur les Listes
+Les listes sont des collections ordonnées et modifiables d'éléments.
+- Ajout d'éléments: `append()`, `insert()`, `extend()`.
+- Suppression d'éléments: `remove()`, `pop()`, `del`.
+- Slicing: `liste[start:end]`.
+- Méthodes utiles: `sort()`, `reverse()`, `count()`, `index()`.
+```python
+ma_liste = [1, 2, 3]
+ma_liste.append(4)
+print(ma_liste) # [1, 2, 3, 4]
+ma_liste.insert(1, 5) # Insère 5 à l'index 1
+print(ma_liste) # [1, 5, 2, 3, 4]
+```
+
+## Chapitre 5: Lecture et Écriture de Fichiers
+### 5.1 Ouvrir et Fermer des Fichiers
+Pour lire ou écrire dans un fichier, il faut d'abord l'ouvrir avec la fonction `open()`.
+Syntaxe: `fichier = open('nom_du_fichier.txt', 'mode')`
+Modes courants: 'r' (lecture), 'w' (écriture, écrase), 'a' (ajout), 'b' (binaire).
+Il est crucial de fermer le fichier avec `fichier.close()` ou d'utiliser le gestionnaire de contexte `with`.
+### 5.2 Lire depuis un Fichier
+Méthodes de lecture: `read()`, `readline()`, `readlines()`.
+```python
+# Assurez-vous d'avoir un fichier exemple.txt avec du contenu
+# exemple.txt:
+# Ligne 1
+# Ligne 2
+with open('exemple.txt', 'r') as f:
+    contenu = f.read()
+    print(contenu)
+
+with open('exemple.txt', 'r') as f:
+    for ligne in f:
+        print(ligne.strip()) # strip() pour enlever le \n final
+```
+### 5.3 Écrire dans un Fichier
+Méthodes d'écriture: `write()`, `writelines()`.
+```python
+with open('sortie.txt', 'w') as f:
+    f.write('Bonjour Python!\\n')
+    f.write('Ceci est une deuxième ligne.\\n')
+
+lignes = ['Ligne A\\n', 'Ligne B\\n']
+with open('sortie_lignes.txt', 'w') as f:
+    f.writelines(lignes)
+```

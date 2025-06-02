@@ -1,0 +1,63 @@
+## 2.1 Définition et Appel de Fonctions
+Syntaxe de base : `def nom_fonction(parametres):`
+  # Corps de la fonction
+  `return valeur_de_retour`
+L'instruction `return` pour renvoyer une valeur.
+Exemple de fonction simple :
+```python
+def saluer(nom):
+  return f"Bonjour, {nom}!"
+print(saluer("Monde"))
+```
+## 2.3 Arguments de Fonctions
+Arguments positionnels et nommés.
+Arguments par défaut.
+Arguments variables `*args` et `**kwargs`.
+```python
+def infos_personne(nom, age, ville="Inconnue"):
+  print(f"{nom}, {age} ans, de {ville}")
+infos_personne("Alice", 30)
+infos_personne(nom="Bob", age=25, ville="Paris")
+```
+## 2.4 Fonctions Lambda (Anonymes)
+Fonctions courtes et anonymes définies avec `lambda`.
+Syntaxe : `lambda arguments: expression`
+```python
+addition = lambda a, b: a + b
+print(addition(5, 3)) # Output: 8
+```
+- Méthodes courantes : `append()`, `insert()`, `remove()`, `pop()`, `sort()`, `reverse()`.
+  `ma_liste.append("fin")`
+- Compréhensions de listes.
+  `carres = [x**2 for x in range(5)] # [0, 1, 4, 9, 16]`
+## 4.1 Manipulation de Chaînes de Caractères
+Concaténation, découpage (slicing).
+Méthodes utiles : `upper()`, `lower()`, `strip()`, `split()`, `join()`, `find()`, `replace()`.
+Formatage de chaînes (f-strings, `format()`).
+```python
+chaine = "  Python Programming  "
+print(chaine.strip().lower()) # "python programming"
+mots = "un,deux,trois".split(',') # ['un', 'deux', 'trois']
+print("-".join(mots)) # "un-deux-trois"
+nom = "Alice"
+age = 30
+message = f"Je m'appelle {nom} et j'ai {age} ans."
+print(message)
+```
+## 4.2 Travailler avec les Fichiers
+Ouverture et fermeture de fichiers : `open()`, `close()`.
+Modes d'ouverture (`'r'`, `'w'`, `'a'`, `'b'`, etc.).
+Lecture de fichiers : `read()`, `readline()`, `readlines()`.
+Écriture dans les fichiers : `write()`, `writelines()`.
+Utilisation du gestionnaire de contexte `with open(...) as ...:` (recommandé).
+```python
+# Écriture dans un fichier
+with open("exemple.txt", "w") as f:
+  f.write("Bonjour Python!\n")
+  f.write("Ceci est un test.")
+
+# Lecture d'un fichier
+with open("exemple.txt", "r") as f:
+  contenu = f.read()
+  print(contenu)
+```

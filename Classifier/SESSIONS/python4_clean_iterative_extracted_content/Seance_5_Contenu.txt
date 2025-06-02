@@ -1,0 +1,85 @@
+**Module 5: Introduction aux Bases de Données et APIs**
+
+*   **Leçon 1: Introduction aux bases de données avec SQLite**
+    *   Concepts de base des bases de données relationnelles.
+    *   Introduction à SQLite comme SGBD léger.
+    *   Création de bases de données et de tables.
+    *   Opérations CRUD (Create, Read, Update, Delete) avec SQL.
+    *   Exemple :
+        ```python
+        import sqlite3
+
+        # Connexion à la base de données (crée le fichier si non existant)
+        conn = sqlite3.connect('ma_base_de_donnees.db')
+        cursor = conn.cursor()
+
+        # Création d'une table
+        cursor.execute('''
+        CREATE TABLE IF NOT EXISTS utilisateurs (
+            id INTEGER PRIMARY KEY,
+            nom TEXT NOT NULL,
+            email TEXT NOT NULL UNIQUE
+        )
+        ''')
+
+        # Insertion de données
+        cursor.execute("INSERT INTO utilisateurs (nom, email) VALUES (?, ?)", ('Alice', 'alice@example.com'))
+        cursor.execute("INSERT INTO utilisateurs (nom, email) VALUES (?, ?)", ('Bob', 'bob@example.com'))
+
+        # Sauvegarde (commit) des changements
+        conn.commit()
+
+        # Lecture de données
+        print("Utilisateurs:")
+        for row in cursor.execute("SELECT id, nom, email FROM utilisateurs"):
+            print(row)
+
+        # Mise à jour de données
+        cursor.execute("UPDATE utilisateurs SET email = ? WHERE nom = ?", ('alice_new@example.com', 'Alice'))
+        conn.commit()
+
+        # Suppression de données
+        # cursor.execute("DELETE FROM utilisateurs WHERE nom = ?", ('Bob',))
+        # conn.commit()
+
+        # Fermeture de la connexion
+        conn.close()
+        ```
+
+*   **Leçon 2: Interaction avec des APIs et requêtes HTTP**
+    *   Principes des APIs (Application Programming Interfaces).
+    *   Utilisation du module `requests` pour effectuer des requêtes HTTP (GET, POST).
+    *   Manipulation des données JSON reçues des APIs.
+    *   Exemple d'utilisation d'une API publique (ex: API météo, API de citations).
+    *   Exemple :
+        ```python
+        import requests
+        import json
+
+        # Exemple avec une API de test (JSONPlaceholder)
+        # Récupérer une liste de "todos"
+        response = requests.get('https://jsonplaceholder.typicode.com/todos?_limit=5')
+
+        if response.status_code == 200:
+            todos = response.json()  # Convertit la réponse JSON en une liste de dictionnaires Python
+            print("Quelques tâches récupérées de l'API:")
+            for todo in todos:
+                print(f"- {todo['title']} (Complété: {todo['completed']})")
+        else:
+            print(f"Erreur lors de la requête GET: {response.status_code}")
+
+        # Exemple de requête POST (créer une nouvelle ressource)
+        nouvel_utilisateur_data = {
+            "name": "Utilisateur Test",
+            "username": "testuser",
+            "email": "test@example.com"
+        }
+        response_post = requests.post('https://jsonplaceholder.typicode.com/users', json=nouvel_utilisateur_data)
+
+        if response_post.status_code == 201: # 201 Created
+            nouveau_utilisateur = response_post.json()
+            print("\nNouvel utilisateur créé:")
+            print(nouveau_utilisateur)
+        else:
+            print(f"Erreur lors de la requête POST: {response_post.status_code}, {response_post.text}")
+        ```
