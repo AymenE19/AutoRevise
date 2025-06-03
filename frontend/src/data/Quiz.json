@@ -1,0 +1,66 @@
+
+{
+  "title": "Quiz - Séance 1: Bases d'HTML et CSS",
+  "questions": [
+    {
+      "id": 1,
+      "question": "Quelle balise HTML est utilisée pour définir le titre principal d'une page ?",
+      "options": [
+        "<title>",
+        "<h1>",
+        "<header>",
+        "<main>"
+      ],
+      "correctAnswer": 1,
+      "explanation": "La balise <h1> est utilisée pour le titre principal du contenu visible sur la page, tandis que <title> définit le titre dans l'onglet du navigateur."
+    },
+    {
+      "id": 2,
+      "question": "Comment sélectionne-t-on un élément avec la classe 'exemple' en CSS ?",
+      "options": [
+        "#exemple",
+        ".exemple",
+        "exemple",
+        "*exemple"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Le point (.) est utilisé pour sélectionner les éléments par leur classe en CSS."
+    },
+    {
+      "id": 3,
+      "question": "Quelle propriété CSS est utilisée pour changer la couleur du texte ?",
+      "options": [
+        "text-color",
+        "font-color",
+        "color",
+        "background-color"
+      ],
+      "correctAnswer": 2,
+      "explanation": "La propriété 'color' en CSS est utilisée pour définir la couleur du texte."
+    },
+    {
+      "id": 4,
+      "question": "Quelle balise HTML définit la structure sémantique pour l'en-tête d'une page ?",
+      "options": [
+        "<head>",
+        "<header>",
+        "<top>",
+        "<title>"
+      ],
+      "correctAnswer": 1,
+      "explanation": "La balise <header> est utilisée pour définir l'en-tête sémantique d'une page ou d'une section."
+    },
+    {
+      "id": 5,
+      "question": "Quelle est la syntaxe correcte pour inclure du CSS externe dans un fichier HTML ?",
+      "options": [
+        "<style src='style.css'>",
+        "<css href='style.css'>",
+        "<link rel='stylesheet' href='style.css'>",
+        "<include css='style.css'>"
+      ],
+      "correctAnswer": 2,
+      "explanation": "La balise <link> avec rel='stylesheet' est la méthode standard pour inclure des feuilles de style externes."
+    }
+  ]
+}

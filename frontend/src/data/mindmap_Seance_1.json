@@ -1,0 +1,76 @@
+
+{
+  "name": "Séance 1: Bases d'HTML et CSS, Structure d'une page web, Introduction à CSS",
+  "children": [
+    {
+      "name": "HTML Basics",
+      "children": [
+        {
+          "name": "Structure de base",
+          "children": [
+            { "name": "<!DOCTYPE html>" },
+            { "name": "<html>" },
+            { "name": "<head>" },
+            { "name": "<body>" }
+          ]
+        },
+        {
+          "name": "Balises essentielles",
+          "children": [
+            { "name": "<h1> à <h6>" },
+            { "name": "<p>" },
+            { "name": "<div>" },
+            { "name": "<span>" },
+            { "name": "<a>" },
+            { "name": "<img>" }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "CSS Introduction",
+      "children": [
+        {
+          "name": "Sélecteurs",
+          "children": [
+            { "name": "Élément (h1)" },
+            { "name": "Classe (.class)" },
+            { "name": "ID (#id)" }
+          ]
+        },
+        {
+          "name": "Propriétés",
+          "children": [
+            { "name": "color" },
+            { "name": "background-color" },
+            { "name": "font-size" },
+            { "name": "margin" },
+            { "name": "padding" }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Structure d'une page web",
+      "children": [
+        {
+          "name": "Métadonnées",
+          "children": [
+            { "name": "<title>" },
+            { "name": "<meta charset>" },
+            { "name": "<meta viewport>" }
+          ]
+        },
+        {
+          "name": "Contenu",
+          "children": [
+            { "name": "<header>" },
+            { "name": "<nav>" },
+            { "name": "<main>" },
+            { "name": "<footer>" }
+          ]
+        }
+      ]
+    }
+  ]
+}
