@@ -94,7 +94,7 @@ def extract_headings_from_one_markdown_file(markdown_file_path: str) -> dict:
     return structure
 
 
-def extract_headings_from_multi_markdown_files(markdowns_folder: str) -> dict:
+def extract_headings_from_multi_markdown_files(markdowns_folder: str, output_folder: str) -> dict:
     """ Extract heading hierarchy from all Markdown files in a folder return the result as a dictionary."""
 
     output = {"marker_output_python": []}
