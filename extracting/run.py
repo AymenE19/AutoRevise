@@ -29,9 +29,15 @@ def run_extracting():
     for element in os.listdir(INPUT_FOLDER):
 
         if os.path.isdir(os.path.join(INPUT_FOLDER, element)):
+            # STEP 0 - Convert PDFs into Markdown files -----------------
             topic_pdfs_folder_path = os.path.join(INPUT_FOLDER, element)
             topic_mds_folder_path = os.path.join(OUTPUT_FOLDER, element)
             ensure_directory_exists(topic_mds_folder_path)
+
+            logger.info(
+                f"Converting all PDF files in '{topic_pdfs_folder_path}'"
+                f" to Markdown and saving them in '{topic_mds_folder_path}...'"
+            )
 
             convert_multi_pdfs_to_markdowns(topic_pdfs_folder_path, topic_mds_folder_path)
 
@@ -40,12 +46,13 @@ def run_extracting():
                 f" to Markdown and saved them in '{topic_mds_folder_path}'"
             )
 
-    markdown_folder_path = r"C:\Users\OUSSAMA MDJ\Downloads\marker_output_python"
+            # STEP 1 - Extract headings structure -----------------
+            extract_headings_from_multi_markdown_files(topic_mds_folder_path)
+
     extracted_structure_json_path = r"C:\Users\OUSSAMA MDJ\Downloads\structure.json"
     gemini_output_path = r"C:\Users\OUSSAMA MDJ\Downloads\intilaform.txt"
     enriched_output_path = r"C:\Users\OUSSAMA MDJ\Downloads\enriched_output.json"
 
-    # STEP 1 - Extract headings structure
     print("\n🛠️ Extracting structure from markdown files...")
     structure = extract_headings_from_multi_markdown_files(markdown_folder_path)
     with open(extracted_structure_json_path, "w", encoding="utf-8") as f:

@@ -1,66 +1,101 @@
-
 {
   "title": "Quiz - Séance 1: Bases d'HTML et CSS",
   "questions": [
     {
       "id": 1,
-      "question": "Quelle balise HTML est utilisée pour définir le titre principal d'une page ?",
+      "question": "Que signifie l'acronyme HTML ?",
       "options": [
-        "<title>",
-        "<h1>",
-        "<header>",
-        "<main>"
+        "HyperText Transfer Protocol",
+        "HyperText Markup Language",
+        "HighTech Modern Language",
+        "Home Tool Management Logic"
       ],
       "correctAnswer": 1,
-      "explanation": "La balise <h1> est utilisée pour le titre principal du contenu visible sur la page, tandis que <title> définit le titre dans l'onglet du navigateur."
+      "explanation": "HTML est le langage de balisage standard utilisé pour créer et structurer le contenu des pages web."
     },
     {
       "id": 2,
-      "question": "Comment sélectionne-t-on un élément avec la classe 'exemple' en CSS ?",
+      "question": "Quel est le rôle principal du CSS ?",
       "options": [
-        "#exemple",
-        ".exemple",
-        "exemple",
-        "*exemple"
+        "Définir la structure du contenu d'une page web.",
+        "Gérer la logique et les interactions côté serveur.",
+        "Styliser la présentation et l'apparence visuelle des documents HTML.",
+        "Interroger des bases de données."
       ],
-      "correctAnswer": 1,
-      "explanation": "Le point (.) est utilisé pour sélectionner les éléments par leur classe en CSS."
+      "correctAnswer": 2,
+      "explanation": "CSS (Cascading Style Sheets) est utilisé pour contrôler l'aspect visuel (couleurs, polices, mise en page) des pages web."
     },
     {
       "id": 3,
-      "question": "Quelle propriété CSS est utilisée pour changer la couleur du texte ?",
+      "question": "Quelle balise HTML est utilisée pour définir le corps principal visible d'une page web ?",
       "options": [
-        "text-color",
+        "<head>",
+        "<body>",
+        "<header>",
+        "<footer>"
+      ],
+      "correctAnswer": 1,
+      "explanation": "La balise <body> contient tout le contenu affiché par le navigateur, comme les textes, images, liens, etc."
+    },
+    {
+      "id": 4,
+      "question": "Comment cible-t-on un élément HTML ayant l'attribut `id=\"titrePrincipal\"` en CSS ?",
+      "options": [
+        ".titrePrincipal",
+        "#titrePrincipal",
+        "id(titrePrincipal)",
+        "element[titrePrincipal]"
+      ],
+      "correctAnswer": 1,
+      "explanation": "En CSS, le sélecteur d'ID utilise le symbole dièse (#) suivi du nom de l'ID pour cibler un élément spécifique."
+    },
+    {
+      "id": 5,
+      "question": "À quoi sert la déclaration `<!DOCTYPE html>` au début d'un fichier HTML ?",
+      "options": [
+        "À charger une feuille de style CSS externe.",
+        "À définir le titre de la page qui s'affiche dans l'onglet du navigateur.",
+        "À indiquer au navigateur que le document est écrit en HTML5.",
+        "À insérer un commentaire dans le code HTML."
+      ],
+      "correctAnswer": 2,
+      "explanation": "La déclaration `<!DOCTYPE html>` est une instruction pour le navigateur web sur la version du HTML utilisée, assurant un rendu correct de la page."
+    },
+    {
+      "id": 6,
+      "question": "Quelle est la méthode correcte pour lier une feuille de style CSS externe nommée `style.css` à une page HTML ?",
+      "options": [
+        "<style src=\"style.css\">",
+        "<script href=\"style.css\" rel=\"stylesheet\">",
+        "<link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\">",
+        "<css import=\"style.css\">"
+      ],
+      "correctAnswer": 2,
+      "explanation": "La balise <link> avec les attributs `rel=\"stylesheet\"`, `type=\"text/css\"` (optionnel en HTML5 pour CSS) et `href` est utilisée dans la section <head> pour lier un fichier CSS externe."
+    },
+    {
+      "id": 7,
+      "question": "Quelle propriété CSS est utilisée pour changer la couleur du texte d'un élément ?",
+      "options": [
         "font-color",
+        "text-color",
         "color",
         "background-color"
       ],
       "correctAnswer": 2,
-      "explanation": "La propriété 'color' en CSS est utilisée pour définir la couleur du texte."
+      "explanation": "La propriété CSS `color` est utilisée pour définir la couleur du texte."
     },
     {
-      "id": 4,
-      "question": "Quelle balise HTML définit la structure sémantique pour l'en-tête d'une page ?",
+      "id": 8,
+      "question": "Parmi les suivantes, quelle balise est sémantiquement utilisée pour un paragraphe de texte ?",
       "options": [
-        "<head>",
-        "<header>",
-        "<top>",
-        "<title>"
-      ],
-      "correctAnswer": 1,
-      "explanation": "La balise <header> est utilisée pour définir l'en-tête sémantique d'une page ou d'une section."
-    },
-    {
-      "id": 5,
-      "question": "Quelle est la syntaxe correcte pour inclure du CSS externe dans un fichier HTML ?",
-      "options": [
-        "<style src='style.css'>",
-        "<css href='style.css'>",
-        "<link rel='stylesheet' href='style.css'>",
-        "<include css='style.css'>"
+        "<div>",
+        "<span>",
+        "<p>",
+        "<section>"
       ],
       "correctAnswer": 2,
-      "explanation": "La balise <link> avec rel='stylesheet' est la méthode standard pour inclure des feuilles de style externes."
+      "explanation": "La balise `<p>` (paragraphe) est utilisée pour structurer des blocs de texte distincts."
     }
   ]
 }
