@@ -1,74 +1,207 @@
-
 {
-  "name": "Séance 1: Bases d'HTML et CSS, Structure d'une page web, Introduction à CSS",
+  "name": "🟠 Séance 1 : Bases d’HTML et CSS, Structure d’une page web, Introduction à CSS",
   "children": [
     {
-      "name": "HTML Basics",
+      "name": "LES FONDEMENTS DU WEB STATIQUE",
       "children": [
         {
-          "name": "Structure de base",
-          "children": [
-            { "name": "<!DOCTYPE html>" },
-            { "name": "<html>" },
-            { "name": "<head>" },
-            { "name": "<body>" }
-          ]
+          "name": "Définitions Clés (Internet, Web, Site Web, Page Web)"
         },
         {
-          "name": "Balises essentielles",
-          "children": [
-            { "name": "<h1> à <h6>" },
-            { "name": "<p>" },
-            { "name": "<div>" },
-            { "name": "<span>" },
-            { "name": "<a>" },
-            { "name": "<img>" }
-          ]
+          "name": "Protocoles Web (HTTP, FTP)"
+        },
+        {
+          "name": "Phases de Création d'un Site Web (Conception, Réalisation, Hébergement)"
+        },
+        {
+          "name": "Site Web Statique vs. Dynamique"
+        },
+        {
+          "name": "Principaux Types de Sites Web"
+        },
+        {
+          "name": "Outils de Développement Web Essentiels"
+        },
+        {
+          "name": "Introduction au HTML (Langage de balisage, Structure)"
+        },
+        {
+          "name": "Éditeurs HTML (Texte vs. WYSIWYG)"
         }
       ]
     },
     {
-      "name": "CSS Introduction",
+      "name": "HTML BASICS",
       "children": [
         {
-          "name": "Sélecteurs",
-          "children": [
-            { "name": "Élément (h1)" },
-            { "name": "Classe (.class)" },
-            { "name": "ID (#id)" }
-          ]
+          "name": "Éléments et Tags (Syntaxe, Imbrication)"
         },
         {
-          "name": "Propriétés",
-          "children": [
-            { "name": "color" },
-            { "name": "background-color" },
-            { "name": "font-size" },
-            { "name": "margin" },
-            { "name": "padding" }
-          ]
+          "name": "Attributs des Tags HTML"
+        },
+        {
+          "name": "Structure Fondamentale d'une Page (<head>, <body>)"
+        },
+        {
+          "name": "Bonnes Pratiques de Formatage du Code Source"
+        },
+        {
+          "name": "Tags de Base pour le Contenu"
+        },
+        {
+          "name": "Titres (<h1> à <h6>) et Paragraphes (<p>)"
+        },
+        {
+          "name": "Éléments de Division (<div> et <span>)"
         }
       ]
     },
     {
-      "name": "Structure d'une page web",
+      "name": "HTML DOCUMENT STRUCTURE IN DEPTH",
       "children": [
         {
-          "name": "Métadonnées",
+          "name": "Philosophie du HTML (Structure avant Apparence)"
+        },
+        {
+          "name": "Importance de la Validation du Code HTML"
+        },
+        {
+          "name": "Déclaration <!DOCTYPE> (Rôle et Versions)"
+        },
+        {
+          "name": "Comparaison HTML vs. XHTML (Différences, Strictesse)"
+        },
+        {
+          "name": "Section <head>",
           "children": [
-            { "name": "<title>" },
-            { "name": "<meta charset>" },
-            { "name": "<meta viewport>" }
+            {
+              "name": "Contenu de l'En-tête (Métadonnées)"
+            },
+            {
+              "name": "Balise <title> (Titre de la Fenêtre, SEO)"
+            },
+            {
+              "name": "Balises <meta> (Descriptions Additionnelles)"
+            },
+            {
+              "name": "Balise <script> (Intégration JavaScript)"
+            },
+            {
+              "name": "Balise <style> (Styles CSS Internes)"
+            }
           ]
         },
         {
-          "name": "Contenu",
+          "name": "Commentaires en HTML (<!-- ... -->)"
+        },
+        {
+          "name": "Section <body> (Contenu Visible de la Page)"
+        },
+        {
+          "name": "Tags de Formatage de Texte (<b>, <i>, <strong>, <em>, etc.)"
+        },
+        {
+          "name": "Hyperliens (<a>) (Internes, Externes, Ancres, Mailto)"
+        }
+      ]
+    },
+    {
+      "name": "CRÉATION D'UN FORMULAIRE HTML",
+      "children": [
+        {
+          "name": "Balise <form> (Attributs action, method)"
+        },
+        {
+          "name": "Méthodes d'Envoi (GET vs. POST)"
+        },
+        {
+          "name": "Éléments de Formulaire Principaux",
           "children": [
-            { "name": "<header>" },
-            { "name": "<nav>" },
-            { "name": "<main>" },
-            { "name": "<footer>" }
+            {
+              "name": "<input type=\"text\"> (Champ de Texte)"
+            },
+            {
+              "name": "<input type=\"password\"> (Champ de Mot de Passe)"
+            },
+            {
+              "name": "<input type=\"radio\"> (Boutons Radio)"
+            },
+            {
+              "name": "<input type=\"checkbox\"> (Cases à Cocher)"
+            },
+            {
+              "name": "<input type=\"submit\"> (Bouton d'Envoi)"
+            },
+            {
+              "name": "<input type=\"reset\"> (Bouton de Réinitialisation)"
+            }
           ]
+        },
+        {
+          "name": "Balise <select> (Liste Déroulante avec <option>)"
+        },
+        {
+          "name": "Balise <textarea> (Zone de Texte Multiligne)"
+        },
+        {
+          "name": "Attributs Communs des Champs (name, value)"
+        },
+        {
+          "name": "Conseils pour la Présentation des Formulaires"
+        }
+      ]
+    },
+    {
+      "name": "INTRODUCTION À CSS",
+      "children": [
+        {
+          "name": "Rôle de CSS (Mise en Forme et Présentation)"
+        },
+        {
+          "name": "Séparation des Préoccupations (HTML pour la Structure, CSS pour le Style)"
+        },
+        {
+          "name": "Méthodes d'Intégration du CSS",
+          "children": [
+            {
+              "name": "CSS Interne (Balise <style>)"
+            },
+            {
+              "name": "CSS Externe (Fichier .css lié via <link>)"
+            },
+            {
+              "name": "CSS en Ligne (Attribut style)"
+            }
+          ]
+        },
+        {
+          "name": "Importation de Feuilles de Style (@import)"
+        }
+      ]
+    },
+    {
+      "name": "INTÉGRATION PHP ET HTML",
+      "children": [
+        {
+          "name": "Principe: PHP Côté Serveur Génère du HTML"
+        },
+        {
+          "name": "Utilisation des Balises PHP (<?php ... ?>)"
+        },
+        {
+          "name": "Traitement du HTML par l'Interpréteur PHP"
+        },
+        {
+          "name": "Génération Dynamique de HTML avec PHP (echo, print)"
+        },
+        {
+          "name": "Gestion des Espaces Blancs et Sauts de Ligne"
+        },
+        {
+          "name": "Syntaxe des Commentaires en PHP"
+        },
+        {
+          "name": "Configurer le Serveur pour Traiter .html comme PHP (AddType)"
         }
       ]
     }
