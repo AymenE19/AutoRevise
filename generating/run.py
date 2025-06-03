@@ -5,7 +5,7 @@ from fastapi import FastAPI, Request
 from google.genai import Client
 
 from generating.settings import MONGODB_URI, MONGODB_DB_NAME, GEMINI_API_KEY
-from generating.functionalities import process_user_action
+from generating.functionalities import process_user_action, test
 from utils.database import MongoDB
 from utils.logger import setup_logger
 
@@ -30,6 +30,11 @@ def read_root(request: Request):
         "message": "Bienvenue sur l'API d'AutoRevise ! 🎓",
         "docs": "Accédez à la documentation via /docs",
     }
+
+
+@fastapi_app.get("/test")
+def read_root(action: str, user_prompt: str):
+    return test(action, user_prompt)
 
 
 @fastapi_app.post("/process_action")
