@@ -100,6 +100,16 @@ class MongoDB:
 
         return sessions
 
+    def find_session_by_order(self, session_order: int) -> dict | None:
+        """Search for a session by its 'session_order' field in the selected topic."""
+
+        session = self.topic.find_one({"session_order": session_order})
+
+        # Logging
+        logger.info(f"Searched for session_order '{session_order}'. Found: {bool(session)}")
+
+        return session
+
     def find_session_by_name(self, session_title: str) -> dict | None:
         """Search for a session by its 'session_title' field in the selected topic."""
 
