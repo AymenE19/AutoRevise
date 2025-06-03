@@ -26,7 +26,7 @@ def build_action_prompt(action: str, title: str, content: str) -> str:
                 {content}
             """
 
-        case "mindmap":
+        case "mind-map":
             return (
                 f"""
                 Tu es un assistant pédagogique. Je vais te fournir le contenu brut d'une séance intitulée : "{title}".
