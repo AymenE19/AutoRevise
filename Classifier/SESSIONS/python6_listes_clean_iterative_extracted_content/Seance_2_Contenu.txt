@@ -1,0 +1,32 @@
+### Leçon 3.1: Définir des Fonctions
+Pour définir une fonction, on utilise le mot-clé `def`.
+```python
+def saluer(nom):
+    return f"Bonjour, {nom}!"
+```
+Une fonction peut prendre des paramètres et retourner une valeur avec `return`.
+
+### Leçon 3.3: Manipulation de Chaînes
+Les chaînes de caractères peuvent être concaténées.
+`s1 = "hello"`
+`s2 = "world"`
+`s3 = s1 + " " + s2`
+Méthodes utiles : `.upper()`, `.lower()`, `.split()`.
+
+### Leçon 3.4: Opérations sur les Listes
+Les listes sont des collections ordonnées et modifiables.
+Ajouter un élément : `ma_liste.append(element)`
+Supprimer un élément : `ma_liste.remove(element)`
+Accéder aux éléments par index.
+
+### Leçon 4.1: Lire et Écrire dans des Fichiers
+Pour ouvrir un fichier en lecture :
+```python
+with open("mon_fichier.txt", "r") as f:
+    contenu = f.read()
+```
+Pour écrire dans un fichier :
+```python
+with open("sortie.txt", "w") as f:
+    f.write("Ceci est un test.")
+```

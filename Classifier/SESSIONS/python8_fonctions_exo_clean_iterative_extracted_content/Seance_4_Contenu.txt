@@ -1,0 +1,175 @@
+3.2 Gestion des Erreurs et Exceptions
+        *   Blocs `try`, `except`, `else`, `finally`
+            ```python
+            try:
+                # Code susceptible de lever une exception
+                resultat = 10 / 0
+            except ZeroDivisionError:
+                print("Erreur : Division par zéro !")
+            except TypeError:
+                print("Erreur : Type incompatible.")
+            else:
+                # Exécuté si aucune exception n'est levée dans le try
+                print("Aucune erreur.")
+            finally:
+                # Exécuté dans tous les cas (erreur ou non)
+                print("Fin du bloc try-except.")
+            ```
+        *   Lever des exceptions (`raise`)
+            ```python
+            def verifier_age(age):
+                if age < 0:
+                    raise ValueError("L'âge ne peut pas être négatif.")
+                print(f"Âge vérifié : {age}")
+
+            try:
+                verifier_age(-5)
+            except ValueError as e:
+                print(f"Exception capturée : {e}")
+            ```
+        *   Exceptions courantes : `TypeError`, `ValueError`, `IndexError`, `KeyError`, `FileNotFoundError`
+    3.3 Programmation Orientée Objet (POO) - Introduction
+        *   Concepts de base : classes et objets
+            *   Une classe est un plan (blueprint) pour créer des objets.
+            *   Un objet est une instance d'une classe.
+        *   Définir une classe (`class`)
+            ```python
+            class Chien:
+                # Attribut de classe (partagé par toutes les instances)
+                espece = "Canis familiaris"
+
+                # Constructeur (méthode spéciale pour initialiser un objet)
+                def __init__(self, nom, age):
+                    # Attributs d'instance (propres à chaque objet)
+                    self.nom = nom
+                    self.age = age
+
+                # Méthode d'instance
+                def aboyer(self):
+                    return f"{self.nom} dit: Ouaf !"
+
+                def description(self):
+                    return f"{self.nom} a {self.age} ans."
+            ```
+        *   Créer des instances (objets)
+            ```python
+            mon_chien = Chien("Rex", 3)
+            autre_chien = Chien("Médor", 5)
+
+            print(mon_chien.nom)  # Output: Rex
+            print(autre_chien.aboyer())  # Output: Médor dit: Ouaf !
+            print(Chien.espece) # Output: Canis familiaris
+            ```
+    3.4 POO - Constructeurs et Méthodes
+        *   Le constructeur `__init__`
+            *   Méthode spéciale appelée automatiquement lors de la création d'un objet.
+            *   Utilisé pour initialiser les attributs de l'instance.
+            *   Le premier paramètre est toujours `self`, qui représente l'instance elle-même.
+        *   Méthodes d'instance (avec `self`)
+            *   Fonctions définies à l'intérieur d'une classe.
+            *   Opèrent sur les données (attributs) de l'instance.
+            *   Doivent avoir `self` comme premier paramètre.
+            ```python
+            class Voiture:
+                def __init__(self, marque, modele):
+                    self.marque = marque
+                    self.modele = modele
+                    self.vitesse = 0
+
+                def accelerer(self, increment):
+                    self.vitesse += increment
+                    print(f"La {self.marque} {self.modele} accélère à {self.vitesse} km/h.")
+
+                def freiner(self, decrement):
+                    self.vitesse -= decrement
+                    if self.vitesse < 0:
+                        self.vitesse = 0
+                    print(f"La {self.marque} {self.modele} freine à {self.vitesse} km/h.")
+
+            ma_voiture = Voiture("Renault", "Clio")
+            ma_voiture.accelerer(50)
+            ma_voiture.freiner(20)
+            ```
+        *   Attributs d'instance et de classe
+            *   Attributs d'instance : spécifiques à chaque objet (ex: `self.nom`). Définis dans `__init__`.
+            *   Attributs de classe : partagés par toutes les instances de la classe (ex: `Chien.espece`). Définis directement dans la classe.
+    3.5 POO - Héritage
+        *   Permet à une classe (classe fille/dérivée) d'hériter des attributs et méthodes d'une autre classe (classe mère/de base).
+        *   Syntaxe : `class ClasseFille(ClasseMere):`
+        *   Surcharge de méthodes (`super()`)
+            *   La classe fille peut redéfinir (surcharger) les méthodes de la classe mère.
+            *   `super()` permet d'appeler la méthode de la classe mère depuis la classe fille.
+            ```python
+            class Animal:
+                def __init__(self, nom):
+                    self.nom = nom
+
+                def manger(self):
+                    print(f"{self.nom} mange.")
+
+            class Chat(Animal): # Chat hérite de Animal
+                def __init__(self, nom, couleur_pelage):
+                    super().__init__(nom) # Appelle le __init__ de Animal
+                    self.couleur_pelage = couleur_pelage
+
+                def miauler(self):
+                    print(f"{self.nom} dit: Miaou !")
+
+                def manger(self): # Surcharge de la méthode manger
+                    super().manger() # Appelle la méthode manger de Animal
+                    print(f"Le chat {self.nom} mange des croquettes.")
+
+            mon_chat = Chat("Garfield", "roux")
+            mon_chat.manger()
+            mon_chat.miauler()
+            ```
+    3.6 POO - Polymorphisme
+        *   Signifie "plusieurs formes". En POO, cela signifie que des objets de classes différentes peuvent répondre au même message (appel de méthode) de manière différente.
+        *   Souvent utilisé avec l'héritage.
+            ```python
+            class Oiseau:
+                def voler(self):
+                    print("L'oiseau vole.")
+
+            class Avion:
+                def voler(self):
+                    print("L'avion vole dans le ciel.")
+
+            def faire_voler(entite_volante):
+                entite_volante.voler() # Appel polymorphique
+
+            moineau = Oiseau()
+            boeing = Avion()
+
+            faire_voler(moineau) # Output: L'oiseau vole.
+            faire_voler(boeing)  # Output: L'avion vole dans le ciel.
+            ```
+        *   Le Duck Typing en Python est une forme de polymorphisme : "Si ça marche comme un canard et cancane comme un canard, alors c'est un canard."
+            *   On ne se soucie pas du type de l'objet, mais de sa capacité à exécuter une certaine méthode ou à avoir un certain attribut.
+    3.8 Méthodes Spéciales (Dunder methods)
+        *   Méthodes avec des doubles underscores au début et à la fin (ex: `__init__`, `__str__`).
+        *   Permettent de surcharger des comportements Python intégrés pour vos objets.
+        *   `__str__(self)`: Retourne une représentation "informelle" ou "lisible" de l'objet sous forme de chaîne. Utilisée par `print()` et `str()`.
+        *   `__repr__(self)`: Retourne une représentation "officielle" ou "non ambiguë" de l'objet sous forme de chaîne. Utile pour le débogage. Si `__str__` n'est pas défini, `__repr__` est utilisé.
+            ```python
+            class Point:
+                def __init__(self, x, y):
+                    self.x = x
+                    self.y = y
+
+                def __str__(self):
+                    return f"Point({self.x}, {self.y})"
+
+                def __repr__(self):
+                    return f"Point(x={self.x}, y={self.y})" # Plus explicite
+
+            p = Point(1, 2)
+            print(p)         # Appelle p.__str__() -> Output: Point(1, 2)
+            print(str(p))    # Appelle p.__str__() -> Output: Point(1, 2)
+            print(repr(p))   # Appelle p.__repr__() -> Output: Point(x=1, y=2)
+            ```
+        *   Autres méthodes spéciales :
+            *   `__len__(self)`: Utilisée par `len()`.
+            *   `__add__(self, other)`: Utilisée par l'opérateur `+`.
+            *   `__eq__(self, other)`: Utilisée par l'opérateur `==`.
+            *   Et beaucoup d'autres pour les comparaisons, opérations arithmétiques, accès aux éléments, etc.

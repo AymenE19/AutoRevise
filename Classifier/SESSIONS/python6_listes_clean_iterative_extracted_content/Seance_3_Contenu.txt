@@ -1,0 +1,105 @@
+## Séance 3: Structures de Données et Algorithmes
+
+### Listes Approfondies
+#### Création et Modification
+Les listes sont des collections ordonnées et mutables.
+```python
+nombres = [1, 2, 3, 4, 5]
+nombres.append(6)       # Ajoute à la fin
+nombres.insert(0, 0)    # Insère à l'index 0
+nombres[2] = 99         # Modifie l'élément à l'index 2
+del nombres[3]          # Supprime l'élément à l'index 3
+element_supprime = nombres.pop() # Supprime et retourne le dernier élément
+print(nombres)
+```
+#### Parcours de Listes
+```python
+fruits = ["pomme", "banane", "cerise"]
+for fruit in fruits:
+    print(fruit)
+
+for index, fruit in enumerate(fruits):
+    print(f"Index {index}: {fruit}")
+```
+#### Slicing de Listes
+```python
+nombres = [0, 1, 2, 3, 4, 5]
+sous_liste = nombres[1:4] # [1, 2, 3]
+premiers_elements = nombres[:3] # [0, 1, 2]
+derniers_elements = nombres[3:] # [3, 4, 5]
+```
+
+### Dictionnaires
+Les dictionnaires stockent des paires clé-valeur. Ils sont non ordonnés (avant Python 3.7, ordonnés depuis) et mutables.
+#### Création et Accès
+```python
+personne = {"nom": "Dupont", "prenom": "Jean", "age": 40}
+print(personne["nom"])  # Accès par clé
+print(personne.get("ville", "Non spécifié")) # Accès sécurisé avec valeur par défaut
+```
+#### Modification et Ajout
+```python
+personne["age"] = 41 # Modification
+personne["profession"] = "Ingénieur" # Ajout
+print(personne)
+```
+#### Parcours de Dictionnaires
+```python
+# Parcourir les clés
+for cle in personne.keys():
+    print(cle)
+
+# Parcourir les valeurs
+for valeur in personne.values():
+    print(valeur)
+
+# Parcourir les paires clé-valeur
+for cle, valeur in personne.items():
+    print(f"{cle}: {valeur}")
+```
+
+### Algorithmes de Tri Simples
+#### Tri à Bulles (Bubble Sort)
+Le tri à bulles compare les éléments adjacents et les échange s'ils sont dans le mauvais ordre. Il répète ce processus jusqu'à ce que la liste soit triée.
+```python
+def tri_a_bulles(liste):
+    n = len(liste)
+    for i in range(n-1):
+        for j in range(0, n-i-1):
+            if liste[j] > liste[j+1]:
+                liste[j], liste[j+1] = liste[j+1], liste[j]
+    return liste
+
+ma_liste_non_triee = [64, 34, 25, 12, 22, 11, 90]
+print(f"Liste triée (bulles): {tri_a_bulles(ma_liste_non_triee)}")
+```
+*(Note: Le tri rapide est un sujet plus avancé, souvent couvert après les bases des tris simples.)*
+
+### Algorithmes de Recherche
+#### Recherche Linéaire (Linear Search)
+La recherche linéaire parcourt chaque élément de la liste jusqu'à ce que l'élément cible soit trouvé ou que la fin de la liste soit atteinte.
+```python
+def recherche_lineaire(liste, element_recherche):
+    for i in range(len(liste)):
+        if liste[i] == element_recherche:
+            return i  # Retourne l'index de l'élément trouvé
+    return -1 # Retourne -1 si l'élément n'est pas trouvé
+
+resultat_recherche = recherche_lineaire([1, 5, 2, 8, 3], 8)
+print(f"Index de l'élément (linéaire): {resultat_recherche}")
+```
+*(Note: La recherche dichotomique nécessite une liste triée et est généralement introduite avec ou après les algorithmes de tri plus efficaces.)*
+
+### Introduction à la Complexité Algorithmique
+La complexité algorithmique est une mesure de la quantité de ressources (temps, espace) nécessaires à un algorithme pour s'exécuter en fonction de la taille de l'entrée.
+On utilise souvent la notation "Big O" (Grand O) pour décrire la performance ou la complexité d'un algorithme.
+- O(1) : Temps constant
+- O(log n) : Temps logarithmique
+- O(n) : Temps linéaire
+- O(n log n) : Temps log-linéaire
+- O(n^2) : Temps quadratique
+
+#### Optimisation des Boucles (Bases)
+- Éviter les calculs répétitifs à l'intérieur des boucles.
+- Choisir la bonne structure de données pour la tâche.
+- Sortir des boucles dès que possible (avec `break`).

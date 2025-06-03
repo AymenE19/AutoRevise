@@ -1,0 +1,68 @@
+### Introduction aux bases de données avec SQLite
+SQLite est un SGBD relationnel accessible via une bibliothèque C. Il est très populaire pour les applications embarquées et les petits projets.
+En Python, le module `sqlite3` est inclus dans la bibliothèque standard et permet de travailler avec des bases de données SQLite.
+
+#### Créer une connexion et un curseur
+```python
+import sqlite3
+
+# Connexion à la base de données (crée le fichier s'il n'existe pas)
+conn = sqlite3.connect('ma_base.db')
+
+# Création d'un curseur
+cursor = conn.cursor()
+```
+
+#### Exécuter des requêtes SQL
+```python
+# Créer une table
+cursor.execute('''
+CREATE TABLE IF NOT EXISTS utilisateurs (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nom TEXT NOT NULL,
+    email TEXT UNIQUE
+)
+''')
+
+# Insérer des données
+cursor.execute("INSERT INTO utilisateurs (nom, email) VALUES (?, ?)", ('Alice', 'alice@example.com'))
+cursor.execute("INSERT INTO utilisateurs (nom, email) VALUES (?, ?)", ('Bob', 'bob@example.com'))
+
+# Sauvegarder (commit) les changements
+conn.commit()
+
+# Sélectionner des données
+cursor.execute("SELECT * FROM utilisateurs")
+for ligne in cursor.fetchall():
+    print(ligne)
+
+# Fermer la connexion
+conn.close()
+```
+
+### Interaction avec des APIs et requêtes HTTP
+Les APIs (Application Programming Interfaces) permettent à différents systèmes logiciels de communiquer entre eux. Les APIs web sont souvent accessibles via HTTP.
+
+#### Utilisation de la bibliothèque `requests`
+La bibliothèque `requests` est une bibliothèque tierce populaire pour effectuer des requêtes HTTP en Python. Elle doit être installée (`pip install requests`).
+
+```python
+import requests
+
+# Effectuer une requête GET
+response = requests.get('https://api.github.com/users/python')
+
+# Vérifier le statut de la réponse
+if response.status_code == 200:
+    # Afficher le contenu (souvent du JSON)
+    data = response.json()
+    print(data['name'])
+    print(data['public_repos'])
+else:
+    print(f"Erreur: {response.status_code}")
+
+# Effectuer une requête POST (exemple)
+payload = {'key1': 'value1', 'key2': 'value2'}
+response_post = requests.post('https://httpbin.org/post', data=payload)
+print(response_post.json())
+```

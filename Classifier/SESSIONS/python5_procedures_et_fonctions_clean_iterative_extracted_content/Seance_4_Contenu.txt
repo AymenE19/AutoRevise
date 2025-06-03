@@ -1,0 +1,88 @@
+## Semaine 4: Programmation Orientée Objet (POO)
+
+### Concepts de la POO
+La Programmation Orientée Objet (POO) est un paradigme de programmation qui utilise des "objets" pour concevoir des applications et des programmes informatiques. Elle repose sur plusieurs concepts clés :
+
+### Définition des Classes et des Objets
+Une **classe** est un plan ou un modèle à partir duquel les objets sont créés. Elle définit un ensemble d'attributs (données) et de méthodes (fonctions) communs à tous les objets de ce type.
+Un **objet** est une instance d'une classe. C'est une entité concrète qui possède un état (ses attributs) et un comportement (ses méthodes).
+
+```python
+class Voiture:
+    # Constructeur
+    def __init__(self, marque, modele):
+        self.marque = marque  # Attribut d'instance
+        self.modele = modele  # Attribut d'instance
+
+    # Méthode d'instance
+    def afficher_details(self):
+        return f"Voiture: {self.marque} {self.modele}"
+
+# Création d'objets (instances de la classe Voiture)
+voiture1 = Voiture("Renault", "Clio")
+voiture2 = Voiture("Peugeot", "208")
+
+print(voiture1.afficher_details())
+print(voiture2.marque)
+```
+
+### Constructeur (`__init__`) et Méthodes Spéciales
+Le **constructeur** est une méthode spéciale nommée `__init__` qui est appelée automatiquement lors de la création d'un nouvel objet. Il est utilisé pour initialiser les attributs de l'objet.
+D'autres méthodes spéciales (souvent appelées "méthodes magiques" ou "dunder methods" car elles commencent et se terminent par un double underscore) permettent de surcharger des comportements Python intégrés pour vos objets (par exemple, `__str__` pour la représentation en chaîne, `__len__` pour la longueur).
+
+```python
+class Livre:
+    def __init__(self, titre, auteur):
+        self.titre = titre
+        self.auteur = auteur
+
+    def __str__(self):
+        return f'"{self.titre}" par {self.auteur}'
+
+mon_livre = Livre("Le Seigneur des Anneaux", "J.R.R. Tolkien")
+print(mon_livre)  # Appelle __str__
+```
+
+### Héritage et Polymorphisme
+L'**héritage** est un mécanisme qui permet à une classe (appelée classe fille ou sous-classe) d'hériter des attributs et des méthodes d'une autre classe (appelée classe mère ou super-classe). Cela favorise la réutilisation du code et la création de hiérarchies de classes.
+
+Le **polymorphisme** (signifiant "plusieurs formes") permet d'utiliser une interface unique pour des objets de types différents. En POO, cela signifie souvent qu'une méthode peut se comporter différemment selon l'objet sur lequel elle est appelée.
+
+```python
+class Animal:
+    def __init__(self, nom):
+        self.nom = nom
+
+    def parler(self):
+        raise NotImplementedError("La sous-classe doit implémenter cette méthode")
+
+class Chien(Animal): # Chien hérite de Animal
+    def parler(self):
+        return "Woof!"
+
+class Chat(Animal): # Chat hérite de Animal
+    def parler(self):
+        return "Miaou!"
+
+# Polymorphisme
+animaux = [Chien("Rex"), Chat("Mimi")]
+for animal in animaux:
+    print(f"{animal.nom} dit: {animal.parler()}")
+```
+
+### Gestion des Exceptions avec `try-except`
+La gestion des exceptions permet de traiter les erreurs qui peuvent survenir pendant l'exécution d'un programme de manière contrôlée, évitant ainsi l'arrêt brutal du programme.
+Le bloc `try` contient le code susceptible de lever une exception.
+Le bloc `except` capture et traite l'exception si elle se produit.
+
+```python
+try:
+    resultat = 10 / 0
+except ZeroDivisionError:
+    print("Erreur : Division par zéro !")
+else:
+    print(f"Le résultat est {resultat}")
+finally:
+    print("Exécution du bloc finally.")
+```
+On peut spécifier le type d'exception à attraper, ou attraper toutes les exceptions avec un `except` générique (bien que ce soit moins recommandé pour un débogage précis).

@@ -1,0 +1,146 @@
+# Module 1: Introduction à Python
+## 1.1 Qu'est-ce que Python ?
+Python est un langage de programmation interprété, de haut niveau et polyvalent. Il est réputé pour sa syntaxe claire et lisible, ce qui en fait un excellent choix pour les débutants. Python est utilisé dans de nombreux domaines tels que le développement web, l'analyse de données, l'intelligence artificielle, le scripting, etc.
+### Caractéristiques principales :
+- Facile à apprendre et à lire
+- Vaste bibliothèque standard
+- Portable (fonctionne sur de nombreux systèmes d'exploitation)
+- Communauté active et grandissante
+
+## 1.2 Installation de l'environnement
+Pour commencer à programmer en Python, vous avez besoin d'un interpréteur Python et d'un environnement de développement.
+### 1.2.1 Anaconda
+Anaconda est une distribution populaire de Python et R pour la science des données et l'apprentissage automatique. Elle simplifie la gestion des paquets et des environnements.
+1. Téléchargez Anaconda depuis [https://www.anaconda.com/products/distribution](https://www.anaconda.com/products/distribution).
+2. Suivez les instructions d'installation pour votre système d'exploitation.
+Anaconda inclut Python, Jupyter Notebook, Spyder, et de nombreux paquets scientifiques.
+### 1.2.2 VS Code (Visual Studio Code)
+VS Code est un éditeur de code source léger mais puissant qui prend en charge Python via des extensions.
+1. Téléchargez VS Code depuis [https://code.visualstudio.com/](https://code.visualstudio.com/).
+2. Installez l'extension Python de Microsoft.
+### 1.2.3 Jupyter Notebook
+Jupyter Notebook est une application web open-source qui vous permet de créer et de partager des documents contenant du code live, des équations, des visualisations et du texte narratif.
+Si vous avez installé Anaconda, Jupyter Notebook est déjà inclus. Vous pouvez le lancer depuis Anaconda Navigator ou en tapant `jupyter notebook` dans votre terminal/console après avoir activé un environnement Anaconda.
+
+## 1.3 Votre premier programme Python
+Ouvrez votre éditeur ou Jupyter Notebook et créez un nouveau fichier (par exemple, `hello.py` ou un nouveau notebook).
+Tapez le code suivant :
+```python
+print("Bonjour, Python !")
+```
+Exécutez le code. Vous devriez voir "Bonjour, Python !" affiché.
+
+# Module 2: Bases de Python
+## 2.1 Variables et Types de Données
+### 2.1.1 Variables
+Une variable est un nom qui fait référence à un emplacement mémoire où une valeur est stockée. En Python, vous n'avez pas besoin de déclarer explicitement le type d'une variable.
+```python
+nom = "Alice"
+age = 30
+taille = 1.65
+est_etudiant = False
+
+print(nom)
+print(age)
+```
+### 2.1.2 Nombres (Entiers, Flottants)
+Python supporte plusieurs types de nombres :
+- **Entiers (int)** : nombres entiers, positifs ou négatifs, sans partie décimale (ex: `10`, `-3`).
+- **Flottants (float)** : nombres avec une partie décimale (ex: `3.14`, `-0.5`).
+```python
+x = 10       # int
+y = 3.14     # float
+z = int("5") # Conversion de chaîne en entier
+w = float(7) # Conversion d'entier en flottant
+print(type(x), type(y))
+```
+### 2.1.3 Chaînes de Caractères (str)
+Les chaînes de caractères sont des séquences de caractères, entourées de guillemets simples (`'`) ou doubles (`"`).
+```python
+message1 = 'Bonjour le monde'
+message2 = "Python c'est cool"
+
+# Concaténation
+salutation = message1 + ". " + message2
+print(salutation)
+
+# Longueur d'une chaîne
+print(len(salutation))
+
+# Accès aux caractères (indexation)
+print(message1[0]) # 'B'
+```
+### 2.1.4 Booléens (bool)
+Le type booléen a deux valeurs possibles : `True` (vrai) et `False` (faux). Ils sont souvent le résultat d'opérations de comparaison.
+```python
+condition_vraie = True
+condition_fausse = False
+print(type(condition_vraie))
+
+resultat = (5 > 3) # True
+print(resultat)
+```
+## 2.2 Opérateurs
+### 2.2.1 Opérateurs Arithmétiques
+`+` (addition), `-` (soustraction), `*` (multiplication), `/` (division réelle), `//` (division entière), `%` (modulo), `**` (exponentiation).
+```python
+a = 10
+b = 3
+print(f"a + b = {a + b}")       # 13
+print(f"a - b = {a - b}")       # 7
+print(f"a * b = {a * b}")       # 30
+print(f"a / b = {a / b}")       # 3.333...
+print(f"a // b = {a // b}")     # 3 (division entière)
+print(f"a % b = {a % b}")       # 1 (reste)
+print(f"a ** b = {a ** b}")     # 1000 (10 puissance 3)
+```
+### 2.2.2 Opérateurs de Comparaison
+`==` (égal à), `!=` (différent de), `>` (supérieur à), `<` (inférieur à), `>=` (supérieur ou égal à), `<=` (inférieur ou égal à). Retournent un booléen.
+```python
+x = 5
+y = 10
+print(f"x == y: {x == y}")  # False
+print(f"x != y: {x != y}")  # True
+print(f"x < y: {x < y}")    # True
+```
+### 2.2.3 Opérateurs Logiques
+`and` (ET logique), `or` (OU logique), `not` (NON logique).
+```python
+p = True
+q = False
+print(f"p and q: {p and q}") # False
+print(f"p or q: {p or q}")   # True
+print(f"not p: {not p}")     # False
+```
+## 2.3 Structures de Contrôle
+### 2.3.1 Conditions (if, elif, else)
+Permettent d'exécuter des blocs de code en fonction de certaines conditions.
+```python
+age = 18
+if age < 13:
+    print("Enfant")
+elif age < 18:
+    print("Adolescent")
+else:
+    print("Adulte")
+```
+### 2.3.2 Boucles `for`
+Utilisées pour itérer sur une séquence (comme une liste, un tuple, un dictionnaire, un ensemble ou une chaîne).
+```python
+# Itérer sur une liste
+fruits = ["pomme", "banane", "cerise"]
+for fruit in fruits:
+    print(fruit)
+
+# Itérer avec range()
+for i in range(5):  # de 0 à 4
+    print(i)
+```
+### 2.3.3 Boucles `while`
+Exécutent un bloc de code tant qu'une condition est vraie.
+```python
+compteur = 0
+while compteur < 5:
+    print(compteur)
+    compteur += 1  # Important: ne pas oublier de modifier la variable de condition
+```

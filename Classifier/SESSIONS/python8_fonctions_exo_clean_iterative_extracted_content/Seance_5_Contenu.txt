@@ -1,0 +1,78 @@
+## Introduction aux bases de données avec SQLite
+SQLite est une bibliothèque C qui implémente un moteur de base de données SQL transactionnel autonome, sans serveur et sans configuration.
+Le code source de SQLite est dans le domaine public.
+
+### Connexion à une base de données
+Pour se connecter à une base de données SQLite (ou la créer si elle n'existe pas), on utilise la fonction `connect()` du module `sqlite3`.
+```python
+import sqlite3
+
+# Connexion à la base de données (crée le fichier s'il n'existe pas)
+conn = sqlite3.connect('ma_base.db')
+print("Base de données ouverte avec succès")
+
+# Création d'un curseur
+cursor = conn.cursor()
+
+# Création d'une table
+cursor.execute('''
+CREATE TABLE IF NOT EXISTS utilisateurs (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nom TEXT NOT NULL,
+    email TEXT NOT NULL UNIQUE
+)
+''')
+print("Table utilisateurs créée avec succès")
+
+# Insertion de données
+cursor.execute("INSERT INTO utilisateurs (nom, email) VALUES (?, ?)", ('Alice', 'alice@example.com'))
+cursor.execute("INSERT INTO utilisateurs (nom, email) VALUES (?, ?)", ('Bob', 'bob@example.com'))
+conn.commit() # Important pour sauvegarder les changements
+print("Données insérées avec succès")
+
+# Récupération de données
+cursor.execute("SELECT * FROM utilisateurs")
+rows = cursor.fetchall()
+for row in rows:
+    print(row)
+
+# Fermeture de la connexion
+conn.close()
+```
+
+## Interaction avec des APIs et requêtes HTTP
+Une API (Application Programming Interface) permet à différents logiciels de communiquer entre eux.
+Les APIs web sont souvent accessibles via des requêtes HTTP.
+
+### Utilisation du module `requests`
+Le module `requests` est une bibliothèque Python populaire pour effectuer des requêtes HTTP.
+Il faut l'installer si ce n'est pas déjà fait : `pip install requests`
+
+```python
+import requests
+import json
+
+# Exemple de requête GET vers une API publique (JSONPlaceholder)
+response = requests.get('https://jsonplaceholder.typicode.com/todos/1')
+
+# Vérifier si la requête a réussi (code de statut 200)
+if response.status_code == 200:
+    # Afficher le contenu de la réponse (souvent du JSON)
+    data = response.json() # Convertit la réponse JSON en dictionnaire Python
+    print("Données récupérées de l'API:")
+    print(data)
+    print(f"Titre de la tâche : {data['title']}")
+else:
+    print(f"Erreur lors de la requête : {response.status_code}")
+
+# Exemple de requête POST
+payload = {'title': 'foo', 'body': 'bar', 'userId': 1}
+headers = {'Content-type': 'application/json; charset=UTF-8'}
+response_post = requests.post('https://jsonplaceholder.typicode.com/posts', data=json.dumps(payload), headers=headers)
+
+if response_post.status_code == 201: # 201 Created
+    print("Données postées avec succès:")
+    print(response_post.json())
+else:
+    print(f"Erreur lors du POST : {response_post.status_code}")
+```

@@ -1,0 +1,94 @@
+## Module 4: Programmation Orientée Objet (POO)
+La POO est un paradigme clé en programmation moderne.
+Elle permet de structurer le code de manière modulaire et réutilisable.
+
+### Classes et Objets
+Une classe est un blueprint pour créer des objets. Un objet est une instance d'une classe.
+```python
+class Chien:
+    # Attribut de classe
+    espece = "Canis familiaris"
+
+    # Constructeur
+    def __init__(self, nom, age):
+        # Attributs d'instance
+        self.nom = nom
+        self.age = age
+
+    def aboyer(self):
+        return f"{self.nom} dit: Ouaf!"
+```
+`mon_chien = Chien("Rex", 3)`
+
+### Constructeur (`__init__`) et Méthodes Spéciales
+Le constructeur `__init__` est une méthode spéciale appelée automatiquement lors de la création d'un objet.
+D'autres méthodes spéciales (ou "dunder methods") comme `__str__` (pour la représentation en chaîne) ou `__len__` (pour la longueur) existent.
+```python
+class Livre:
+    def __init__(self, titre, auteur):
+        self.titre = titre
+        self.auteur = auteur
+
+    def __str__(self):
+        return f"'{self.titre}' par {self.auteur}"
+
+un_livre = Livre("Le Seigneur des Anneaux", "J.R.R. Tolkien")
+print(un_livre) # Affiche: 'Le Seigneur des Anneaux' par J.R.R. Tolkien
+```
+
+### Héritage
+L'héritage permet à une classe (enfant) d'hériter des attributs et méthodes d'une autre classe (parent).
+Cela favorise la réutilisation du code et la création de hiérarchies de classes.
+```python
+class Animal:
+    def __init__(self, nom):
+        self.nom = nom
+
+    def manger(self):
+        return f"{self.nom} mange."
+
+class Chat(Animal): # Chat hérite de Animal
+    def miauler(self):
+        return f"{self.nom} dit: Miaou!"
+
+mon_chat = Chat("Garfield")
+print(mon_chat.manger())  # Méthode héritée de Animal
+print(mon_chat.miauler()) # Méthode propre à Chat
+```
+
+### Polymorphisme
+Le polymorphisme (signifiant "plusieurs formes") permet d'utiliser des objets de classes différentes via une interface commune.
+Par exemple, différentes classes animales pourraient avoir une méthode `faire_son()` qui produit un son différent.
+```python
+class Oiseau(Animal):
+    def faire_son(self):
+        return "Cui cui"
+
+class Vache(Animal):
+    def faire_son(self):
+        return "Meuh"
+
+animaux = [Chat("Felix"), Oiseau("Titi"), Vache("Marguerite")]
+for animal_instance in animaux:
+    # Supposons que Chat a aussi faire_son()
+    # print(animal_instance.faire_son()) # Exemple de polymorphisme si faire_son est défini dans Animal ou toutes les sous-classes
+    print(animal_instance.manger()) # Toutes héritent de manger
+```
+Note: L'exemple de polymorphisme ci-dessus est simplifié. Une vraie démo nécessiterait que `faire_son` soit dans `Animal` ou que toutes les instances aient cette méthode.
+
+## Module 5: Gestion des Exceptions
+La gestion des erreurs est cruciale pour écrire du code robuste.
+
+### Le bloc `try-except`
+Python utilise les blocs `try` et `except` pour intercepter et gérer les exceptions (erreurs à l'exécution).
+```python
+try:
+    resultat = 10 / 0
+except ZeroDivisionError:
+    print("Erreur: Division par zéro impossible!")
+except TypeError:
+    print("Erreur: Opération sur type incompatible.")
+finally:
+    print("Exécution du bloc finally.")
+```
+Le bloc `finally` s'exécute toujours, qu'une exception ait eu lieu ou non.

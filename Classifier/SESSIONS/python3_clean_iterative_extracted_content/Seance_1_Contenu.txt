@@ -1,0 +1,138 @@
+# Module 1: Introduction à Python
+## 1.1 Qu'est-ce que Python ?
+Python est un langage de programmation polyvalent, interprété, et de haut niveau, réputé pour sa syntaxe claire et lisible. Créé par Guido van Rossum et sorti pour la première fois en 1991, Python met l'accent sur la productivité des développeurs et la lisibilité du code.
+Il est largement utilisé dans divers domaines tels que le développement web, l'analyse de données, l'intelligence artificielle, l'apprentissage automatique, l'automatisation de scripts, et plus encore.
+
+## 1.2 Installation de l'environnement
+Pour commencer à programmer en Python, vous devez configurer votre environnement de développement. Nous recommandons l'utilisation d'Anaconda, qui simplifie la gestion des paquets et des environnements.
+
+### 1.2.1 Anaconda
+Anaconda est une distribution gratuite et open-source des langages Python et R pour le calcul scientifique (science des données, apprentissage machine, traitement de données à grande échelle, analyse prédictive, etc.).
+- Rendez-vous sur le site officiel d'Anaconda (anaconda.com) et téléchargez l'installateur pour votre système d'exploitation.
+- Suivez les instructions d'installation. Une fois installé, vous aurez accès à Python, Jupyter Notebook, Spyder, et d'autres outils.
+
+### 1.2.2 VS Code (Visual Studio Code)
+VS Code est un éditeur de code source léger mais puissant qui fonctionne sur votre bureau et est disponible pour Windows, macOS et Linux.
+- Téléchargez VS Code depuis code.visualstudio.com.
+- Installez l'extension Python de Microsoft pour VS Code. Elle offre des fonctionnalités telles que IntelliSense (complétion de code), le linting, le débogage, etc.
+
+### 1.2.3 Jupyter Notebook
+Jupyter Notebook est une application web open-source qui vous permet de créer et de partager des documents contenant du code en direct, des équations, des visualisations et du texte narratif.
+- Si vous avez installé Anaconda, Jupyter Notebook est déjà inclus. Vous pouvez le lancer depuis Anaconda Navigator ou via la ligne de commande (`jupyter notebook`).
+
+## 1.3 Variables et Types de Données
+Les variables sont des conteneurs pour stocker des valeurs de données. Python est un langage à typage dynamique, ce qui signifie que vous n'avez pas besoin de déclarer explicitement le type d'une variable.
+
+### 1.3.1 Variables
+Une variable est créée au moment où vous lui affectez une valeur pour la première fois.
+`nom_variable = valeur`
+Exemple :
+`x = 5`
+`nom = "Python"`
+`pi = 3.14159`
+
+### 1.3.2 Types de Données Numériques (entiers, flottants)
+- **Entiers (`int`)**: Nombres entiers, positifs ou négatifs, sans décimales.
+  `age = 30`
+  `quantite = -5`
+- **Flottants (`float`)**: Nombres avec une partie décimale.
+  `prix = 19.99`
+  `temperature = -3.5`
+
+### 1.3.3 Chaînes de Caractères (strings)
+Les chaînes de caractères (`str`) sont des séquences de caractères, entourées de guillemets simples (`'...'`) ou doubles (`"..."`).
+`message_simple = 'Bonjour'`
+`message_double = "Python est amusant"`
+`phrase = "L'apprentissage de Python"`
+
+### 1.3.4 Booléens
+Les booléens (`bool`) représentent l'une des deux valeurs : `True` (Vrai) ou `False` (Faux). Ils sont souvent le résultat d'opérations de comparaison.
+`est_majeur = True`
+`a_reussi = False`
+
+## 1.4 Opérateurs
+Les opérateurs sont utilisés pour effectuer des opérations sur les variables et les valeurs.
+
+### 1.4.1 Opérateurs Arithmétiques
+Utilisés avec des valeurs numériques pour effectuer des opérations mathématiques courantes :
+- Addition : `+` (`a + b`)
+- Soustraction : `-` (`a - b`)
+- Multiplication : `*` (`a * b`)
+- Division : `/` (`a / b`) (renvoie toujours un flottant)
+- Division entière : `//` (`a // b`) (renvoie la partie entière du quotient)
+- Modulo : `%` (`a % b`) (renvoie le reste de la division)
+- Exponentiation : `**` (`a ** b`) (a élevé à la puissance b)
+Exemple :
+`resultat = 10 + 5 * 2  # resultat = 20 (priorité des opérateurs)`
+
+### 1.4.2 Opérateurs de Comparaison
+Utilisés pour comparer deux valeurs. Ils renvoient `True` ou `False`.
+- Égal à : `==` (`a == b`)
+- Différent de : `!=` (`a != b`)
+- Supérieur à : `>` (`a > b`)
+- Inférieur à : `<` (`a < b`)
+- Supérieur ou égal à : `>=` (`a >= b`)
+- Inférieur ou égal à : `<=` (`a <= b`)
+Exemple :
+`est_egal = (5 == 5)  # True`
+`est_plus_grand = (10 > 20) # False`
+
+### 1.4.3 Opérateurs Logiques
+Utilisés pour combiner des instructions conditionnelles :
+- `and` : Renvoie `True` si les deux opérandes sont vrais.
+  `(age > 18) and (pays == "France")`
+- `or` : Renvoie `True` si au moins l'un des opérandes est vrai.
+  `(heure < 8) or (heure > 18)`
+- `not` : Inverse le résultat, renvoie `False` si le résultat est vrai, et vice-versa.
+  `not est_fatigue`
+
+## 1.5 Structures de Contrôle : Conditions
+Les structures conditionnelles permettent d'exécuter différents blocs de code en fonction de certaines conditions.
+
+### 1.5.1 `if`
+L'instruction `if` exécute un bloc de code si sa condition est `True`.
+`temperature = 25`
+`if temperature > 20:`
+`    print("Il fait chaud !")`
+
+### 1.5.2 `else`
+L'instruction `else` peut suivre un `if` et exécute un bloc de code si la condition de l'`if` est `False`.
+`age = 16`
+`if age >= 18:`
+`    print("Vous êtes majeur.")`
+`else:`
+`    print("Vous êtes mineur.")`
+
+### 1.5.3 `elif`
+L'instruction `elif` (abréviation de "else if") permet de vérifier plusieurs conditions.
+`note = 85`
+`if note >= 90:`
+`    print("Grade A")`
+`elif note >= 80:`
+`    print("Grade B")`
+`elif note >= 70:`
+`    print("Grade C")`
+`else:`
+`    print("Grade D ou F")`
+
+## 1.6 Structures de Contrôle : Boucles
+Les boucles sont utilisées pour exécuter un bloc de code de manière répétée.
+
+### 1.6.1 Boucle `for`
+La boucle `for` est utilisée pour itérer sur une séquence (comme une liste, un tuple, un dictionnaire, un ensemble ou une chaîne de caractères) ou d'autres objets itérables.
+`# Itérer sur une liste de nombres`
+`nombres = [1, 2, 3, 4, 5]`
+`for nombre in nombres:`
+`    print(nombre)`
+
+`# Utilisation de range()`
+`for i in range(5):  # Génère les nombres de 0 à 4`
+`    print(i)`
+
+### 1.6.2 Boucle `while`
+La boucle `while` exécute un bloc de code tant qu'une condition donnée est `True`.
+`compteur = 0`
+`while compteur < 5:`
+`    print(f"Le compteur est à {compteur}")`
+`    compteur = compteur + 1  # ou compteur += 1`
+`print("Boucle terminée.")`

@@ -1,0 +1,71 @@
+### Module `sqlite3` pour les Bases de Données
+Python dispose d'un module intégré `sqlite3` pour interagir avec les bases de données SQLite.
+SQLite est un système de gestion de base de données relationnelle léger, basé sur des fichiers.
+
+#### Connexion à une base de données
+```python
+import sqlite3
+
+# Connexion (crée la base si elle n'existe pas)
+conn = sqlite3.connect('mabase.db')
+```
+
+#### Création d'un curseur
+```python
+cur = conn.cursor()
+```
+
+#### Exécution de requêtes SQL
+```python
+# Créer une table
+cur.execute('''
+CREATE TABLE IF NOT EXISTS utilisateurs (
+    id INTEGER PRIMARY KEY,
+    nom TEXT NOT NULL,
+    email TEXT
+)
+''')
+
+# Insérer des données
+cur.execute("INSERT INTO utilisateurs (nom, email) VALUES (?, ?)", ('Alice', 'alice@example.com'))
+cur.execute("INSERT INTO utilisateurs (nom, email) VALUES (?, ?)", ('Bob', 'bob@example.com'))
+
+# Valider les changements
+conn.commit()
+```
+
+#### Récupération de données
+```python
+cur.execute("SELECT * FROM utilisateurs")
+for ligne in cur.fetchall():
+    print(ligne)
+```
+
+#### Fermeture de la connexion
+```python
+conn.close()
+```
+
+### Interaction avec des APIs Web avec `requests`
+Le module `requests` est une bibliothèque tierce populaire pour effectuer des requêtes HTTP en Python.
+Il faut l'installer (`pip install requests`).
+
+#### Effectuer une requête GET
+```python
+import requests
+
+response = requests.get('https://api.example.com/data')
+
+if response.status_code == 200:
+    data = response.json() # Si la réponse est en JSON
+    print(data)
+else:
+    print(f"Erreur: {response.status_code}")
+```
+
+#### Effectuer une requête POST
+```python
+payload = {'key1': 'value1', 'key2': 'value2'}
+response_post = requests.post('https://api.example.com/submit', data=payload)
+print(response_post.text)
+```

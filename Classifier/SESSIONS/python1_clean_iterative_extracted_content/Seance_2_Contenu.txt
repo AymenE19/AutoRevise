@@ -1,0 +1,98 @@
+### 2.1 Définition et Appel de Fonctions
+En Python, une fonction est définie à l'aide du mot-clé `def`, suivi du nom de la fonction et de parenthèses `()`.
+Les fonctions peuvent prendre des paramètres (arguments) et retourner des valeurs en utilisant le mot-clé `return`.
+
+```python
+# Définition d'une fonction simple
+def saluer(nom):
+    message = f"Bonjour, {nom}!"
+    return message
+
+# Appel de la fonction
+print(saluer("Monde"))  # Output: Bonjour, Monde!
+
+# Fonction avec plusieurs paramètres et valeur de retour
+def addition(a, b):
+    return a + b
+
+resultat = addition(5, 3)
+print(f"Le résultat de l'addition est : {resultat}") # Output: Le résultat de l'addition est : 8
+```
+
+### 3.1 Chaînes de Caractères (Strings)
+Les chaînes de caractères sont des séquences immuables de caractères.
+Python offre de nombreuses méthodes pour manipuler les chaînes : découpage (slicing), concaténation, recherche, remplacement, etc.
+
+```python
+s = "Bonjour le monde!"
+print(s[0])         # Output: B (accès par index)
+print(s[8:10])      # Output: le (découpage)
+print(s.upper())    # Output: BONJOUR LE MONDE!
+print(s.find("jour")) # Output: 3 (index de la première occurrence)
+print("Monde" in s) # Output: False (Attention à la casse)
+print("monde" in s) # Output: True
+s_concat = s + " Comment allez-vous?"
+print(s_concat)     # Output: Bonjour le monde! Comment allez-vous?
+```
+
+### 3.2 Listes (Lists)
+Les listes sont des collections ordonnées et modifiables d'éléments.
+Elles peuvent contenir des éléments de types différents.
+Opérations courantes : ajout, suppression, accès par index, découpage, tri.
+
+```python
+ma_liste = [1, "Python", 3.14, True]
+print(ma_liste[1])      # Output: Python
+
+ma_liste.append("nouveau")
+print(ma_liste)         # Output: [1, 'Python', 3.14, True, 'nouveau']
+
+ma_liste.insert(1, "Java")
+print(ma_liste)         # Output: [1, 'Java', 'Python', 3.14, True, 'nouveau']
+
+ma_liste.remove("Python")
+print(ma_liste)         # Output: [1, 'Java', 3.14, True, 'nouveau']
+
+element_supprime = ma_liste.pop(2) # Supprime et retourne l'élément à l'index 2
+print(element_supprime) # Output: 3.14
+print(ma_liste)         # Output: [1, 'Java', True, 'nouveau']
+
+numeros = [3, 1, 4, 1, 5, 9, 2]
+numeros.sort()
+print(numeros)          # Output: [1, 1, 2, 3, 4, 5, 9]
+
+print(len(numeros))     # Output: 7
+```
+
+### 4.1 Lecture et Écriture de Fichiers
+Python permet de lire et d'écrire dans des fichiers texte et binaires.
+Utilisation des fonctions `open()`, `read()`, `write()`, `close()`.
+Le gestionnaire de contexte `with` est recommandé pour s'assurer que les fichiers sont correctement fermés, même en cas d'erreur.
+
+**Écriture dans un fichier :**
+```python
+# Mode 'w': écrit dans le fichier (écrase le contenu existant)
+# Mode 'a': ajoute au fichier (append)
+with open("exemple.txt", "w", encoding="utf-8") as f:
+    f.write("Bonjour le monde!\n")
+    f.write("Ceci est un test d'écriture dans un fichier.\n")
+
+print("Données écrites dans exemple.txt")
+```
+
+**Lecture depuis un fichier :**
+```python
+# Mode 'r': lit le fichier
+try:
+    with open("exemple.txt", "r", encoding="utf-8") as f:
+        contenu = f.read() # Lit tout le contenu
+        print("\nContenu du fichier exemple.txt:")
+        print(contenu)
+
+    with open("exemple.txt", "r", encoding="utf-8") as f:
+        print("\nLecture ligne par ligne:")
+        for ligne in f:
+            print(ligne.strip()) # strip() pour enlever les sauts de ligne
+except FileNotFoundError:
+    print("Le fichier exemple.txt n'a pas été trouvé.")
+```

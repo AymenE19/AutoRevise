@@ -1,0 +1,105 @@
+# Module 1: Fondamentaux de Python
+
+## 1.1 Introduction à Python
+Python est un langage de programmation interprété, de haut niveau et polyvalent. Créé par Guido van Rossum et sorti pour la première fois en 1991, Python se distingue par une syntaxe claire et lisible, ce qui en fait un excellent langage pour les débutants.
+
+### 1.1.1 Qu'est-ce que Python ?
+- Langage interprété : Exécuté ligne par ligne.
+- Facile à apprendre : Syntaxe proche de l'anglais.
+- Vaste communauté : Beaucoup de ressources et bibliothèques.
+
+### 1.1.2 Installation de l'environnement
+Nous recommandons d'utiliser Anaconda pour gérer les paquets et les environnements.
+- **Anaconda**: Distribution populaire pour la science des données.
+- **VS Code**: Éditeur de code source populaire avec un excellent support Python.
+- **Jupyter Notebook**: Application web pour créer et partager des documents contenant du code live, des équations, des visualisations et du texte narratif.
+
+## 1.2 Variables et Types de Données
+En Python, les variables sont créées lorsque vous leur assignez une valeur. Python est typé dynamiquement, ce qui signifie que vous n'avez pas besoin de déclarer le type de la variable.
+
+### 1.2.1 Variables
+```python
+x = 5       # x est un entier
+y = "Bonjour" # y est une chaîne de caractères
+z = 3.14    # z est un flottant
+```
+
+### 1.2.2 Types de Données Primitifs
+- **Entiers (int)**: Nombres entiers, positifs ou négatifs, sans décimales. Exemple: `10`, `-3`.
+- **Flottants (float)**: Nombres avec une partie décimale. Exemple: `3.14`, `-0.5`.
+- **Chaînes de caractères (str)**: Séquences de caractères, entourées de guillemets simples ou doubles. Exemple: `"Python"`, `'Bonjour'`.
+- **Booléens (bool)**: Représentent deux valeurs : `True` ou `False`.
+
+## 1.3 Opérateurs
+Python propose divers opérateurs pour effectuer des opérations sur les variables et les valeurs.
+
+### 1.3.1 Opérateurs Arithmétiques
+```python
+a = 10
+b = 3
+print(a + b)  # Addition: 13
+print(a - b)  # Soustraction: 7
+print(a * b)  # Multiplication: 30
+print(a / b)  # Division: 3.33...
+print(a // b) # Division entière: 3
+print(a % b)  # Modulo: 1
+print(a ** b) # Exponentiation: 1000
+```
+
+### 1.3.2 Opérateurs de Comparaison
+```python
+x = 5
+y = 10
+print(x == y) # Égal à: False
+print(x != y) # Différent de: True
+print(x > y)  # Supérieur à: False
+print(x < y)  # Inférieur à: True
+print(x >= y) # Supérieur ou égal à: False
+print(x <= y) # Inférieur ou égal à: True
+```
+
+### 1.3.3 Opérateurs Logiques
+```python
+p = True
+q = False
+print(p and q) # ET logique: False
+print(p or q)  # OU logique: True
+print(not p)   # NON logique: False
+```
+
+## 1.4 Structures de Contrôle
+Les structures de contrôle permettent de diriger le flux d'exécution d'un programme.
+
+### 1.4.1 Instructions Conditionnelles (if, elif, else)
+Permettent d'exécuter des blocs de code en fonction de certaines conditions.
+```python
+age = 18
+if age < 18:
+    print("Mineur")
+elif age == 18:
+    print("Juste majeur")
+else:
+    print("Majeur")
+```
+
+### 1.4.2 Boucles
+#### Boucle `for`
+Utilisée pour itérer sur une séquence (liste, tuple, dictionnaire, ensemble ou chaîne).
+```python
+fruits = ["pomme", "banane", "cerise"]
+for fruit in fruits:
+    print(fruit)
+
+# Itérer avec range()
+for i in range(5): # de 0 à 4
+    print(i)
+```
+
+#### Boucle `while`
+Exécute un bloc de code tant qu'une condition est vraie.
+```python
+count = 0
+while count < 5:
+    print(count)
+    count += 1
+```

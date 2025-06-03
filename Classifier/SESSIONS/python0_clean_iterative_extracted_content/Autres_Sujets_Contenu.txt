@@ -1,0 +1,280 @@
+# Chapitre 6: Modules et Paquets en Python
+
+## 6.1 Introduction aux modules
+Python permet d'organiser le code en modules. Un module est un fichier contenant des définitions et des instructions Python. Pour utiliser un module, il faut l'importer.
+
+```python
+# exemple_module.py
+def saluer(nom):
+    return f"Bonjour, {nom}!"
+
+# main.py
+import exemple_module
+print(exemple_module.saluer("Monde"))
+```
+
+## 6.2 Les paquets (Packages)
+Les paquets sont une façon de structurer l'espace de noms des modules Python en utilisant des "noms de modules pointés". Par exemple, le nom de module A.B désigne un sous-module B dans un paquet A.
+
+Structure d'un paquet :
+```
+mon_paquet/
+    __init__.py
+    module1.py
+    module2.py
+    sous_paquet/
+        __init__.py
+        module_sous.py
+```
+L'utilisation de `__init__.py` est nécessaire pour que Python traite les répertoires comme contenant des paquets.
+
+## 6.3 Importation sélective
+Il est possible d'importer des noms spécifiques d'un module dans l'espace de noms courant.
+
+```python
+from math import sqrt, pi
+print(sqrt(16)) # Affiche 4.0
+print(pi)       # Affiche 3.141592653589793
+```
+
+# Chapitre 7: Introduction à NumPy
+
+## 7.1 Qu'est-ce que NumPy?
+NumPy (Numerical Python) est la bibliothèque fondamentale pour le calcul scientifique en Python. Elle fournit un objet tableau multidimensionnel performant, et des outils pour travailler avec ces tableaux.
+
+## 7.2 Création de tableaux NumPy (ndarray)
+```python
+import numpy as np
+
+# Créer un tableau à partir d'une liste Python
+arr1 = np.array([1, 2, 3, 4, 5])
+print(arr1)
+
+# Créer un tableau 2D
+arr2d = np.array([[1, 2, 3], [4, 5, 6]])
+print(arr2d)
+
+# Créer des tableaux spécifiques
+zeros_arr = np.zeros((2, 3)) # Tableau de zéros de forme 2x3
+ones_arr = np.ones((3, 2))   # Tableau de uns de forme 3x2
+range_arr = np.arange(0, 10, 2) # Tableau de 0 à 8 par pas de 2
+print(zeros_arr)
+print(ones_arr)
+print(range_arr)
+```
+
+## 7.3 Opérations de base sur les tableaux
+Les opérations arithmétiques sur les tableaux NumPy sont appliquées élément par élément.
+```python
+import numpy as np
+a = np.array([10, 20, 30, 40])
+b = np.array([1, 2, 3, 4])
+
+c = a - b  # Soustraction élément par élément
+print(c)   # Output: [ 9 18 27 36]
+
+d = a * 2  # Multiplication par un scalaire
+print(d)   # Output: [20 40 60 80]
+```
+
+# Chapitre 8: Introduction à Pandas
+
+## 8.1 Qu'est-ce que Pandas?
+Pandas est une bibliothèque open-source offrant des structures de données hautes performances et faciles à utiliser, ainsi que des outils d'analyse de données pour Python. Les deux structures de données principales de Pandas sont les `Series` (1D) et les `DataFrame` (2D).
+
+## 8.2 Series Pandas
+Une `Series` est un tableau unidimensionnel étiqueté capable de contenir des données de n'importe quel type (entiers, chaînes, flottants, objets Python, etc.).
+```python
+import pandas as pd
+import numpy as np
+
+s = pd.Series([1, 3, 5, np.nan, 6, 8])
+print(s)
+```
+
+## 8.3 DataFrame Pandas
+Un `DataFrame` est une structure de données bidimensionnelle étiquetée avec des colonnes de types potentiellement différents. Vous pouvez le considérer comme une feuille de calcul, une table SQL, ou un dictionnaire d'objets `Series`.
+```python
+import pandas as pd
+
+data = {'Ville': ['Paris', 'Londres', 'Berlin', 'Madrid'],
+        'Population': [2141000, 8982000, 3769000, 3223000],
+        'Pays': ['France', 'Royaume-Uni', 'Allemagne', 'Espagne']}
+df = pd.DataFrame(data)
+print(df)
+```
+
+## 8.4 Lecture de données avec Pandas
+Pandas peut lire des données à partir de divers formats de fichiers comme CSV, Excel, SQL, JSON, etc.
+```python
+# Supposons un fichier data.csv
+# Nom,Age,Ville
+# Alice,30,New York
+# Bob,24,Los Angeles
+# Charlie,22,Chicago
+
+# df_csv = pd.read_csv('data.csv') # Décommenter si le fichier existe
+# print(df_csv.head())
+```
+
+# Chapitre 9: Les Tuples et les Ensembles
+
+## 9.1 Les Tuples
+Les tuples sont des collections ordonnées et **immuables** d'éléments. Ils sont similaires aux listes, mais une fois créés, on ne peut pas modifier leur contenu. Ils sont définis avec des parenthèses `()`.
+
+```python
+mon_tuple = (1, "Python", 3.14)
+print(mon_tuple)
+print(mon_tuple[1]) # Accès par index
+
+# Les tuples sont immuables
+# mon_tuple[0] = 5 # Ceci lèverait une TypeError
+
+# Utilisation des tuples
+coordonnees = (10.0, 20.5) # Représenter des coordonnées
+```
+
+## 9.2 Les Ensembles (Sets)
+Les ensembles sont des collections **non ordonnées** d'éléments **uniques**. Ils sont utiles pour les opérations mathématiques sur les ensembles comme l'union, l'intersection, la différence, etc. Ils sont définis avec des accolades `{}` ou la fonction `set()`.
+
+```python
+mon_set = {1, 2, 3, 2, 1} # Les doublons sont automatiquement supprimés
+print(mon_set) # Affiche {1, 2, 3} (l'ordre peut varier)
+
+set_a = {1, 2, 3, 4}
+set_b = {3, 4, 5, 6}
+
+print("Union:", set_a | set_b)             # ou set_a.union(set_b)
+print("Intersection:", set_a & set_b)      # ou set_a.intersection(set_b)
+print("Différence (A-B):", set_a - set_b) # ou set_a.difference(set_b)
+```
+
+# Chapitre 10: Compréhensions de Liste, Dictionnaire et Ensemble
+
+## 10.1 Compréhensions de Liste
+Les compréhensions de liste offrent une syntaxe concise pour créer des listes. Elles sont souvent plus lisibles et plus performantes que l'utilisation de boucles `for` explicites.
+
+```python
+# Créer une liste des carrés des nombres de 0 à 9
+carres = []
+for x in range(10):
+    carres.append(x**2)
+print(carres)
+
+# Avec une compréhension de liste
+carres_comprehension = [x**2 for x in range(10)]
+print(carres_comprehension)
+
+# Avec une condition
+nombres_pairs_carres = [x**2 for x in range(10) if x % 2 == 0]
+print(nombres_pairs_carres)
+```
+
+## 10.2 Compréhensions de Dictionnaire
+Similaires aux compréhensions de liste, mais pour créer des dictionnaires.
+
+```python
+nombres = [1, 2, 3, 4]
+carres_dict = {x: x**2 for x in nombres}
+print(carres_dict) # Output: {1: 1, 2: 4, 3: 9, 4: 16}
+```
+
+## 10.3 Compréhensions d'Ensemble
+Pour créer des ensembles de manière concise.
+
+```python
+liste_avec_doublons = [1, 2, 2, 3, 4, 4, 4, 5]
+ensemble_unique = {x for x in liste_avec_doublons}
+print(ensemble_unique) # Output: {1, 2, 3, 4, 5} (ordre peut varier)
+```
+
+# Chapitre 11: Gestion des Environnements Virtuels
+
+## 11.1 Pourquoi utiliser des environnements virtuels?
+Les environnements virtuels créent des installations Python isolées. Cela signifie que chaque projet peut avoir ses propres dépendances, indépendamment des dépendances des autres projets. C'est crucial pour éviter les conflits de versions de paquets.
+
+## 11.2 Création et activation d'un environnement virtuel avec `venv`
+Python vient avec le module `venv` pour créer des environnements virtuels.
+
+```bash
+# Créer un environnement virtuel nommé 'mon_env'
+python -m venv mon_env 
+# ou python3 -m venv mon_env
+
+# Activer l'environnement virtuel
+# Sur Windows:
+# mon_env\Scripts\activate
+# Sur macOS/Linux:
+source mon_env/bin/activate
+
+# Une fois activé, votre terminal indiquera généralement le nom de l'environnement actif.
+# (mon_env) $ 
+
+# Pour désactiver l'environnement:
+# (mon_env) $ deactivate
+```
+
+## 11.3 Gestion des paquets avec `pip` dans un environnement virtuel
+Une fois l'environnement activé, `pip install <paquet>` installera le paquet uniquement dans cet environnement.
+`pip freeze > requirements.txt` peut être utilisé pour sauvegarder les dépendances du projet.
+`pip install -r requirements.txt` peut être utilisé pour installer les dépendances à partir d'un fichier `requirements.txt`.
+
+# Chapitre 12: Introduction aux Tests Unitaires avec `unittest`
+
+## 12.1 L'importance des tests
+Écrire des tests pour votre code est une pratique essentielle en développement logiciel. Les tests unitaires vérifient que les petites unités de code (fonctions, méthodes) fonctionnent comme prévu.
+
+## 12.2 Le module `unittest`
+Python inclut un module standard pour les tests unitaires appelé `unittest`.
+
+```python
+# fichier: calculs.py
+def addition(a, b):
+    return a + b
+
+def soustraction(a, b):
+    return a - b
+
+# fichier: test_calculs.py
+import unittest
+from calculs import addition, soustraction # Supposons que calculs.py est dans le même répertoire
+
+class TestCalculs(unittest.TestCase):
+
+    def test_addition(self):
+        self.assertEqual(addition(2, 2), 4)
+        self.assertEqual(addition(-1, 1), 0)
+        self.assertEqual(addition(-1, -1), -2)
+
+    def test_soustraction(self):
+        self.assertEqual(soustraction(5, 2), 3)
+        self.assertEqual(soustraction(2, 5), -3)
+
+if __name__ == '__main__':
+    unittest.main()
+```
+Pour exécuter les tests, vous pouvez lancer le fichier `test_calculs.py` : `python test_calculs.py`
+
+# Chapitre 13: Introduction à Git et au Contrôle de Version
+
+## 13.1 Qu'est-ce que le contrôle de version?
+Le contrôle de version est un système qui enregistre les modifications apportées à un fichier ou à un ensemble de fichiers au fil du temps, afin que vous puissiez rappeler des versions spécifiques ultérieurement.
+
+## 13.2 Git : un système de contrôle de version distribué
+Git est le système de contrôle de version moderne le plus populaire. Il est distribué, ce qui signifie que chaque développeur dispose d'une copie complète du dépôt, y compris son historique complet.
+
+## 13.3 Commandes Git de base
+- `git init` : Initialise un nouveau dépôt Git dans le répertoire courant.
+- `git clone <url_depot>` : Copie un dépôt distant existant.
+- `git add <fichier>` : Ajoute les modifications d'un fichier à la zone de staging (index).
+- `git commit -m "Message de commit"` : Enregistre les modifications de la zone de staging dans l'historique du dépôt.
+- `git status` : Affiche l'état des fichiers dans le répertoire de travail et la zone de staging.
+- `git log` : Affiche l'historique des commits.
+- `git branch <nom_branche>` : Crée une nouvelle branche.
+- `git checkout <nom_branche>` : Change de branche active.
+- `git merge <nom_branche>` : Fusionne la branche spécifiée dans la branche active.
+- `git pull` : Récupère et fusionne les modifications depuis le dépôt distant.
+- `git push` : Envoie les commits locaux vers le dépôt distant.
+
+## 13.4 Utilisation de base avec GitHub/GitLab
+GitHub, GitLab, Bitbucket sont des plateformes populaires pour héberger des dépôts Git distants et collaborer.

@@ -1,0 +1,125 @@
+### Introduction aux Bases de Données avec SQLite
+SQLite est un moteur de base de données SQL autonome, sans serveur, sans configuration, transactionnel.
+Il est intégré à la bibliothèque standard de Python via le module `sqlite3`.
+
+#### Connexion et Curseur
+```python
+import sqlite3
+
+# Connexion à la base de données (crée le fichier s'il n'existe pas)
+conn = sqlite3.connect('ma_base.db')
+
+# Création d'un objet curseur
+cursor = conn.cursor()
+```
+
+#### Création de Table
+```python
+cursor.execute('''
+CREATE TABLE IF NOT EXISTS utilisateurs (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nom TEXT NOT NULL,
+    email TEXT UNIQUE NOT NULL
+)
+''')
+conn.commit() # Valider la transaction
+```
+
+#### Insertion de Données
+```python
+cursor.execute("INSERT INTO utilisateurs (nom, email) VALUES (?, ?)", ("Alice", "alice@example.com"))
+cursor.execute("INSERT INTO utilisateurs (nom, email) VALUES (:nom, :email)", {"nom": "Bob", "email": "bob@example.com"})
+conn.commit()
+```
+
+#### Sélection de Données
+```python
+cursor.execute("SELECT * FROM utilisateurs")
+utilisateurs = cursor.fetchall() # Récupère toutes les lignes
+for utilisateur in utilisateurs:
+    print(utilisateur)
+
+cursor.execute("SELECT * FROM utilisateurs WHERE nom = ?", ("Alice",))
+alice = cursor.fetchone() # Récupère une seule ligne
+print(f"Utilisateur trouvé: {alice}")
+```
+
+#### Mise à Jour et Suppression
+```python
+cursor.execute("UPDATE utilisateurs SET email = ? WHERE nom = ?", ("alice_new@example.com", "Alice"))
+conn.commit()
+
+cursor.execute("DELETE FROM utilisateurs WHERE nom = ?", ("Bob",))
+conn.commit()
+```
+
+#### Fermeture de la Connexion
+```python
+conn.close()
+```
+
+### Interaction avec des APIs Web (Requêtes HTTP)
+Une API (Application Programming Interface) permet à différentes applications de communiquer entre elles, souvent via le web en utilisant HTTP.
+
+#### Utilisation de la bibliothèque `requests`
+La bibliothèque `requests` simplifie l'envoi de requêtes HTTP en Python.
+Il faut l'installer si ce n'est pas déjà fait: `pip install requests`
+
+#### Faire une requête GET
+```python
+import requests
+
+try:
+    response = requests.get('https://jsonplaceholder.typicode.com/todos/1')
+    response.raise_for_status() # Lève une exception pour les codes d'erreur HTTP (4xx ou 5xx)
+
+    # Contenu de la réponse
+    print(f"Status Code: {response.status_code}")
+    print(f"Headers: {response.headers['Content-Type']}")
+    
+    # Si la réponse est en JSON
+    data = response.json()
+    print("Données JSON:")
+    print(data)
+    
+    # Si la réponse est du texte
+    # print("Contenu Texte:")
+    # print(response.text)
+
+except requests.exceptions.HTTPError as errh:
+    print(f"Http Error: {errh}")
+except requests.exceptions.ConnectionError as errc:
+    print(f"Error Connecting: {errc}")
+except requests.exceptions.Timeout as errt:
+    print(f"Timeout Error: {errt}")
+except requests.exceptions.RequestException as err:
+    print(f"Oops: Something Else: {err}")
+
+```
+
+#### Faire une requête POST
+```python
+import requests
+import json
+
+url = 'https://jsonplaceholder.typicode.com/posts'
+nouveau_post = {
+    'title': 'Mon Titre',
+    'body': 'Ceci est le contenu de mon post.',
+    'userId': 1
+}
+
+try:
+    # Envoyer les données en JSON
+    response = requests.post(url, json=nouveau_post)
+    # Ou envoyer des données de formulaire: response = requests.post(url, data=nouveau_post)
+    response.raise_for_status()
+
+    print(f"Status Code: {response.status_code}")
+    # La réponse d'un POST contient souvent l'objet créé avec son ID
+    print("Réponse JSON:")
+    print(response.json())
+
+except requests.exceptions.RequestException as e:
+    print(f"Erreur lors de la requête POST: {e}")
+```

@@ -1,0 +1,93 @@
+La POO est un paradigme puissant.
+### Concepts Clés de la POO
+La Programmation Orientée Objet (POO) repose sur plusieurs concepts fondamentaux qui permettent de structurer le code de manière modulaire et réutilisable.
+### Définition des Classes et des Objets
+Une **classe** est un plan (blueprint) pour créer des objets. Elle définit un ensemble d'attributs (données) et de méthodes (fonctions) que les objets de cette classe auront.
+Un **objet** est une instance d'une classe. C'est une entité concrète créée à partir du plan défini par la classe.
+```python
+class Voiture:
+    # Attribut de classe
+    roues = 4
+
+    # Constructeur
+    def __init__(self, marque, modele):
+        # Attributs d'instance
+        self.marque = marque
+        self.modele = modele
+
+    # Méthode d'instance
+    def afficher_details(self):
+        return f"Voiture: {self.marque} {self.modele}, Roues: {self.roues}"
+
+# Création d'objets (instances)
+ma_voiture1 = Voiture("Renault", "Clio")
+ma_voiture2 = Voiture("Peugeot", "208")
+
+print(ma_voiture1.afficher_details())
+print(ma_voiture2.marque)
+```
+### Constructeur (`__init__`) et Méthodes Spéciales
+Le **constructeur** est une méthode spéciale nommée `__init__` qui est automatiquement appelée lors de la création d'un nouvel objet (instance) de la classe. Son rôle principal est d'initialiser les attributs de l'objet.
+Les **méthodes spéciales** (aussi appelées méthodes magiques ou "dunder methods" car elles commencent et finissent par un double underscore) permettent de surcharger des comportements Python intégrés pour les objets personnalisés.
+Exemples de méthodes spéciales :
+- `__str__(self)`: Retourne une représentation en chaîne de caractères de l'objet, conviviale pour l'utilisateur.
+- `__repr__(self)`: Retourne une représentation en chaîne de caractères de l'objet, utile pour le débogage.
+- `__len__(self)`: Retourne la "longueur" de l'objet, utilisée par la fonction `len()`.
+```python
+class Livre:
+    def __init__(self, titre, auteur, pages):
+        self.titre = titre
+        self.auteur = auteur
+        self.pages = pages
+
+    def __str__(self):
+        return f"{self.titre} par {self.auteur}"
+
+    def __len__(self):
+        return self.pages
+
+mon_livre = Livre("Le Seigneur des Anneaux", "J.R.R. Tolkien", 1200)
+print(str(mon_livre)) # Appelle mon_livre.__str__()
+print(len(mon_livre)) # Appelle mon_livre.__len__()
+```
+### Héritage et Polymorphisme
+L'**héritage** est un mécanisme qui permet à une classe (appelée classe fille ou sous-classe) d'hériter des attributs et méthodes d'une autre classe (appelée classe parente ou super-classe). Cela favorise la réutilisation du code et la création de hiérarchies de classes.
+Le **polymorphisme** (signifiant "plusieurs formes") permet d'utiliser des objets de classes différentes de manière interchangeable s'ils partagent une interface commune (par exemple, les mêmes noms de méthodes).
+```python
+class Animal:
+    def __init__(self, nom):
+        self.nom = nom
+
+    def parler(self):
+        raise NotImplementedError("La sous-classe doit implémenter cette méthode")
+
+class Chien(Animal): # Chien hérite de Animal
+    def parler(self):
+        return f"{self.nom} dit: Ouaf!"
+
+class Chat(Animal): # Chat hérite de Animal
+    def parler(self):
+        return f"{self.nom} dit: Miaou!"
+
+# Polymorphisme
+animaux = [Chien("Rex"), Chat("Misty")]
+for animal in animaux:
+    print(animal.parler())
+```
+### Gestion des Exceptions avec `try-except`
+La gestion des exceptions permet de traiter les erreurs qui peuvent survenir pendant l'exécution d'un programme sans le faire planter. On utilise les blocs `try` et `except`.
+Le code susceptible de lever une exception est placé dans le bloc `try`. Si une exception se produit, le code dans le bloc `except` correspondant est exécuté.
+```python
+try:
+    x = int(input("Entrez un nombre: "))
+    resultat = 10 / x
+    print(f"Le résultat est {resultat}")
+except ValueError:
+    print("Erreur: Veuillez entrer un nombre valide.")
+except ZeroDivisionError:
+    print("Erreur: Division par zéro impossible.")
+except Exception as e:
+    print(f"Une erreur inattendue est survenue: {e}")
+finally:
+    print("Exécution du bloc finally, quoi qu'il arrive.")
+```

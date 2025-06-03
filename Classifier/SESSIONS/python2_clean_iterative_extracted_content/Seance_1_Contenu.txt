@@ -1,0 +1,192 @@
+## Module 1: Introduction à Python
+
+### 1.1 Qu'est-ce que Python ?
+Python est un langage de programmation interprété, de haut niveau et généraliste. Il est réputé pour sa syntaxe claire et lisible, ce qui en fait un excellent choix pour les débutants.
+Principales caractéristiques :
+- Facile à apprendre
+- Open source
+- Grande communauté
+- Vaste bibliothèque standard
+
+### 1.2 Installation de l'environnement
+Pour commencer à programmer en Python, vous devez installer un environnement de développement.
+
+#### 1.2.1 Anaconda
+Anaconda est une distribution populaire de Python et R pour la science des données et l'apprentissage automatique. Elle inclut de nombreux paquets préinstallés.
+Installation :
+1. Téléchargez depuis anaconda.com
+2. Suivez les instructions d'installation
+
+#### 1.2.2 VS Code
+Visual Studio Code est un éditeur de code source léger mais puissant qui prend en charge Python nativement ou via des extensions.
+Configuration :
+- Installez VS Code depuis code.visualstudio.com
+- Installez l'extension Python de Microsoft.
+
+#### 1.2.3 Jupyter Notebook
+Jupyter Notebook est une application web open-source qui vous permet de créer et de partager des documents contenant du code live, des équations, des visualisations et du texte narratif.
+Lancement :
+- Si Anaconda est installé : `jupyter notebook` dans le terminal.
+- Sinon : `pip install notebook` puis `jupyter notebook`.
+
+### 1.3 Variables et Types de Données
+Les variables sont des conteneurs pour stocker des valeurs de données. Python est un langage à typage dynamique.
+
+#### 1.3.1 Entiers (int)
+Nombres entiers, positifs ou négatifs, sans décimales.
+Exemple :
+```python
+age = 30
+nombre_eleves = -5
+```
+
+#### 1.3.2 Flottants (float)
+Nombres avec une partie décimale.
+Exemple :
+```python
+prix = 19.99
+temperature = -2.5
+```
+
+#### 1.3.3 Chaînes de caractères (str)
+Séquence de caractères, entourée de guillemets simples ou doubles.
+Exemple :
+```python
+nom = "Alice"
+message = 'Bonjour le monde !'
+```
+
+#### 1.3.4 Booléens (bool)
+Représentent deux valeurs : `True` ou `False`.
+Exemple :
+```python
+est_majeur = True
+a_reussi = False
+```
+
+### 1.4 Opérateurs
+Python propose différents types d'opérateurs.
+
+#### 1.4.1 Opérateurs Arithmétiques
+Utilisés pour effectuer des opérations mathématiques.
+- `+` (Addition)
+- `-` (Soustraction)
+- `*` (Multiplication)
+- `/` (Division)
+- `%` (Modulo)
+- `**` (Exponentiation)
+- `//` (Division entière)
+Exemple :
+```python
+x = 10
+y = 3
+print(x + y)  # 13
+print(x / y)  # 3.333...
+print(x // y) # 3
+```
+
+#### 1.4.2 Opérateurs de Comparaison
+Utilisés pour comparer deux valeurs.
+- `==` (Égal à)
+- `!=` (Différent de)
+- `>` (Supérieur à)
+- `<` (Inférieur à)
+- `>=` (Supérieur ou égal à)
+- `<=` (Inférieur ou égal à)
+Exemple :
+```python
+a = 5
+b = 10
+print(a == b) # False
+print(a < b)  # True
+```
+
+#### 1.4.3 Opérateurs Logiques
+Utilisés pour combiner des instructions conditionnelles.
+- `and` (ET logique)
+- `or` (OU logique)
+- `not` (NON logique)
+Exemple :
+```python
+age = 25
+est_etudiant = True
+if age > 18 and est_etudiant:
+    print("Admis")
+```
+
+### 1.5 Structures de Contrôle : Conditions
+Permettent d'exécuter du code en fonction de certaines conditions.
+
+#### 1.5.1 if
+Exécute un bloc de code si une condition est vraie.
+```python
+temperature = 30
+if temperature > 25:
+    print("Il fait chaud !")
+```
+
+#### 1.5.2 else
+Exécute un bloc de code si la condition du `if` est fausse.
+```python
+temperature = 10
+if temperature > 25:
+    print("Il fait chaud !")
+else:
+    print("Il ne fait pas chaud.")
+```
+
+#### 1.5.3 elif
+Permet de vérifier plusieurs conditions. `elif` est l'abréviation de "else if".
+```python
+note = 75
+if note >= 90:
+    print("A")
+elif note >= 80:
+    print("B")
+elif note >= 70:
+    print("C")
+else:
+    print("D")
+```
+
+### 1.6 Structures de Contrôle : Boucles
+Permettent d'exécuter un bloc de code plusieurs fois.
+
+#### 1.6.1 Boucle for
+Utilisée pour itérer sur une séquence (liste, tuple, dictionnaire, ensemble ou chaîne).
+```python
+fruits = ["pomme", "banane", "cerise"]
+for fruit in fruits:
+    print(fruit)
+
+# Itérer avec range()
+for i in range(5):  # de 0 à 4
+    print(i)
+```
+
+#### 1.6.2 Boucle while
+Exécute un bloc de code tant qu'une condition est vraie.
+```python
+compteur = 0
+while compteur < 5:
+    print(compteur)
+    compteur += 1 # Important d'incrémenter pour éviter une boucle infinie
+```
+
+#### 1.6.3 break et continue
+- `break` : Termine la boucle courante.
+- `continue` : Passe à l'itération suivante de la boucle.
+Exemple `break`:
+```python
+for i in range(10):
+    if i == 5:
+        break  # Sort de la boucle quand i est 5
+    print(i) # Affiche 0, 1, 2, 3, 4
+```
+Exemple `continue`:
+```python
+for i in range(5):
+    if i == 2:
+        continue # Saute l'itération quand i est 2
+    print(i) # Affiche 0, 1, 3, 4
+```

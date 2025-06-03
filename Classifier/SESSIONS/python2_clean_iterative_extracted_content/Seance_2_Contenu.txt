@@ -1,0 +1,66 @@
+# Module 2: Fonctions et Manipulation de Données
+
+## 2.1 Définition et Appel de Fonctions
+Une fonction est un bloc de code réutilisable que l'on peut appeler plusieurs fois.
+Syntaxe de définition :
+`def nom_de_la_fonction(parametre1, parametre2):`
+  `# Bloc de code (instructions)`
+  `resultat = parametre1 + parametre2`
+  `return resultat`
+
+Exemple d'appel :
+`somme = nom_de_la_fonction(5, 3)`
+`print(somme)  # Affiche 8`
+
+Les paramètres sont les valeurs passées à une fonction. `return` spécifie la valeur retournée par la fonction.
+
+## 2.2 Manipulation des Chaînes de Caractères
+Les chaînes sont des séquences de caractères immuables.
+Quelques opérations et méthodes courantes :
+- Concaténation : `chaine1 + chaine2`
+- Répétition : `chaine * nombre`
+- Longueur : `len(chaine)`
+- Accès à un caractère : `chaine[index]`
+- Slicing (extraction de sous-chaîne) : `chaine[debut:fin]`
+- Méthodes : `.upper()`, `.lower()`, `.strip()`, `.split(separateur)`, `separateur.join(liste_de_chaines)`
+
+Exemple :
+`texte = "  Bonjour Python!  "`
+`print(texte.strip().upper()) # Affiche "BONJOUR PYTHON!"`
+`mots = texte.strip().split(" ") # ['Bonjour', 'Python!']`
+
+## 2.3 Opérations de Base sur les Listes
+Les listes sont des collections ordonnées et modifiables d'éléments.
+- Création : `ma_liste = [1, "deux", 3.0, True]`
+- Accès : `ma_liste[index]`
+- Modification : `ma_liste[index] = nouvelle_valeur`
+- Ajout : `ma_liste.append(element)` (à la fin), `ma_liste.insert(index, element)`
+- Suppression : `del ma_liste[index]`, `ma_liste.pop(index_optionnel)`, `ma_liste.remove(valeur)`
+- Longueur : `len(ma_liste)`
+- Slicing : `ma_liste[debut:fin]`
+
+Exemple :
+`nombres = [1, 2, 3]`
+`nombres.append(4)`
+`print(nombres)  # Affiche [1, 2, 3, 4]`
+`print(nombres[1]) # Affiche 2`
+
+## 2.4 Lecture et Écriture de Fichiers
+Python permet de lire et d'écrire dans des fichiers texte et binaires.
+L'instruction `with` est recommandée car elle gère la fermeture automatique du fichier.
+
+### Écriture dans un fichier :
+`with open("exemple.txt", "w") as f:  # "w" pour write (écrase le contenu existant)`
+  `f.write("Première ligne de texte.\n")`
+  `f.write("Deuxième ligne.")`
+
+### Lecture depuis un fichier :
+`with open("exemple.txt", "r") as f:  # "r" pour read`
+  `contenu_total = f.read()      # Lit tout le fichier en une chaîne`
+  `print("Contenu total :\n", contenu_total)`
+  `f.seek(0)  # Retourne au début du fichier pour relire`
+  `lignes = f.readlines()      # Lit toutes les lignes dans une liste`
+  `print("Lignes :", lignes)`
+  `f.seek(0)`
+  `for ligne in f:             # Itération sur les lignes`
+    `print("Ligne par ligne :", ligne.strip())`

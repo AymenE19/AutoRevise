@@ -1,0 +1,123 @@
+## Module Supplémentaire: Introduction aux Bases de Données avec SQLite
+
+Python peut facilement interagir avec des bases de données. SQLite est une base de données SQL légère, basée sur des fichiers, qui ne nécessite pas de serveur séparé. Elle est incluse dans la bibliothèque standard de Python via le module `sqlite3`.
+
+### Connexion à une base de données et création de table
+```python
+import sqlite3
+
+# Connexion à la base de données (crée le fichier s'il n'existe pas)
+conn = sqlite3.connect('ma_base_de_donnees.db')
+
+# Création d'un curseur pour exécuter des requêtes SQL
+cursor = conn.cursor()
+
+# Création d'une table 'utilisateurs'
+cursor.execute('''
+CREATE TABLE IF NOT EXISTS utilisateurs (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nom TEXT NOT NULL,
+    email TEXT UNIQUE NOT NULL
+)
+''')
+
+# Validation des changements
+conn.commit()
+```
+
+### Insertion de données
+```python
+# Insertion d'un utilisateur
+try:
+    cursor.execute("INSERT INTO utilisateurs (nom, email) VALUES (?, ?)", ("Alice Wonderland", "alice@example.com"))
+    cursor.execute("INSERT INTO utilisateurs (nom, email) VALUES (?, ?)", ("Bob The Builder", "bob@example.com"))
+    conn.commit()
+    print("Utilisateurs insérés.")
+except sqlite3.IntegrityError:
+    print("Erreur: l'email existe déjà ou une autre contrainte d'intégrité a été violée.")
+```
+
+### Lecture de données
+```python
+cursor.execute("SELECT * FROM utilisateurs")
+utilisateurs = cursor.fetchall() # Récupère toutes les lignes
+
+for utilisateur in utilisateurs:
+    print(f"ID: {utilisateur[0]}, Nom: {utilisateur[1]}, Email: {utilisateur[2]}")
+
+# Lecture avec condition
+cursor.execute("SELECT nom, email FROM utilisateurs WHERE nom=?", ("Alice Wonderland",))
+alice = cursor.fetchone() # Récupère une seule ligne
+if alice:
+    print(f"Infos d'Alice: Nom={alice[0]}, Email={alice[1]}")
+```
+
+### Fermeture de la connexion
+Il est important de fermer la connexion à la base de données lorsque vous avez terminé.
+```python
+conn.close()
+print("Connexion à la base de données fermée.")
+```
+
+## Module Supplémentaire: Interaction avec des APIs Web (Requêtes HTTP)
+
+Les APIs (Application Programming Interfaces) permettent à différents logiciels de communiquer entre eux. Les APIs Web sont souvent accessibles via HTTP. La bibliothèque `requests` est très populaire en Python pour effectuer des requêtes HTTP.
+
+### Installation de la bibliothèque `requests`
+Si vous ne l'avez pas, installez-la avec pip:
+`pip install requests`
+
+### Effectuer une requête GET
+```python
+import requests
+
+try:
+    # Exemple avec une API publique de test (JSONPlaceholder)
+    response = requests.get('https://jsonplaceholder.typicode.com/todos/1')
+    
+    # Vérifier si la requête a réussi (code de statut 200)
+    response.raise_for_status() # Lève une exception pour les codes d'erreur HTTP (4xx ou 5xx)
+    
+    # Afficher le contenu de la réponse (souvent du JSON)
+    data = response.json() # Convertit la réponse JSON en dictionnaire Python
+    print("Données reçues de l'API:")
+    print(f"User ID: {data['userId']}")
+    print(f"ID: {data['id']}")
+    print(f"Title: {data['title']}")
+    print(f"Completed: {data['completed']}")
+    
+except requests.exceptions.HTTPError as http_err:
+    print(f"Erreur HTTP: {http_err}")
+except requests.exceptions.ConnectionError as conn_err:
+    print(f"Erreur de Connexion: {conn_err}")
+except requests.exceptions.Timeout as timeout_err:
+    print(f"Erreur de Timeout: {timeout_err}")
+except requests.exceptions.RequestException as req_err:
+    print(f"Erreur de Requête: {req_err}")
+```
+
+### Effectuer une requête POST (envoyer des données)
+```python
+import requests
+
+# Données à envoyer (payload)
+payload = {
+    'title': 'foo',
+    'body': 'bar',
+    'userId': 1
+}
+
+try:
+    response_post = requests.post('https://jsonplaceholder.typicode.com/posts', json=payload)
+    response_post.raise_for_status()
+    
+    data_post = response_post.json()
+    print("\nRéponse de la requête POST:")
+    print(data_post)
+    print(f"Code de statut: {response_post.status_code}") # Devrait être 201 (Created)
+
+except requests.exceptions.RequestException as e:
+    print(f"Erreur lors de la requête POST: {e}")
+
+```
+*Note: Les APIs peuvent nécessiter une authentification (clés API, OAuth, etc.) qui n'est pas couverte dans cette introduction.*

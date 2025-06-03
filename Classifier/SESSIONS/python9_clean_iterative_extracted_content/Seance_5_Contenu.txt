@@ -1,0 +1,64 @@
+## Introduction aux Bases de Données avec SQLite
+SQLite est un système de gestion de base de données relationnelle contenu dans une bibliothèque C. Il est léger, sans serveur, et ne nécessite aucune configuration.
+### Connexion à une base de données SQLite
+```python
+import sqlite3
+
+# Connexion à la base de données (crée le fichier s'il n'existe pas)
+conn = sqlite3.connect('ma_base.db')
+print("Base de données ouverte avec succès")
+
+# Création d'un curseur
+cursor = conn.cursor()
+
+# Création d'une table
+cursor.execute('''
+CREATE TABLE IF NOT EXISTS utilisateurs (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nom TEXT NOT NULL,
+    email TEXT NOT NULL UNIQUE
+)
+''')
+print("Table utilisateurs créée avec succès")
+
+# Insertion de données
+cursor.execute("INSERT INTO utilisateurs (nom, email) VALUES (?, ?)", ('Alice', 'alice@example.com'))
+cursor.execute("INSERT INTO utilisateurs (nom, email) VALUES (?, ?)", ('Bob', 'bob@example.com'))
+
+# Sauvegarde (commit) des changements
+conn.commit()
+print("Données insérées avec succès")
+
+# Fermeture de la connexion
+conn.close()
+```
+## Interaction avec des APIs et Requêtes HTTP
+Une API (Application Programming Interface) permet à différents logiciels de communiquer entre eux. Les APIs web sont souvent accessibles via HTTP.
+### Utilisation de la bibliothèque `requests`
+La bibliothèque `requests` simplifie l'envoi de requêtes HTTP en Python.
+```python
+import requests
+
+# Faire une requête GET
+response = requests.get('https://api.github.com/users/python')
+
+# Vérifier le statut de la réponse
+if response.status_code == 200:
+    print("Requête réussie!")
+    # Afficher le contenu de la réponse (souvent du JSON)
+    data = response.json()
+    print(f"Login de l'utilisateur: {data['login']}")
+    print(f"Nombre de dépôts publics: {data['public_repos']}")
+else:
+    print(f"Échec de la requête: {response.status_code}")
+
+# Faire une requête POST (exemple)
+payload = {'key1': 'value1', 'key2': 'value2'}
+response_post = requests.post('https://httpbin.org/post', data=payload)
+print(f"Données envoyées: {response_post.json()['form']}")
+```
+### Comprendre les requêtes HTTP
+- **GET**: Récupérer des données.
+- **POST**: Envoyer des données pour créer une ressource.
+- **PUT**: Envoyer des données pour mettre à jour une ressource existante.
+- **DELETE**: Supprimer une ressource.

@@ -1,0 +1,37 @@
+# Modules et Packages
+## Importer des modules
+Utilisation de `import` et `from ... import`.
+## Créer ses propres modules
+Organiser son code en fichiers réutilisables.
+## Introduction à `pip`
+Installer des packages externes comme `requests` ou `numpy`.
+
+# Exploration de Données avec Pandas
+## Introduction à Pandas
+Qu'est-ce que Pandas et pourquoi l'utiliser ?
+## Séries et DataFrames
+Les structures de données principales de Pandas.
+## Lecture de données (CSV, Excel)
+Importer des données depuis différents formats.
+## Nettoyage et Transformation de Données
+Gérer les valeurs manquantes, filtrer, trier.
+
+# Visualisation de Données avec Matplotlib
+## Premiers graphiques
+Lignes, barres, histogrammes.
+## Personnalisation des graphiques
+Titres, labels, légendes.
+
+# Projet Final: Analyse de Données Météorologiques
+## Description du projet
+Appliquer les concepts appris pour analyser un jeu de données.
+## Étapes du projet
+Collecte, nettoyage, analyse, visualisation.
+
+# Bonnes Pratiques de Codage
+## Style de code (PEP 8)
+Comment écrire du code Python lisible.
+## Commentaires et Documentation
+L'importance de documenter son code.
+## Tests Unitaires (introduction)
+Introduction à l'écriture de tests pour vérifier son code.
